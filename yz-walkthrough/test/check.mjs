@@ -18,8 +18,8 @@ const check = (name, ok, detail = '') => {
   console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? '  ' + detail : ''}`);
 };
 
-// The page's own formatter, lifted out of the template so the test cannot drift from it.
-const fmtSrc = /\/\*fmt:start\*\/([\s\S]*?)\/\*fmt:end\*\//.exec(template)[1];
+// The page's own formatter, lifted out of the built file so the test cannot drift from what ships.
+const fmtSrc = /\/\*fmt:start\*\/([\s\S]*?)\/\*fmt:end\*\//.exec(built)[1];
 const { fmt, decimals } = vm.runInNewContext(`${fmtSrc}; ({ fmt, decimals })`);
 
 const org = Object.fromEntries(exhibits.organizations.map((o) => [o.id, o]));
@@ -66,11 +66,14 @@ for (const o of exhibits.organizations) {
     for (const r of x.rows) {
       if (r.kind === 'section') continue;
       if (!Array.isArray(r.values) || r.values.length !== 4) { badCells.push(`${o.id}${x.n}.${r.id} needs four values`); continue; }
+      // The expected decimals come from the data, not from the function under test.
+      const want = r.kind === 'memo' ? 0 : o.decimals;
       const d = decimals(o, r);
+      if (d !== want) badCells.push(`${o.id}${x.n}.${r.id} uses ${d} decimals, wants ${want}`);
       for (const v of r.values) {
         cellCount++;
         const s = fmt(v, d);
-        if (!shape[d].test(s) || (v < 0) !== s.startsWith('(') || s.includes('-')) badCells.push(`${o.id}${x.n}.${r.id}=${s}`);
+        if (!shape[want].test(s) || (v < 0) !== s.startsWith('(') || s.includes('-')) badCells.push(`${o.id}${x.n}.${r.id}=${s}`);
       }
     }
   }
@@ -110,7 +113,10 @@ const lum = (hex) => {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 };
 const ratio = (a, b) => { const [hi, lo] = [lum(a), lum(b)].sort((x, y) => y - x); return (hi + 0.05) / (lo + 0.05); };
-const C = { orange: '#EB5600', hover: '#E87722', burnt: '#BF5700', teal: '#1A9988', tint: '#D1EBE7', ink: '#1A1A1A', body: '#2D2D2D', muted: '#555555', white: '#FFFFFF', cream: '#FFF8F0', disabled: '#767676' };
+// Read the colours from the page's own tokens, so a changed token is a re-run check.
+const tok = Object.fromEntries([...css.matchAll(/--([a-z-]+):\s*(#[0-9A-Fa-f]{6})\b/g)].map(([, k, v]) => [k, v]));
+const C = { orange: tok.orange, hover: tok['orange-hover'], burnt: tok.burnt, teal: tok.teal, tint: tok['teal-tint'], ink: tok.ink, body: tok.body, muted: tok.muted, white: tok.white, cream: tok.cream };
+check('colour tokens found in the page', Object.values(C).every((v) => /^#[0-9A-Fa-f]{6}$/.test(v ?? '')), JSON.stringify(C));
 const pairs = [
   ['ink on white', C.ink, C.white, 4.5], ['ink on cream', C.ink, C.cream, 4.5],
   ['body on white', C.body, C.white, 4.5], ['body on cream', C.body, C.cream, 4.5],

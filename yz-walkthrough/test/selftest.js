@@ -30,6 +30,12 @@ export async function run() {
     await goto(`#q${q.n}s${N}`);
     if ($$('.step:not([hidden])').length !== N) fail(`Q${q.n}`, `expected ${N} steps shown`);
     if ($('#answer').hidden) fail(`Q${q.n}`, 'answer hidden with all steps shown');
+    // An equals sign only where the tokens are arithmetic (an operator token with no words in it).
+    q.steps.forEach((st, si) => {
+      const arith = st.equation.some((t) => t.type === 'op' && /[+\-\/]/.test(t.text) && !/[a-z]/i.test(t.text));
+      const sign = !!$(`#step${si + 1} .eq-sign`);
+      if (sign !== arith) fail(`Q${q.n} step ${si + 1}`, arith ? 'arithmetic step has no equals sign' : 'equals sign on a step that is not arithmetic');
+    });
     const seen = new Set();
     for (const [si, st] of q.steps.entries()) {
       for (const [ti, t] of st.equation.entries()) {
@@ -76,7 +82,9 @@ export async function run() {
           // Scrolled into view, clear of the sticky header and the pane edges.
           const r = td.getBoundingClientRect();
           if (r.top < headBottom - 1 || r.bottom > wr.bottom + 1) fail(where, 'lit cell is not in view vertically');
-          if (years.length === 1 && (r.left < wr.left - 1 || r.right > wr.left + wrap.clientWidth + 1)) fail(where, 'lit cell is not in view horizontally');
+          // The row label is pinned over the left of the pane, so the cell has to clear it.
+          const labRight = $('th', tr).getBoundingClientRect().right;
+          if (years.length === 1 && (r.left < labRight - 1 || r.right > wr.left + wrap.clientWidth + 1)) fail(where, 'lit cell is not in view horizontally');
           // Roughly the middle of the pane, unless the table cannot scroll that far.
           const mid = (headBottom + wr.bottom) / 2, c = (r.top + r.bottom) / 2;
           const atEdge = wrap.scrollTop < 2 || wrap.scrollTop + wrap.clientHeight > wrap.scrollHeight - 2;
@@ -102,7 +110,12 @@ export async function run() {
     await goto(`#q${q.n}s1`);
     const first = q.steps[0].equation.find((t) => t.type === 'var');
     if ($$('.step:not([hidden])').length !== 1) fail(`Q${q.n} arrival`, 'more than step 1 shown');
-    if (first && $$('td.hl', wrap).length === 0) fail(`Q${q.n} arrival`, 'no cell selected on arrival');
+    if (first) {
+      const chip = $('.chip.active');
+      const td = $('td.hl', wrap);
+      if (!chip || chip.dataset.s !== '0' || +chip.dataset.t !== q.steps[0].equation.indexOf(first)) fail(`Q${q.n} arrival`, 'the first variable of step 1 is not the active chip');
+      if (!td || td.closest('tr').dataset.row !== first.ref.row) fail(`Q${q.n} arrival`, 'the first variable of step 1 is not the lit cell');
+    } else if ($$('td.hl', wrap).length) fail(`Q${q.n} arrival`, 'a cell is lit with no value on screen');
     if (!$('table', wrap)) fail(`Q${q.n} arrival`, 'statement pane is empty');
   }
 
@@ -131,13 +144,22 @@ export async function run() {
   // Step reveal and keyboard.
   await goto('#q1s1');
   const key = (k, shift = false) => document.body.dispatchEvent(new KeyboardEvent('keydown', { key: k, shiftKey: shift, bubbles: true, cancelable: true }));
+  // Arrows still work after a click in the exhibit, unless the table really scrolls sideways.
+  wrap.focus();
+  const sideways = wrap.scrollWidth > wrap.clientWidth + 1;
+  wrap.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true }));
+  if (location.hash !== (sideways ? '#q1s1' : '#q1s2')) fail('Right arrow with focus in the exhibit', `hash ${location.hash}, sideways scroll ${sideways}`);
+  wrap.blur();
+  if (!sideways) key('ArrowLeft');
   $('#btnNext').click();
   if (location.hash !== '#q1s2' || $$('.step:not([hidden])').length !== 2) fail('Next step', `hash ${location.hash}`);
   key('ArrowRight');
   if (location.hash !== '#q1s3') fail('Right arrow', `hash ${location.hash}`);
   key('ArrowLeft');
   if (location.hash !== '#q1s2') fail('Left arrow', `hash ${location.hash}`);
+  $('#btnAll').focus();
   $('#btnAll').click();
+  if (document.activeElement && document.activeElement.disabled) fail('Show all', 'focus left on a disabled button');
   if (location.hash !== '#q1s6' || $('#answer').hidden || !$('#btnNext').disabled) fail('Show all', `hash ${location.hash}`);
   $('#btnReset').click();
   if (location.hash !== '#q1s1' || $$('.step:not([hidden])').length !== 1 || !$('#btnReset').disabled) fail('Reset', `hash ${location.hash}`);

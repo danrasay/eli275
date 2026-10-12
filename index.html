@@ -30,8 +30,8 @@ body{margin:0;font-family:var(--text);font-size:16px;line-height:1.45;color:var(
 .top{padding:12px var(--gut) 12px;background:var(--white);border-top:6px solid var(--orange);border-bottom:1px solid var(--hairline)}
 .brand{display:flex;align-items:center;gap:10px;margin:0 0 5px}
 .bars{display:inline-flex;gap:4px;flex:none}
-.bars i{display:block;width:37px;height:5px;background:var(--teal)}
-.bars i + i{background:var(--orange)}
+.bars i{display:block;width:37px;height:0;border-top:5px solid var(--teal)}
+.bars i + i{border-top-color:var(--orange)}
 .course{font:700 14px/1.2 var(--display);color:var(--ink)}
 h1{margin:0;font:700 24px/1.15 var(--display);color:var(--ink)}
 main{max-width:760px;padding:20px var(--gut) 28px}
@@ -43,7 +43,7 @@ main{max-width:760px;padding:20px var(--gut) 28px}
 .pages p{margin:4px 0 0;font-size:14px;color:var(--muted)}
 footer{padding:9px var(--gut);background:var(--white);border-top:1px solid var(--hairline);font-size:12px;line-height:1.4;color:var(--muted)}
 @media (max-width:899.98px){ :root{--gut:16px} h1{font-size:20px} }
-@media print{ body{background:#fff} .top{border-top-color:#000} .bars i,.bars i + i{background:#000} .pages li{border-left-color:#000} *{color:#000!important} }
+@media print{ body{background:#fff} .top{border-top-color:#000} .bars i,.bars i + i{border-top-color:#000} .pages li{border-left-color:#000} *{color:#000!important} }
 </style>
 </head>
 <body>
