@@ -1,0 +1,6 @@
+# Internal build specs stay off the public site
+HANDOFF.md
+
+.DS_Store
+.claude/
+node_modules/

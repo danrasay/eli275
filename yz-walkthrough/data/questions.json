@@ -1,0 +1,1759 @@
+{
+ "questions": [
+  {
+   "n": 1,
+   "part": "Part 1. Read the statements",
+   "title": "The discount, both organizations",
+   "prompt": "How many cents of each list-price dollar does each organization keep, Year 1 and Year 4? Which way is the discount moving?",
+   "reference": "Hettinger 4.1 to 4.4, revenue and net revenue; Ch 14, percentage change",
+   "orgs": [
+    "Y",
+    "Z"
+   ],
+   "steps": [
+    {
+     "label": "Cents kept per list-price dollar = Net revenue from customers / Charges at list price",
+     "equation": [],
+     "result": null,
+     "note": "Y figures are in $ thousands; Z figures in $ millions. The ratio has no unit."
+    },
+    {
+     "label": "Organization Y, Year 1",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Net revenue from customers, Year 1",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "net_revenue",
+        "year": 1
+       },
+       "value": 11015
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "var",
+       "text": "Charges to customers at list price (service, housing and meals), Year 1",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "list_price",
+        "year": 1
+       },
+       "value": 28466
+      }
+     ],
+     "result": "38.7 cents"
+    },
+    {
+     "label": "Organization Y, Year 4",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Net revenue from customers, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "net_revenue",
+        "year": 4
+       },
+       "value": 20515
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "var",
+       "text": "Charges to customers at list price (service, housing and meals), Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "list_price",
+        "year": 4
+       },
+       "value": 56711
+      }
+     ],
+     "result": "36.2 cents"
+    },
+    {
+     "label": "Organization Z, Year 1",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Main service fees, net, Year 1",
+       "ref": {
+        "org": "Z",
+        "exhibit": 1,
+        "row": "net_fees",
+        "year": 1
+       },
+       "value": 677.5
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "var",
+       "text": "Main service fees at list price, Year 1",
+       "ref": {
+        "org": "Z",
+        "exhibit": 1,
+        "row": "list_price",
+        "year": 1
+       },
+       "value": 1007.2
+      }
+     ],
+     "result": "67.3 cents"
+    },
+    {
+     "label": "Organization Z, Year 4",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Main service fees, net, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 1,
+        "row": "net_fees",
+        "year": 4
+       },
+       "value": 978.1
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "var",
+       "text": "Main service fees at list price, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 1,
+        "row": "list_price",
+        "year": 4
+       },
+       "value": 1558.5
+      }
+     ],
+     "result": "62.8 cents"
+    },
+    {
+     "label": "Direction",
+     "equation": [],
+     "result": "Both keep fewer cents in Year 4 than in Year 1. The discount is deepening at both."
+    }
+   ],
+   "answer": "Y 38.7 cents to 36.2 cents; Z 67.3 cents to 62.8 cents; both deeper.",
+   "lesson": "List price is a fiction in this industry. Net revenue is the real top line."
+  },
+  {
+   "n": 2,
+   "part": "Part 1. Read the statements",
+   "title": "Who covers the cost, Year 4",
+   "prompt": "For each organization, how much of each $1.00 of expenses do customers cover? For Z, what is the result after support?",
+   "reference": "Hettinger 4.3 to 4.4, the P&L staircase; Ch 1, the third fit",
+   "orgs": [
+    "Y",
+    "Z"
+   ],
+   "steps": [
+    {
+     "label": "Organization Y: (Net revenue from customers + Other sales and income) / Total expenses",
+     "equation": [
+      {
+       "type": "op",
+       "text": "("
+      },
+      {
+       "type": "var",
+       "text": "Net revenue from customers, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "net_revenue",
+        "year": 4
+       },
+       "value": 20515
+      },
+      {
+       "type": "op",
+       "text": "+"
+      },
+      {
+       "type": "var",
+       "text": "Other sales and income, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "other_sales",
+        "year": 4
+       },
+       "value": 3267
+      },
+      {
+       "type": "op",
+       "text": ")"
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "var",
+       "text": "Total expenses, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "total_expenses",
+        "year": 4
+       },
+       "value": 40391
+      }
+     ],
+     "result": "58.9 cents of each $1.00"
+    },
+    {
+     "label": "Organization Z: Total revenue from customers and sponsors / Total expenses",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Total revenue from customers and sponsors, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 1,
+        "row": "total_rev_cust_sponsors",
+        "year": 4
+       },
+       "value": 1953.6
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "var",
+       "text": "Total expenses, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 1,
+        "row": "total_expenses",
+        "year": 4
+       },
+       "value": 2999.3
+      }
+     ],
+     "result": "65.1 cents of each $1.00"
+    },
+    {
+     "label": "Organization Z after support: Operating surplus (deficit) + Net support",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Operating surplus (deficit), Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 1,
+        "row": "operating_deficit",
+        "year": 4
+       },
+       "value": -1045.7
+      },
+      {
+       "type": "op",
+       "text": "+"
+      },
+      {
+       "type": "var",
+       "text": "Net support, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 1,
+        "row": "net_support",
+        "year": 4
+       },
+       "value": 1077.4
+      }
+     ],
+     "result": "31.7 surplus before building and endowment items",
+     "note": "This is the line printed as Surplus (deficit) before building and endowment items."
+    }
+   ],
+   "answer": "Y 58.9 cents; Z 65.1 cents, and +31.7 after support.",
+   "lesson": "Neither covers its cost from customers alone. Someone else fills the gap, every year."
+  },
+  {
+   "n": 3,
+   "part": "Part 1. Read the statements",
+   "title": "One customer, Year 4 (Y)",
+   "prompt": "What does the average customer pay, what does one cost, and what is the gap?",
+   "reference": "Hettinger 4.3 to 4.4; Ch 1, the third fit",
+   "orgs": [
+    "Y"
+   ],
+   "steps": [
+    {
+     "label": "Paid per customer = Net revenue from customers / Average number of customers",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Net revenue from customers, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "net_revenue",
+        "year": 4
+       },
+       "value": 20515
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "var",
+       "text": "Not in dollars: average number of customers served, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "customers",
+        "year": 4
+       },
+       "value": 767
+      }
+     ],
+     "result": "26.7 thousand, about $26,700"
+    },
+    {
+     "label": "Cost per customer = Total expenses / Average number of customers",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Total expenses, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "total_expenses",
+        "year": 4
+       },
+       "value": 40391
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "var",
+       "text": "Not in dollars: average number of customers served, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "customers",
+        "year": 4
+       },
+       "value": 767
+      }
+     ],
+     "result": "52.7 thousand, about $52,700"
+    },
+    {
+     "label": "Gap = Cost per customer less Paid per customer",
+     "equation": [
+      {
+       "type": "op",
+       "text": "52.7"
+      },
+      {
+       "type": "op",
+       "text": "-"
+      },
+      {
+       "type": "op",
+       "text": "26.7"
+      }
+     ],
+     "result": "about $25,900 per customer"
+    }
+   ],
+   "answer": "Pays about $26,700; costs about $52,700; gap about $25,900.",
+   "lesson": "Growth is not a fix when the unit loses money. Unit economics has a name from Wednesday on."
+  },
+  {
+   "n": 4,
+   "part": "Part 2. Profit is not cash",
+   "title": "A deficit is not cash (Y, Year 3)",
+   "prompt": "The deficit is bigger than the cash used by operations. Find the gap. Which line on Exhibit 3 explains most of it, and which two lines on Exhibit 2 show the same thing?",
+   "reference": "Hettinger Ch 5, cash is not profit; Ch 8, how the statements tie",
+   "orgs": [
+    "Y"
+   ],
+   "steps": [
+    {
+     "label": "Gap = Deficit for the year less Net cash used by operating activities",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Surplus (deficit) for the year, Year 3",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "surplus",
+        "year": 3
+       },
+       "value": -14204
+      },
+      {
+       "type": "op",
+       "text": "vs"
+      },
+      {
+       "type": "var",
+       "text": "Net cash used by operating activities, Year 3",
+       "ref": {
+        "org": "Y",
+        "exhibit": 3,
+        "row": "cf_operating",
+        "year": 3
+       },
+       "value": -7501
+      }
+     ],
+     "result": "6,703 less cash left than the deficit says"
+    },
+    {
+     "label": "The Exhibit 3 line that explains most of it",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Decrease (increase) in receivables, Year 3",
+       "ref": {
+        "org": "Y",
+        "exhibit": 3,
+        "row": "cf_receivables",
+        "year": 3
+       },
+       "value": 6362
+      }
+     ],
+     "result": "6,362: receivables fell, so cash came in for revenue recorded earlier"
+    },
+    {
+     "label": "The same thing on Exhibit 2: Government relief credit receivable",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Government relief credit receivable, Year 2",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "relief_receivable",
+        "year": 2
+       },
+       "value": 3628
+      },
+      {
+       "type": "op",
+       "text": "to"
+      },
+      {
+       "type": "var",
+       "text": "Government relief credit receivable, Year 3",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "relief_receivable",
+        "year": 3
+       },
+       "value": 0
+      }
+     ],
+     "result": "fell 3,628"
+    },
+    {
+     "label": "The same thing on Exhibit 2: Donations promised, not yet received",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Donations promised, not yet received, Year 2",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "donations_promised",
+        "year": 2
+       },
+       "value": 5699
+      },
+      {
+       "type": "op",
+       "text": "to"
+      },
+      {
+       "type": "var",
+       "text": "Donations promised, not yet received, Year 3",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "donations_promised",
+        "year": 3
+       },
+       "value": 2943
+      }
+     ],
+     "result": "fell 2,756",
+     "note": "Together the two receivable lines fall 6,384, within the 6,362 receivables line once the small customer receivable (266 vs 249) is netted in."
+    }
+   ],
+   "answer": "Gap 6,703; receivables fell 6,362 (relief credit 3,628 to 0; donations promised 5,699 to 2,943).",
+   "lesson": "You can lose on paper and bleed less cash for a while. Collecting old promises is not a strategy."
+  },
+  {
+   "n": 5,
+   "part": "Part 2. Profit is not cash",
+   "title": "A surplus is not cash (Z, Year 2)",
+   "prompt": "Strip out the one-time item to get the underlying surplus. Then show what happened to free cash and investments from Year 1 to Year 2, and name the largest cash outflow that explains it.",
+   "reference": "Hettinger Ch 5; Ch 3.4, cash flows by activity",
+   "orgs": [
+    "Z"
+   ],
+   "steps": [
+    {
+     "label": "Underlying surplus = Surplus for the year less the one-time item",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Surplus (deficit) for the year, Year 2",
+       "ref": {
+        "org": "Z",
+        "exhibit": 1,
+        "row": "surplus",
+        "year": 2
+       },
+       "value": 79.3
+      },
+      {
+       "type": "op",
+       "text": "-"
+      },
+      {
+       "type": "var",
+       "text": "One-time: operations taken over from an affiliate, Year 2",
+       "ref": {
+        "org": "Z",
+        "exhibit": 1,
+        "row": "one_time",
+        "year": 2
+       },
+       "value": 67.9
+      }
+     ],
+     "result": "11.4"
+    },
+    {
+     "label": "Free cash and investments, Year 1 = Cash free to use + Short-term investments + Long-term investments free to use",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Cash, free to use, Year 1",
+       "ref": {
+        "org": "Z",
+        "exhibit": 2,
+        "row": "cash_free",
+        "year": 1
+       },
+       "value": 47.5
+      },
+      {
+       "type": "op",
+       "text": "+"
+      },
+      {
+       "type": "var",
+       "text": "Short-term investments, Year 1",
+       "ref": {
+        "org": "Z",
+        "exhibit": 2,
+        "row": "st_investments",
+        "year": 1
+       },
+       "value": 191.3
+      },
+      {
+       "type": "op",
+       "text": "+"
+      },
+      {
+       "type": "var",
+       "text": "Long-term investments, free to use, Year 1",
+       "ref": {
+        "org": "Z",
+        "exhibit": 2,
+        "row": "lt_investments_free",
+        "year": 1
+       },
+       "value": 530.8
+      }
+     ],
+     "result": "769.6"
+    },
+    {
+     "label": "Free cash and investments, Year 2",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Cash, free to use, Year 2",
+       "ref": {
+        "org": "Z",
+        "exhibit": 2,
+        "row": "cash_free",
+        "year": 2
+       },
+       "value": 53.8
+      },
+      {
+       "type": "op",
+       "text": "+"
+      },
+      {
+       "type": "var",
+       "text": "Short-term investments, Year 2",
+       "ref": {
+        "org": "Z",
+        "exhibit": 2,
+        "row": "st_investments",
+        "year": 2
+       },
+       "value": 165.0
+      },
+      {
+       "type": "op",
+       "text": "+"
+      },
+      {
+       "type": "var",
+       "text": "Long-term investments, free to use, Year 2",
+       "ref": {
+        "org": "Z",
+        "exhibit": 2,
+        "row": "lt_investments_free",
+        "year": 2
+       },
+       "value": 409.1
+      }
+     ],
+     "result": "627.9"
+    },
+    {
+     "label": "Change",
+     "equation": [
+      {
+       "type": "op",
+       "text": "627.9"
+      },
+      {
+       "type": "op",
+       "text": "-"
+      },
+      {
+       "type": "op",
+       "text": "769.6"
+      }
+     ],
+     "result": "fell 141.7"
+    },
+    {
+     "label": "Largest cash outflow in the asset and financing sections",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Bought property and equipment, Year 2",
+       "ref": {
+        "org": "Z",
+        "exhibit": 3,
+        "row": "cf_property",
+        "year": 2
+       },
+       "value": -267.3
+      }
+     ],
+     "result": "Bought property and equipment, 267.3"
+    }
+   ],
+   "answer": "79.3 less 67.9 = 11.4; free cash and investments fell 141.7 (769.6 to 627.9); bought property and equipment 267.3.",
+   "lesson": "A surplus on the statement; cash walking out the door. Always read both."
+  },
+  {
+   "n": 6,
+   "part": "Part 2. Profit is not cash",
+   "title": "Prove it with depreciation (Z, Year 4)",
+   "prompt": "Property and equipment fell even though Z bought more of it. Show the change, the purchases, and the line that explains the difference.",
+   "reference": "Hettinger 4.3 and 6.2, depreciation; Ch 8",
+   "orgs": [
+    "Z"
+   ],
+   "steps": [
+    {
+     "label": "Change in Property and equipment, net",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Property and equipment, net of depreciation, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 2,
+        "row": "property",
+        "year": 4
+       },
+       "value": 2843.6
+      },
+      {
+       "type": "op",
+       "text": "-"
+      },
+      {
+       "type": "var",
+       "text": "Property and equipment, net of depreciation, Year 3",
+       "ref": {
+        "org": "Z",
+        "exhibit": 2,
+        "row": "property",
+        "year": 3
+       },
+       "value": 2854.2
+      }
+     ],
+     "result": "down 10.6"
+    },
+    {
+     "label": "What Z bought (Exhibit 3)",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Bought property and equipment, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 3,
+        "row": "cf_property",
+        "year": 4
+       },
+       "value": -209.9
+      }
+     ],
+     "result": "209.9 of purchases"
+    },
+    {
+     "label": "What explains the fall (Exhibit 1)",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Depreciation, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 1,
+        "row": "depreciation",
+        "year": 4
+       },
+       "value": 225.5
+      }
+     ],
+     "result": "Depreciation 225.5 outran the buying: 209.9 - 225.5 = (15.6)",
+     "note": "The remaining +5.0 is non-cash additions (leased space, software subscriptions, unpaid invoices) less retirements. Not required."
+    }
+   ],
+   "answer": "Down 10.6; bought 209.9; depreciation 225.5 explains it.",
+   "lesson": "Depreciation moves the balance sheet and the P&L without a dollar moving. That is the point of it."
+  },
+  {
+   "n": 7,
+   "part": "Part 2. Profit is not cash",
+   "title": "Who paid for it (Y, all four years)",
+   "prompt": "Operations used cash every year. Add up the four years. Which section of Exhibit 3 supplied the cash, and how much over the same four years?",
+   "reference": "Hettinger 3.4, cash flows by activity",
+   "orgs": [
+    "Y"
+   ],
+   "steps": [
+    {
+     "label": "Cash used by operations, four years",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Net cash used by operating activities, Years 1 to 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 3,
+        "row": "cf_operating",
+        "years": [
+         1,
+         2,
+         3,
+         4
+        ]
+       },
+       "value": [
+        -7072,
+        -10204,
+        -7501,
+        -5284
+       ]
+      }
+     ],
+     "result": "30,061 used"
+    },
+    {
+     "label": "Cash supplied by asset activities, four years",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Net cash from asset activities, Years 1 to 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 3,
+        "row": "cf_asset",
+        "years": [
+         1,
+         2,
+         3,
+         4
+        ]
+       },
+       "value": [
+        9118,
+        10394,
+        7433,
+        4581
+       ]
+      }
+     ],
+     "result": "31,526 supplied"
+    },
+    {
+     "label": "Mostly from one line",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Investments sold, net of purchases, Years 1 to 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 3,
+        "row": "cf_inv_sold",
+        "years": [
+         1,
+         2,
+         3,
+         4
+        ]
+       },
+       "value": [
+        9305,
+        10827,
+        7711,
+        4664
+       ]
+      }
+     ],
+     "result": "32,507 from selling investments",
+     "note": "Either total, 31,526 or 32,507, earns the point on the sheet."
+    }
+   ],
+   "answer": "Operations used 30,061; asset activities supplied 31,526, almost all of it investments sold (32,507).",
+   "lesson": "The college ran its operations by selling its savings. Selling savings has an end date; Question 11 computes it."
+  },
+  {
+   "n": 8,
+   "part": "Part 3. The ratio room",
+   "title": "Margin check (Y)",
+   "prompt": "Compute the operating margin (deficit before investment results divided by total operating revenue) for Year 1 and Year 4. Is it improving? Does it describe a viable organization?",
+   "reference": "Hettinger Ch 10, margins; Ch 15.1 and 15.3, margins and strategy",
+   "orgs": [
+    "Y"
+   ],
+   "steps": [
+    {
+     "label": "Operating margin, Year 1",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Deficit before investment results, Year 1",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "deficit_before_inv",
+        "year": 1
+       },
+       "value": -9570
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "var",
+       "text": "Total operating revenue, Year 1",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "total_op_rev",
+        "year": 1
+       },
+       "value": 25653
+      }
+     ],
+     "result": "-37.3%"
+    },
+    {
+     "label": "Operating margin, Year 4",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Deficit before investment results, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "deficit_before_inv",
+        "year": 4
+       },
+       "value": -8751
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "var",
+       "text": "Total operating revenue, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "total_op_rev",
+        "year": 4
+       },
+       "value": 31640
+      }
+     ],
+     "result": "-27.7%"
+    },
+    {
+     "label": "Dollars out per dollar in, Year 4 = Total expenses / Total operating revenue",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Total expenses, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "total_expenses",
+        "year": 4
+       },
+       "value": 40391
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "var",
+       "text": "Total operating revenue, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "total_op_rev",
+        "year": 4
+       },
+       "value": 31640
+      }
+     ],
+     "result": "$1.28 out for every $1.00 in"
+    },
+    {
+     "label": "Reading",
+     "equation": [],
+     "result": "Improving, and still deeply negative. A margin can improve and still describe a business that does not work."
+    }
+   ],
+   "answer": "-37.3% to -27.7%; improving; $1.28 out per $1.00 in at Year 4; not viable as run.",
+   "lesson": "A margin can improve and still describe a business that does not work."
+  },
+  {
+   "n": 9,
+   "part": "Part 3. The ratio room",
+   "title": "Liquidity check (Y, Year 4)",
+   "prompt": "Divide cash plus escrow plus investments by debt due within one year. The ratio is above 1.0. Is Y liquid? Look at what is in the numerator and at the net assets section of Exhibit 2 before you answer.",
+   "reference": "Hettinger Ch 12, liquidity ratios",
+   "orgs": [
+    "Y"
+   ],
+   "steps": [
+    {
+     "label": "Numerator = Cash + Cash held in escrow + Investments",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Cash, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "cash",
+        "year": 4
+       },
+       "value": 5110
+      },
+      {
+       "type": "op",
+       "text": "+"
+      },
+      {
+       "type": "var",
+       "text": "Cash held in escrow, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "escrow",
+        "year": 4
+       },
+       "value": 1178
+      },
+      {
+       "type": "op",
+       "text": "+"
+      },
+      {
+       "type": "var",
+       "text": "Investments, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "investments",
+        "year": 4
+       },
+       "value": 22194
+      }
+     ],
+     "result": "28,482"
+    },
+    {
+     "label": "Ratio = Numerator / Debt due within one year",
+     "equation": [
+      {
+       "type": "op",
+       "text": "28,482"
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "var",
+       "text": "Debt due within one year, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "debt_current",
+        "year": 4
+       },
+       "value": 20418
+      }
+     ],
+     "result": "1.4"
+    },
+    {
+     "label": "Read the numerator against the net assets section",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Restricted by donors, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "na_restricted",
+        "year": 4
+       },
+       "value": 33237
+      },
+      {
+       "type": "op",
+       "text": "vs"
+      },
+      {
+       "type": "var",
+       "text": "Free to use, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "na_free",
+        "year": 4
+       },
+       "value": 4713
+      }
+     ],
+     "result": "Restricted 33,237 against free 4,713: most of the investments are not Y's to spend"
+    },
+    {
+     "label": "Reading",
+     "equation": [],
+     "result": "Above 1.0, but not liquid in the way the ratio suggests. A ratio is only as liquid as what is inside it."
+    }
+   ],
+   "answer": "28,482 / 20,418 = 1.4; restricted net assets 33,237 vs free 4,713; not liquid as the ratio suggests.",
+   "lesson": "Above 1.0 is not a guarantee. A ratio is only as liquid as what is inside it."
+  },
+  {
+   "n": 10,
+   "part": "Part 3. The ratio room",
+   "title": "Leverage check (Y)",
+   "prompt": "Compute total liabilities divided by total net assets for Year 1 and Year 4. Both are under 2.0. What does this ratio miss about Y's position?",
+   "reference": "Hettinger Ch 13, leverage ratios; 6.2, current versus long-term",
+   "orgs": [
+    "Y"
+   ],
+   "steps": [
+    {
+     "label": "Year 1",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Total liabilities, Year 1",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "total_liabilities",
+        "year": 1
+       },
+       "value": 28022
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "var",
+       "text": "Total net assets, Year 1",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "total_net_assets",
+        "year": 1
+       },
+       "value": 71264
+      }
+     ],
+     "result": "0.39"
+    },
+    {
+     "label": "Year 4",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Total liabilities, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "total_liabilities",
+        "year": 4
+       },
+       "value": 32951
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "var",
+       "text": "Total net assets, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "total_net_assets",
+        "year": 4
+       },
+       "value": 37950
+      }
+     ],
+     "result": "0.87"
+    },
+    {
+     "label": "What the ratio misses: when the debt is due",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Debt due within one year, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "debt_current",
+        "year": 4
+       },
+       "value": 20418
+      }
+     ],
+     "result": "20,418 is due within one year; the lender can call"
+    },
+    {
+     "label": "What the ratio misses: what the net assets are made of",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Restricted by donors, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "na_restricted",
+        "year": 4
+       },
+       "value": 33237
+      },
+      {
+       "type": "op",
+       "text": "and"
+      },
+      {
+       "type": "var",
+       "text": "Property and equipment, net of depreciation, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "property",
+        "year": 4
+       },
+       "value": 38733
+      }
+     ],
+     "result": "Restricted funds and property Y cannot spend sit inside the denominator"
+    }
+   ],
+   "answer": "0.39 to 0.87; under 2.0, but 20,418 is due within a year and the net assets include restricted funds and property.",
+   "lesson": "Leverage reads differently when the lender can call tomorrow. Benchmarks are a starting point, not a verdict."
+  },
+  {
+   "n": 11,
+   "part": "Part 4. Judgment",
+   "title": "Runway",
+   "prompt": "Y: monthly burn from Year 4 operating cash, and months of runway on cash. Z: days of cash for Year 1 and Year 4, using free cash and investments divided by daily cash spending. Which way are both heading?",
+   "reference": "Course supplement, burn rate and runway (Week 4); Hettinger 6.2",
+   "orgs": [
+    "Y",
+    "Z"
+   ],
+   "steps": [
+    {
+     "label": "Y monthly burn = Net cash used by operating activities / 12",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Net cash used by operating activities, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 3,
+        "row": "cf_operating",
+        "year": 4
+       },
+       "value": -5284
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "op",
+       "text": "12"
+      }
+     ],
+     "result": "about 440 per month"
+    },
+    {
+     "label": "Y runway = Cash / monthly burn",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Cash, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "cash",
+        "year": 4
+       },
+       "value": 5110
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "op",
+       "text": "440.3"
+      }
+     ],
+     "result": "11.6 months on cash",
+     "note": "With escrow included: 14.3 months. Either is accepted if stated. And 20,418 of debt is due within the year."
+    },
+    {
+     "label": "Z daily cash spending, Year 1 = (Paid to staff + Paid to suppliers + Price assistance) / 365",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Paid to staff, Year 1",
+       "ref": {
+        "org": "Z",
+        "exhibit": 3,
+        "row": "cf_staff",
+        "year": 1
+       },
+       "value": -1440.4
+      },
+      {
+       "type": "op",
+       "text": "+"
+      },
+      {
+       "type": "var",
+       "text": "Paid to suppliers, Year 1",
+       "ref": {
+        "org": "Z",
+        "exhibit": 3,
+        "row": "cf_suppliers",
+        "year": 1
+       },
+       "value": -598.6
+      },
+      {
+       "type": "op",
+       "text": "+"
+      },
+      {
+       "type": "var",
+       "text": "Price assistance paid to customers, Year 1",
+       "ref": {
+        "org": "Z",
+        "exhibit": 3,
+        "row": "cf_assistance",
+        "year": 1
+       },
+       "value": -105.9
+      },
+      {
+       "type": "op",
+       "text": ") / 365"
+      }
+     ],
+     "result": "5.88 per day"
+    },
+    {
+     "label": "Z free cash and investments, Year 1",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Cash, free to use, Year 1",
+       "ref": {
+        "org": "Z",
+        "exhibit": 2,
+        "row": "cash_free",
+        "year": 1
+       },
+       "value": 47.5
+      },
+      {
+       "type": "op",
+       "text": "+"
+      },
+      {
+       "type": "var",
+       "text": "Short-term investments, Year 1",
+       "ref": {
+        "org": "Z",
+        "exhibit": 2,
+        "row": "st_investments",
+        "year": 1
+       },
+       "value": 191.3
+      },
+      {
+       "type": "op",
+       "text": "+"
+      },
+      {
+       "type": "var",
+       "text": "Long-term investments, free to use, Year 1",
+       "ref": {
+        "org": "Z",
+        "exhibit": 2,
+        "row": "lt_investments_free",
+        "year": 1
+       },
+       "value": 530.8
+      }
+     ],
+     "result": "769.6"
+    },
+    {
+     "label": "Z days of cash, Year 1",
+     "equation": [
+      {
+       "type": "op",
+       "text": "769.6"
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "op",
+       "text": "5.88"
+      }
+     ],
+     "result": "131 days"
+    },
+    {
+     "label": "Z daily cash spending, Year 4",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Paid to staff, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 3,
+        "row": "cf_staff",
+        "year": 4
+       },
+       "value": -1850.2
+      },
+      {
+       "type": "op",
+       "text": "+"
+      },
+      {
+       "type": "var",
+       "text": "Paid to suppliers, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 3,
+        "row": "cf_suppliers",
+        "year": 4
+       },
+       "value": -845.8
+      },
+      {
+       "type": "op",
+       "text": "+"
+      },
+      {
+       "type": "var",
+       "text": "Price assistance paid to customers, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 3,
+        "row": "cf_assistance",
+        "year": 4
+       },
+       "value": -81.7
+      },
+      {
+       "type": "op",
+       "text": ") / 365"
+      }
+     ],
+     "result": "7.61 per day"
+    },
+    {
+     "label": "Z free cash and investments, Year 4",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Cash, free to use, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 2,
+        "row": "cash_free",
+        "year": 4
+       },
+       "value": 16.9
+      },
+      {
+       "type": "op",
+       "text": "+"
+      },
+      {
+       "type": "var",
+       "text": "Short-term investments, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 2,
+        "row": "st_investments",
+        "year": 4
+       },
+       "value": 367.3
+      },
+      {
+       "type": "op",
+       "text": "+"
+      },
+      {
+       "type": "var",
+       "text": "Long-term investments, free to use, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 2,
+        "row": "lt_investments_free",
+        "year": 4
+       },
+       "value": 110.5
+      }
+     ],
+     "result": "494.7"
+    },
+    {
+     "label": "Z days of cash, Year 4",
+     "equation": [
+      {
+       "type": "op",
+       "text": "494.7"
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "op",
+       "text": "7.61"
+      }
+     ],
+     "result": "65 days"
+    },
+    {
+     "label": "Direction",
+     "equation": [],
+     "result": "Both heading down. Different sizes, same direction."
+    }
+   ],
+   "answer": "Y: burn about 440 per month, 11.6 months on cash; Z: 131 days to 65 days; both down.",
+   "lesson": "Runway is the one number that turns a statement into a deadline."
+  },
+  {
+   "n": 12,
+   "part": "Part 4. Judgment",
+   "title": "What are they, and would you lend to either one?",
+   "prompt": "Name the kind of organization each one is, with two pieces of evidence from the exhibits. Then give a lending verdict for each. A verdict needs at least one number from the exhibits.",
+   "reference": "Hettinger Ch 1 and Ch 2, business types and the third fit; Ch 13",
+   "orgs": [
+    "Y",
+    "Z"
+   ],
+   "steps": [
+    {
+     "label": "Organization Y, evidence: donors and restricted equity (no owners)",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Donations and grants, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "donations",
+        "year": 4
+       },
+       "value": 7858
+      },
+      {
+       "type": "op",
+       "text": "and"
+      },
+      {
+       "type": "var",
+       "text": "Restricted by donors, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "na_restricted",
+        "year": 4
+       },
+       "value": 33237
+      }
+     ],
+     "result": "A nonprofit with donor-restricted net assets"
+    },
+    {
+     "label": "Organization Y, evidence: a list price with a deep discount, housing and meals, customers counted per year",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Charges to customers at list price (service, housing and meals), Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "list_price",
+        "year": 4
+       },
+       "value": 56711
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "var",
+       "text": "Not in dollars: average number of customers served, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 1,
+        "row": "customers",
+        "year": 4
+       },
+       "value": 767
+      }
+     ],
+     "result": "about $73,900 list price per customer, 64% discounted: a private residential college"
+    },
+    {
+     "label": "Organization Y, verdict with numbers",
+     "equation": [
+      {
+       "type": "op",
+       "text": "58.9 cents per expense dollar from customers (Q2)"
+      },
+      {
+       "type": "op",
+       "text": "; 11.6 months of runway (Q11)"
+      },
+      {
+       "type": "op",
+       "text": ";"
+      },
+      {
+       "type": "var",
+       "text": "Debt due within one year, Year 4",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "debt_current",
+        "year": 4
+       },
+       "value": 20418
+      }
+     ],
+     "result": "Not viable as run; would not lend without a new source of cover"
+    },
+    {
+     "label": "Organization Z, evidence: state government support and research",
+     "equation": [
+      {
+       "type": "var",
+       "text": "State government support, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 1,
+        "row": "state_support",
+        "year": 4
+       },
+       "value": 404.0
+      },
+      {
+       "type": "op",
+       "text": "and"
+      },
+      {
+       "type": "var",
+       "text": "Research and project contracts, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 1,
+        "row": "research_contracts",
+        "year": 4
+       },
+       "value": 633.9
+      }
+     ],
+     "result": "A government-supported public institution with a large research enterprise"
+    },
+    {
+     "label": "Organization Z, evidence: scale and an endowment",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Customers served, headcount each fall, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 1,
+        "row": "customers",
+        "year": 4
+       },
+       "value": 84548
+      },
+      {
+       "type": "op",
+       "text": "and"
+      },
+      {
+       "type": "var",
+       "text": "Endowment investments, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 2,
+        "row": "endowment",
+        "year": 4
+       },
+       "value": 354.6
+      }
+     ],
+     "result": "About 85,000 customers and a 354.6 endowment: a large public research university"
+    },
+    {
+     "label": "Organization Z, verdict with numbers",
+     "equation": [
+      {
+       "type": "op",
+       "text": "65.1 cents per expense dollar from customers and sponsors (Q2)"
+      },
+      {
+       "type": "op",
+       "text": "; 65 days of cash (Q11)"
+      },
+      {
+       "type": "op",
+       "text": ";"
+      },
+      {
+       "type": "var",
+       "text": "State government support, Year 4",
+       "ref": {
+        "org": "Z",
+        "exhibit": 1,
+        "row": "state_support",
+        "year": 4
+       },
+       "value": 404.0
+      }
+     ],
+     "result": "Viable only with support, and short of cash; lend only against the public backstop"
+    }
+   ],
+   "answer": "Y: a private nonprofit residential college, not viable as run. Z: a public research university, viable only with support and short of cash. Either verdict earns the point with a number behind it.",
+   "lesson": "Same test, different backstop. One closes; one restructures and continues. Lenders read statements before stories."
+  }
+ ],
+ "bonus": {
+  "n": "B",
+  "part": "Bonus",
+  "title": "Name both organizations",
+  "prompt": "One line on the group sheet.",
+  "answer": [
+   {
+    "org": "Y",
+    "name": "Hampshire College",
+    "place": "Amherst, Massachusetts",
+    "outcome": "On April 14, 2026 the college announced it will close after the fall 2026 semester. The statements said it first: customers covered 59 cents of each expense dollar, operations ran on sold savings, and 11.6 months of runway faced 20,418 of debt due within the year."
+   },
+   {
+    "org": "Z",
+    "name": "University of Arizona",
+    "place": "Tucson, Arizona",
+    "outcome": "A real cash crisis: days of cash fell from 131 to 65 on our page-only measure, and the university reported job losses while it restructured. Still open. The backstop is the public purse, and it came with conditions."
+   }
+  ],
+  "tone": "Keep both factual and restrained. Real people lost jobs and a real college is closing. No humor about the outcome."
+ }
+}
