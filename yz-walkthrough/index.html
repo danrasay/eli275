@@ -4,16 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Organizations Y and Z Solution Walkthrough | ELI 275</title>
-<meta name="description" content="Step by step solutions to the Organizations Y and Z team challenge. ELI 275 Entrepreneurial Finance, Lewis &amp; Clark College, Fall 2026.">
 <link rel="icon" href="data:,">
+<script>
+// Links made before the tour took this address (#q9s3, #bonus) still open that step of the walkthrough.
+(function () { var h = location.hash; if (/^#(q\d+(s\d+)?|bonus)$/i.test(h)) location.replace('walkthrough/' + h); })();
+</script>
+<title>Y and Z Walkthrough Tour</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&amp;family=Raleway:wght@700&amp;display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&amp;family=Raleway:wght@700&amp;display=swap">
 <style>
-/* ELI course material design system, deck variant.
-   Flat fields, zero radius, no shadows, no gradients. Raleway Bold for the
-   page title, course name and question titles; Lato for everything else. */
+/* Layout: a player. A live miniature of the walkthrough is the stage; a caption and
+   transport sit under it; the ten scenes are listed beside it (below it when narrow).
+   ELI course material design system, deck variant: one light look by choice, flat
+   fields, zero radius apart from true-circle badges, no shadows, no gradients. */
 :root{
   --orange:#EB5600;
   --orange-hover:#E87722;
@@ -24,275 +28,257 @@
   --body:#2D2D2D;
   --muted:#555555;
   --hairline:#D9D9D9;
+  --band:#E9EDEE;
   --white:#FFFFFF;
   --cream:#FFF8F0;
+  --callout:#FFF3E0;
   --display:"Raleway","Helvetica Neue",Arial,sans-serif;
   --text:"Lato","Helvetica Neue",Arial,sans-serif;
-  --t:120ms linear;
   --gut:20px;
-  --pane-h:48vh;
 }
-@supports (height:1dvh){ :root{ --pane-h:48dvh; } }
 *,*::before,*::after{box-sizing:border-box;border-radius:0}
 [hidden]{display:none!important}
-html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{margin:0;font-family:var(--text);font-size:16px;line-height:1.45;color:var(--body);background:var(--white)}
-button{font:inherit;color:inherit;cursor:pointer;margin:0}
+body{margin:0;background:var(--white);color:var(--body);font-family:var(--text);font-size:16px;line-height:1.45}
+button{margin:0;font:inherit;color:inherit;cursor:pointer}
 button:disabled{cursor:default}
-a:focus-visible,button:focus-visible,.wrap:focus-visible,h2:focus-visible{outline:2px solid var(--burnt);outline-offset:2px}
-/* Motion: colour only, 120 ms, and only on hover and focus. State changes are instant. */
-a:hover,a:focus-visible,button:hover,button:focus-visible{transition:background-color var(--t),border-color var(--t),color var(--t)}
-h2:focus:not(:focus-visible){outline:none}
-.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+a{color:var(--ink)}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--burnt);outline-offset:2px}
+.page{max-width:1240px;margin:0 auto;padding-inline:var(--gut);padding-block:0 28px}
 
-/* Header and question strip */
-.top{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 32px;padding:12px var(--gut) 10px;background:var(--white);border-top:6px solid var(--orange);border-bottom:1px solid var(--hairline)}
+/* Header */
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px 24px;padding-block:12px;border-top:6px solid var(--orange);border-bottom:1px solid var(--hairline)}
 .brand{display:flex;align-items:center;gap:10px;margin:0 0 5px}
 .bars{display:inline-flex;gap:4px;flex:none}
 .bars i{display:block;width:37px;height:0;border-top:5px solid var(--teal)}
 .bars i + i{border-top-color:var(--orange)}
 .course{font:700 14px/1.2 var(--display);color:var(--ink)}
-h1{margin:0;font:700 24px/1.15 var(--display);color:var(--ink)}
-.rail{display:flex;flex-wrap:wrap;gap:8px 18px;margin-left:auto}
-.part{display:flex;flex-direction:column;gap:3px}
-.part-name{font-size:11.5px;line-height:1.2;font-weight:700;color:var(--muted);white-space:nowrap}
-.part-name.blank{visibility:hidden}
-.qs{display:flex;gap:4px}
-.qlink{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:36px;padding:0 8px;border:1px solid var(--muted);background:var(--white);color:var(--ink);font-size:14px;font-weight:700;text-decoration:none}
-.qlink:hover{border-color:var(--orange);background:var(--cream)}
-.qlink:active{background:var(--burnt);border-color:var(--burnt);color:var(--white)}
-.qlink[aria-current="page"]{background:var(--orange);border:2px solid var(--ink);color:var(--ink)}
+h1{margin:0;font:700 26px/1.15 var(--display);color:var(--ink);text-wrap:balance}
+.lead{max-width:75ch;margin:10px 0 14px;font-size:16px;color:var(--body)}
 
-/* Panes */
-main{background:var(--cream)}
-.solution{min-width:0;background:var(--cream)}
-.statement{min-width:0;background:var(--white)}
-
-/* Step controls */
-.controls{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px var(--gut);background:var(--cream);border-bottom:1px solid var(--hairline)}
-.btn{min-height:40px;padding:8px 14px;border:1px solid var(--ink);background:var(--white);color:var(--ink);font-size:14px;font-weight:700;line-height:1.2}
-.btn:hover{border-color:var(--orange);background:var(--cream)}
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 14px;border:1px solid var(--ink);background:var(--white);color:var(--ink);font-size:14px;font-weight:700;line-height:1.2;text-decoration:none}
+.btn:hover{border-color:var(--orange);background:var(--cream);transition:background-color 120ms linear,border-color 120ms linear,color 120ms linear}
 .btn:active{background:var(--burnt);border-color:var(--burnt);color:var(--white)}
 .btn.primary{background:var(--orange);border-color:var(--orange)}
 .btn.primary:hover{background:var(--orange-hover);border-color:var(--orange-hover)}
 .btn.primary:active{background:var(--burnt);border-color:var(--burnt);color:var(--white)}
-.btn:disabled,.btn.primary:disabled{background:var(--white);border-color:var(--hairline);color:#767676}
-.count{margin-left:auto;font-size:13px;font-weight:700;color:var(--body)}
+.btn:disabled{background:var(--white);border-color:var(--hairline);color:#767676}
 
-/* Question */
-.q-body{padding:16px var(--gut) 4px}
-.part-line{margin:0;font-size:13px;font-weight:700;color:var(--muted)}
-.q-title{margin:4px 0 0;font:700 26px/1.2 var(--display);color:var(--ink)}
-.prompt{margin:10px 0 0;font-size:16px;color:var(--body)}
-.ref{margin:8px 0 14px;font-size:13px;color:var(--muted)}
-.ref b{color:var(--body)}
+/* Player */
+.player{display:grid;grid-template-columns:minmax(0,1fr);gap:18px 24px;align-items:start}
+.left{min-width:0;display:grid;gap:10px}
+.stage{position:relative;height:min(580px,max(440px,calc(100vh - 330px)));overflow:hidden;background:var(--band)}
+.stage.is-narrow{height:min(640px,max(520px,calc(100vh - 250px)))}
+.caption{padding:12px 14px 14px;background:var(--callout);border-left:8px solid var(--orange)}
+.kicker{margin:0;font-size:12px;font-weight:700;color:var(--muted)}
+.caption h2{margin:2px 0 0;font:700 21px/1.2 var(--display);color:var(--ink);text-wrap:balance}
+.cap-text{max-width:70ch;min-height:2.9em;margin:6px 0 0;font-size:16px;color:var(--body)}
+.transport{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.transport .grow{flex:1}
+.bar{display:flex;gap:3px;margin:0;padding:0;list-style:none}
+.bar li{flex:1;height:6px;background:var(--hairline)}
+.bar li.done{background:var(--orange)}
+.bar li.now{background:var(--ink)}
 
-/* Steps */
-.steps{list-style:none;margin:0;padding:0;display:grid;gap:12px}
-.step{min-width:0;padding:12px 14px 14px;background:var(--white);border-left:7px solid var(--hairline)}
-.step.current{border-left-color:var(--orange)}
-.step-n{margin:0;font-size:12px;font-weight:700;color:var(--burnt)}
-.step h3{margin:2px 0 0;font:700 15px/1.35 var(--text);color:var(--ink)}
-.eq-row{display:flex;flex-wrap:wrap;align-items:flex-start;gap:6px 8px;margin:10px 0 0}
-.op{min-width:0;max-width:100%;padding-top:7px;font-size:19px;line-height:26px;color:var(--ink)}
-.chip{display:inline-flex;flex-direction:column;align-items:flex-start;max-width:min(100%,220px);padding:6px 10px;border:1px solid var(--muted);background:var(--cream);color:var(--ink);text-align:left}
-.chip.multi{max-width:100%}
-.chip-v{display:flex;flex-wrap:wrap;row-gap:2px;font-size:19px;line-height:26px;font-weight:700;font-variant-numeric:tabular-nums lining-nums}
-.chip-v span + span{margin-left:9px;padding-left:9px;border-left:1px solid var(--muted)}
-.chip-l{margin-top:2px;font-size:11px;line-height:1.3;color:var(--muted)}
-.chip:hover{border-color:var(--orange);background:var(--white)}
-.chip:active{border-color:var(--burnt)}
-.chip.active{padding:5px 9px;border:2px solid var(--teal);background:var(--teal-tint)}
-.chip.active .chip-l{color:var(--body)}
-.result{display:flex;gap:8px;margin:10px 0 0;font-size:19px;line-height:1.35;font-weight:700;color:var(--ink)}
-.result.prose{display:block;font-size:17px;font-weight:400}
-.eq-sign{flex:none}
-.note{margin:8px 0 0;font-size:13px;line-height:1.4;color:var(--muted)}
+/* Scene list */
+.scenes-h{margin:0 0 8px;font:700 13px/1.2 var(--text);color:var(--muted)}
+.scenes{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.scene{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 10px;align-items:start;width:100%;padding:8px 10px 9px 7px;border:0;border-left:7px solid var(--hairline);background:var(--cream);text-align:left}
+.scene:hover{border-left-color:var(--orange-hover);transition:border-color 120ms linear}
+.scene[aria-current="step"]{border-left-color:var(--orange);background:var(--callout)}
+.badge{grid-row:span 2;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--burnt);color:var(--white);font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.s-t{font-size:15px;font-weight:700;line-height:1.25;color:var(--ink)}
+.scene[aria-current="step"] .s-t{text-decoration:underline;text-underline-offset:3px}
+.s-d{font-size:13px;line-height:1.35;color:var(--muted)}
+footer{margin-top:22px;padding-top:10px;border-top:1px solid var(--hairline);font-size:12px;line-height:1.4;color:var(--muted)}
 
-/* Answer and lesson */
-.answer{margin:12px 0 0;padding:12px 14px;background:var(--white);border-left:8px solid var(--orange)}
-.answer p{margin:0;font-size:16px;color:var(--ink)}
-.answer p + p{margin-top:10px}
-.answer b{display:block;font-size:13px;color:var(--burnt)}
+/* ---------- The miniature: a small working copy of the walkthrough ---------- */
+.mini{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--white);border-top:5px solid var(--orange);font-size:12px;line-height:1.35;color:var(--body)}
+.stage.phone .mini{inset:0 auto 0 50%;width:min(360px,100%);transform:translateX(-50%)}
+.mini button{line-height:1.2}
+.m-addr{flex:none;display:flex;gap:0;align-items:center;height:24px;padding:0 10px;background:var(--band);font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden}
+.m-addr b{font-weight:700;color:var(--ink)}
+.m-strip{flex:none;display:flex;flex-wrap:wrap;gap:4px 12px;padding:6px 10px;border-bottom:1px solid var(--hairline)}
+.m-part{display:flex;flex-direction:column;gap:2px}
+.m-pn{font-size:9.5px;font-weight:700;color:var(--muted);white-space:nowrap}
+.m-pn.blank{visibility:hidden}
+.m-qs{display:flex;gap:3px}
+.m-q{min-width:24px;height:24px;padding:0 5px;border:1px solid var(--muted);background:var(--white);color:var(--ink);font-size:11px;font-weight:700}
+.m-q[aria-current="page"]{background:var(--orange);border:2px solid var(--ink)}
+.m-main{flex:1;min-height:0;display:grid;grid-template-columns:45fr 55fr}
+.m-sol{min-width:0;min-height:0;display:flex;flex-direction:column;background:var(--cream)}
+.m-ctl{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:5px;padding:6px 10px;border-bottom:1px solid var(--hairline)}
+.m-btn{min-height:26px;padding:4px 9px;border:1px solid var(--ink);background:var(--white);color:var(--ink);font-size:11.5px;font-weight:700}
+.m-btn.primary{background:var(--orange);border-color:var(--orange)}
+.m-btn:disabled{background:var(--white);border-color:var(--hairline);color:#767676}
+.m-count{margin-left:auto;font-size:11px;font-weight:700;color:var(--body)}
+.m-scroll{flex:1;min-height:0;overflow-y:auto;padding:8px 10px 12px}
+.m-partline{margin:0;font-size:10px;font-weight:700;color:var(--muted)}
+.m-title{margin:2px 0 0;font:700 15px/1.2 var(--display);color:var(--ink)}
+.m-prompt{margin:5px 0 8px;font-size:11.5px;color:var(--body)}
+.m-steps{display:grid;gap:7px;margin:0;padding:0;list-style:none}
+.m-step{min-width:0;padding:7px 9px 8px;background:var(--white);border-left:5px solid var(--hairline)}
+.m-step.current{border-left-color:var(--orange)}
+.m-stepn{margin:0;font-size:9.5px;font-weight:700;color:var(--burnt)}
+.m-step h3{margin:1px 0 0;font:700 11.5px/1.3 var(--text);color:var(--ink)}
+.m-eq{display:flex;flex-wrap:wrap;align-items:flex-start;gap:4px 5px;margin:6px 0 0}
+.m-op{min-width:0;max-width:100%;padding-top:5px;font-size:14px;line-height:20px;color:var(--ink)}
+.m-chip{display:inline-flex;flex-direction:column;align-items:flex-start;max-width:min(100%,170px);padding:4px 7px;border:1px solid var(--muted);background:var(--cream);color:var(--ink);text-align:left}
+.m-chip.multi{max-width:100%}
+.m-cv{display:flex;flex-wrap:wrap;font-size:14px;line-height:20px;font-weight:700;font-variant-numeric:tabular-nums lining-nums}
+.m-cv span + span{margin-left:6px;padding-left:6px;border-left:1px solid var(--muted)}
+.m-cl{margin-top:1px;font-size:9.5px;line-height:1.25;color:var(--muted)}
+.m-chip.active{padding:3px 6px;border:2px solid var(--teal);background:var(--teal-tint)}
+.m-chip.active .m-cl{color:var(--body)}
+.m-result{display:flex;gap:6px;margin:6px 0 0;font-size:13.5px;line-height:1.3;font-weight:700;color:var(--ink)}
+.m-result.prose{display:block;font-size:12px;font-weight:400}
+.m-note{margin:5px 0 0;font-size:10.5px;color:var(--muted)}
+.m-answer{margin:7px 0 0;padding:7px 9px;background:var(--white);border-left:6px solid var(--orange)}
+.m-answer p{margin:0;font-size:11.5px;color:var(--ink)}
+.m-answer p + p{margin-top:6px}
+.m-answer b{display:block;font-size:10px;color:var(--burnt)}
+.m-press{outline:2px solid var(--orange);outline-offset:1px}
+.m-st{min-width:0;min-height:0;display:flex;flex-direction:column;background:var(--white)}
+.m-head{flex:none;padding:6px 10px 5px;border-bottom:1px solid var(--hairline)}
+.m-sws{display:flex;flex-wrap:wrap;gap:4px 8px}
+.m-sw{display:inline-flex}
+.m-swl{display:none;align-self:center;margin-right:5px;font-size:10px;font-weight:700;color:var(--muted)}
+.mini.short .m-long{display:none}
+.mini.short .m-swl{display:inline}
+.mini.short .m-sw button{min-width:26px}
+.m-sw button{min-height:24px;padding:3px 8px;border:1px solid var(--muted);background:var(--white);color:var(--body);font-size:11px}
+.m-sw button + button{margin-left:-1px}
+.m-sw button[aria-pressed="true"]{position:relative;padding-bottom:1px;border-bottom:3px solid var(--orange);background:var(--cream);color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.m-ext{margin:5px 0 0;font:700 12.5px/1.25 var(--text);color:var(--ink)}
+.m-units{margin:0;font-size:10.5px;color:var(--muted)}
+.m-readout{margin:4px 0 0;padding-left:6px;border-left:3px solid var(--teal);font-size:10.5px;color:var(--body)}
+.m-wrap{flex:1;min-height:0;overflow:auto}
+.mini table{width:100%;min-width:380px;border-collapse:separate;border-spacing:0;font-size:11px;line-height:1.3;font-variant-numeric:tabular-nums lining-nums}
+.mini th,.mini td{padding:3px 7px;border-bottom:1px solid var(--hairline);background:var(--white);font-weight:400;text-align:left;vertical-align:bottom}
+.mini thead th{position:sticky;top:0;z-index:2;padding-top:5px;padding-bottom:5px;border-bottom:1px solid var(--muted);font-weight:700;color:var(--ink);white-space:nowrap}
+.mini thead th:first-child{left:0;z-index:3;padding-left:10px;border-right:1px solid var(--hairline);font-weight:400;color:var(--muted)}
+.mini thead th.hl-col{padding-bottom:3px;border-bottom:3px solid var(--teal)}
+.mini .num{text-align:right;white-space:nowrap}
+.mini td.num:not(.neg)::after,.mini thead th.num::after{content:")";visibility:hidden}
+.mini tbody th[scope="row"]{position:sticky;left:0;z-index:1;min-width:120px;padding-left:7px;border-left:3px solid transparent;border-right:1px solid var(--hairline)}
+.mini tr.k-total th,.mini tr.k-total td{border-top:1px solid var(--muted);font-weight:700;color:var(--ink)}
+.mini tr.k-memo th,.mini tr.k-memo td{font-style:italic}
+.mini tr.k-section th{padding-left:10px;border-bottom:1px solid var(--muted);background:var(--cream);font-weight:700;color:var(--ink)}
+.mini td.hl{background:var(--teal-tint);outline:2px solid var(--teal);outline-offset:-2px;font-weight:700;color:var(--ink)}
+.mini tr.hl-row th[scope="row"]{border-left-color:var(--teal);font-weight:700;color:var(--ink)}
+/* Phone layout of the miniature: stacked, exhibit pinned to the bottom */
+.mini.narrow .m-main{display:flex;flex-direction:column}
+.mini.narrow .m-sol{flex:1}
+.mini.narrow .m-st{flex:none;height:46%;border-top:4px solid var(--orange)}
+.mini.narrow .m-pn i{display:none}
+.mini.narrow .m-host{display:none}
+.mini.narrow .m-readout{display:none}
+.mini.narrow .m-sw button{padding-left:7px;padding-right:7px}
 
-/* Bonus */
-.reveal{display:grid;gap:12px;margin:14px 0 0}
-.org-card{padding:12px 14px 14px;background:var(--white);border-left:7px solid var(--orange)}
-.org-tag{margin:0;font-size:12px;font-weight:700;color:var(--burnt)}
-.org-card h3{margin:2px 0 0;font:700 22px/1.2 var(--text);color:var(--ink)}
-.place{margin:2px 0 0;font-size:14px;color:var(--muted)}
-.outcome{margin:10px 0 0;font-size:16px;color:var(--body)}
-.tone{margin:14px 0 0;padding-top:10px;border-top:1px solid var(--hairline);font-size:13px;font-style:italic;color:var(--muted)}
+/* The scripted pointer and the key overlay */
+.cursor{position:absolute;left:0;top:0;z-index:20;width:0;height:0;pointer-events:none;transition:transform 500ms cubic-bezier(.4,0,.2,1)}
+.cursor::before,.cursor::after{content:"";position:absolute;left:0;top:0;clip-path:polygon(0 0,0 78%,22% 60%,38% 96%,52% 90%,36% 56%,68% 56%)}
+.cursor::before{left:-2px;top:-3px;width:22px;height:27px;background:var(--white)}
+.cursor::after{width:17px;height:21px;background:var(--ink)}
+.ring{position:absolute;left:-14px;top:-14px;width:28px;height:28px;border:3px solid var(--orange);opacity:0;transition:opacity 120ms linear}
+.cursor.click .ring{opacity:1}
+.keys{position:absolute;left:50%;bottom:14px;z-index:19;display:flex;gap:6px;padding:8px 10px;background:var(--ink);transform:translateX(-50%)}
+.key{min-width:48px;padding:6px 10px;border:1px solid var(--white);color:var(--white);font-size:13px;font-weight:700;text-align:center}
+.key.down{background:var(--orange);border-color:var(--orange);color:var(--ink)}
 
-/* Question to question */
-.qnav{display:flex;flex-wrap:wrap;gap:8px;padding:12px var(--gut) 0}
-.keys{margin:0;padding:10px var(--gut) 18px;font-size:12px;color:var(--muted)}
-
-/* Statement pane */
-.st-head{padding:10px var(--gut) 8px;border-bottom:1px solid var(--hairline)}
-.switches{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
-.switch{display:inline-flex;align-items:center}
-.sw-label{display:none;margin-right:6px;font-size:12px;font-weight:700;color:var(--muted)}
-.switch button{min-height:36px;padding:5px 12px;border:1px solid var(--muted);background:var(--white);color:var(--body);font-size:13px;font-weight:400;line-height:1.2}
-.switch button + button{margin-left:-1px}
-.switch button:hover{background:var(--cream)}
-.switch button[aria-pressed="true"]{position:relative;padding-bottom:2px;background:var(--cream);border-bottom:4px solid var(--orange);color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:3px}
-.back{display:none}
-.ex-org{margin:10px 0 0;font-size:13px;font-weight:700;color:var(--muted)}
-.ex-title{margin:1px 0 0;font:700 17px/1.25 var(--text);color:var(--ink)}
-.ex-units{margin:1px 0 0;font-size:13px;color:var(--muted)}
-.readout{margin:7px 0 0;padding-left:8px;border-left:4px solid var(--teal);font-size:13px;line-height:1.35;color:var(--body)}
-.wrap{position:relative;overflow:auto;-webkit-overflow-scrolling:touch}
-.wrap:focus-visible{outline-offset:-2px}
-
-/* Exhibit table */
-table{width:100%;min-width:468px;border-collapse:separate;border-spacing:0;font-size:13px;line-height:1.3;color:var(--body);font-variant-numeric:tabular-nums lining-nums}
-th,td{padding:5px 10px;border-bottom:1px solid var(--hairline);background:var(--white);font-weight:400;text-align:left;vertical-align:bottom}
-thead th{position:sticky;top:0;z-index:2;padding-top:7px;padding-bottom:7px;border-bottom:1px solid var(--muted);font-weight:700;color:var(--ink);white-space:nowrap}
-thead th:first-child{left:0;z-index:3;padding-left:var(--gut);border-right:1px solid var(--hairline);font-weight:400;color:var(--muted)}
-thead th.hl-col{padding-bottom:5px;border-bottom:3px solid var(--teal)}
-.num{text-align:right;white-space:nowrap}
-td.num:not(.neg)::after,thead th.num::after{content:")";visibility:hidden}
-tbody th[scope="row"]{position:sticky;left:0;z-index:1;min-width:150px;padding-left:calc(var(--gut) - 4px);border-left:4px solid transparent;border-right:1px solid var(--hairline)}
-/* The table runs edge to edge; its text keeps the page gutter on both sides. */
-thead th:last-child,td:last-child{padding-right:var(--gut)}
-tr.k-total th,tr.k-total td{border-top:1px solid var(--muted);font-weight:700;color:var(--ink)}
-tr.k-memo th,tr.k-memo td{font-style:italic}
-tr.k-section th{padding-top:9px;padding-left:var(--gut);border-bottom:1px solid var(--muted);background:var(--cream);font-weight:700;color:var(--ink)}
-tr.k-section th span{position:sticky;left:var(--gut)}
-td.hl{background:var(--teal-tint);outline:2px solid var(--teal);outline-offset:-2px;font-weight:700;color:var(--ink)}
-tr.hl-row th[scope="row"]{border-left-color:var(--teal);font-weight:700;color:var(--ink)}
-
-footer{padding:9px var(--gut);background:var(--white);border-top:1px solid var(--hairline);font-size:12px;line-height:1.4;color:var(--muted)}
-noscript p{margin:0;padding:16px var(--gut)}
-
-/* Desktop: two panes at 45 / 55, each scrolling on its own. Short windows fall through to the stacked layout. */
-@media (min-width:900px) and (min-height:520px){
-  html,body{height:100%}
-  body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
-  @supports (height:1dvh){ body{height:100dvh} }
-  main{flex:1;min-height:0;display:grid;grid-template-columns:45fr 55fr}
-  .solution{overflow-y:auto;scroll-padding:72px 0 12px}
-  .statement{display:flex;flex-direction:column;min-height:0}
-  .wrap{flex:1;min-height:0}
+@media (min-width:1080px){
+  .player{grid-template-columns:minmax(0,1fr) 320px}
 }
-
-/* Under 900 px wide, or under 520 px tall: stacked, statement pane below and pinned to the bottom edge */
-@media (max-width:899.98px), (max-height:519.98px){
+@media (max-width:899.98px){
   :root{--gut:16px}
-  h1{font-size:20px}
-  .q-title{font-size:22px}
-  .pn-rest{display:none}
-  .rail{margin-left:0}
-  .statement{position:sticky;bottom:0;z-index:6;display:flex;flex-direction:column;height:var(--pane-h);border-top:6px solid var(--orange)}
-  .wrap{flex:1;min-height:0}
-  html{scroll-padding:72px 0 calc(var(--pane-h) + 12px)}
-  .st-head{padding-top:8px;padding-bottom:6px}
-  .ex-org{display:none}
-  .ex-title{margin-top:7px;font-size:15px}
-  .readout{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  h1{font-size:22px}
 }
-/* Phones: one row of short switch buttons, each group named by a label */
-@media (max-width:519.98px){
-  .sw-long{display:none}
-  .sw-label{display:inline}
-  .switch button{min-width:38px;padding-left:8px;padding-right:8px}
-}
-@media (max-width:429.98px){
-  .chip.multi .chip-v{display:grid;grid-template-columns:auto auto;justify-content:start}
-  .chip.multi .chip-v span:nth-child(odd){margin-left:0;padding-left:0;border-left:0}
-}
-@media (max-width:899.98px) and (pointer:coarse){
-  .qlink{min-width:40px;height:40px}
-}
-/* Short (a phone on its side, a squat window): let the statement pane flow instead of pinning it */
-@media (max-height:519.98px){
-  .statement{position:static;height:auto}
-  .wrap{max-height:82vh}
-  html{scroll-padding-bottom:12px}
-  .back{display:inline-flex;align-items:center}
-  .readout{position:static;width:auto;height:auto;margin:7px 0 0;padding:0 0 0 8px;overflow:visible;clip:auto;white-space:normal;border-left:4px solid var(--teal)}
-}
-
-/* Print: black on white, everything in flow */
-@media print{
-  html,body{display:block!important;height:auto!important;overflow:visible!important;background:#fff!important}
-  main{display:block!important;background:#fff!important}
-  .solution,.statement,.wrap{position:static!important;height:auto!important;max-height:none!important;overflow:visible!important;background:#fff!important}
-  .controls,.rail,.qnav,.keys,.switches,.back{display:none!important}
-  thead th,tbody th[scope="row"],tr.k-section th span{position:static!important}
-  .top{border-top-color:#000}
-  .bars i,.bars i + i{border-top-color:#000}
-  .step,.step.current,.answer,.org-card{border-left-color:#000;break-inside:avoid}
-  .ex-org{display:block!important}
-  .statement{margin-top:16px;border-top:2px solid #000}
-  .chip{background:#fff;border-color:#000}
-  .chip.active,td.hl{background:#fff;outline:2px solid #000;border-color:#000}
-  tr.hl-row th[scope="row"]{border-left-color:#000}
-  thead th.hl-col{border-bottom-color:#000}
-  tr.k-section th{background:#fff}
-  .readout{position:static!important;width:auto!important;height:auto!important;margin:7px 0 0!important;padding:0 0 0 8px!important;overflow:visible!important;clip:auto!important;white-space:normal!important;border-left:4px solid #000!important}
-  *{color:#000!important}
+@media (prefers-reduced-motion:reduce){
+  .cursor,.ring{transition:none}
 }
 </style>
 </head>
 <body>
-<header class="top">
-  <div class="ident">
-    <p class="brand"><span class="bars" aria-hidden="true"><i></i><i></i></span><span class="course">ELI 275 Entrepreneurial Finance</span></p>
-    <h1>Organizations Y and Z Solution Walkthrough</h1>
-  </div>
-  <nav class="rail" id="rail" aria-label="Questions"></nav>
-</header>
-
-<main>
-  <section class="solution" id="solution" aria-label="Solution">
-    <div class="controls" id="controls" role="group" aria-label="Step controls">
-      <button type="button" class="btn primary" id="btnNext">Next step</button>
-      <button type="button" class="btn" id="btnAll">Show all</button>
-      <button type="button" class="btn" id="btnReset">Reset</button>
-      <span class="count" id="stepCount" role="status" aria-live="polite"></span>
+<div class="page">
+  <header class="top">
+    <div>
+      <p class="brand"><span class="bars" aria-hidden="true"><i></i><i></i></span><span class="course">ELI 275 Entrepreneurial Finance</span></p>
+      <h1>Tour of the Y and Z Walkthrough</h1>
     </div>
-    <div class="q-body" id="qbody"></div>
-    <div class="qnav">
-      <button type="button" class="btn" id="btnPrevQ">Previous question</button>
-      <button type="button" class="btn" id="btnNextQ">Next question</button>
-    </div>
-    <p class="keys">Keyboard: Left and Right arrows move between steps. Hold Shift with an arrow to move between questions.</p>
-  </section>
+    <a class="btn" href="walkthrough/">Open the walkthrough</a>
+  </header>
 
-  <section class="statement" id="statement" aria-label="Financial statement exhibit">
-    <div class="st-head">
-      <div class="switches">
-        <div class="switch" id="orgSwitch" role="group" aria-label="Organization"></div>
-        <div class="switch" id="exSwitch" role="group" aria-label="Exhibit"></div>
-        <button type="button" class="btn back" id="btnBack">Back to the working</button>
+  <p class="lead">Ten short scenes show you how to use the solution walkthrough. Play the tour or pick a scene. The miniature is live, so you can select anything in it yourself.</p>
+
+  <div class="player">
+    <div class="left">
+      <div class="transport" role="group" aria-label="Tour controls">
+        <button type="button" class="btn primary" id="btnPlay">Play the tour</button>
+        <button type="button" class="btn" id="btnPrev">Previous scene</button>
+        <button type="button" class="btn" id="btnNextScene">Next scene</button>
+        <span class="grow"></span>
+        <button type="button" class="btn" id="btnSpeed">Speed 1x</button>
       </div>
-      <p class="ex-org" id="exOrg"></p>
-      <h2 class="ex-title" id="exTitle"></h2>
-      <p class="ex-units" id="exUnits"></p>
-      <p class="readout" id="readout" role="status" aria-live="polite"></p>
+      <ol class="bar" id="bar" aria-hidden="true"></ol>
+      <div class="caption">
+        <p class="kicker" id="capKick"></p>
+        <h2 id="capTitle"></h2>
+        <p class="cap-text" id="capText" aria-live="polite"></p>
+      </div>
+      <div class="stage" id="stage" role="region" aria-label="Live miniature of the walkthrough">
+        <div class="mini" id="mini">
+          <div class="m-addr" aria-hidden="true"><span class="m-host">danrasay.github.io</span><span>/eli275/yz-walkthrough/walkthrough/</span><b id="mPath">#q1s1</b></div>
+          <div class="m-strip" id="mStrip"></div>
+          <div class="m-main">
+            <div class="m-sol">
+              <div class="m-ctl" id="mCtl">
+                <button type="button" class="m-btn primary" id="mNext">Next step</button>
+                <button type="button" class="m-btn" id="mAll">Show all</button>
+                <button type="button" class="m-btn" id="mReset">Reset</button>
+                <span class="m-count" id="mCount"></span>
+              </div>
+              <div class="m-scroll" id="mSol"><div id="mQ"></div></div>
+            </div>
+            <div class="m-st">
+              <div class="m-head">
+                <div class="m-sws">
+                  <div class="m-sw" id="mOrg" role="group" aria-label="Organization"></div>
+                  <div class="m-sw" id="mEx" role="group" aria-label="Exhibit"></div>
+                </div>
+                <p class="m-ext" id="mTitle"></p>
+                <p class="m-units" id="mUnits"></p>
+                <p class="m-readout" id="mReadout"></p>
+              </div>
+              <div class="m-wrap" id="mWrap" tabindex="0" role="region" aria-label="Exhibit table"></div>
+            </div>
+          </div>
+        </div>
+        <div class="cursor" id="cursor" aria-hidden="true" hidden><span class="ring"></span></div>
+        <div class="keys" id="keys" aria-hidden="true" hidden></div>
+      </div>
+
     </div>
-    <div class="wrap" id="wrap" tabindex="0" role="region" aria-labelledby="exOrg exTitle"></div>
-  </section>
-</main>
 
-<footer>Prepared for ELI 275 Entrepreneurial Finance, Lewis &amp; Clark College, Fall 2026. Figures from the organizations' audited statements, relabelled for the course. Built with help from Claude (Anthropic).</footer>
+    <nav aria-label="Scenes">
+      <p class="scenes-h">Scenes</p>
+      <ol class="scenes" id="scenes" role="list"></ol>
+    </nav>
+  </div>
 
-<noscript><p>This page needs JavaScript to show the walkthrough. Turn it on in your browser, then reload.</p></noscript>
+  <footer>Prepared for ELI 275 Entrepreneurial Finance, Lewis &amp; Clark College, Fall 2026. Figures from the organizations' audited statements, relabelled for the course. Built with help from Claude (Anthropic).</footer>
+</div>
 
-<script type="application/json" id="data-exhibits">{"organizations":[{"id":"Y","name":"Organization Y","units":"Dollars in thousands","unit_short":"$ thousands","decimals":0,"years":["Year 1","Year 2","Year 3","Year 4"],"exhibits":[{"n":1,"title":"Exhibit 1: Revenue and Expenses, years ended June 30","rows":[{"id":"sec_rev","label":"Revenue","kind":"section"},{"id":"list_price","label":"Charges to customers at list price (service, housing and meals)","kind":"line","values":[28466,32258,47849,56711]},{"id":"discounts","label":"Less: discounts granted to customers","kind":"line","values":[-17451,-20213,-30834,-36196]},{"id":"net_revenue","label":"Net revenue from customers","kind":"total","values":[11015,12045,17015,20515]},{"id":"other_sales","label":"Other sales and income","kind":"line","values":[3403,3465,3706,3267]},{"id":"donations","label":"Donations and grants","kind":"line","values":[7372,9362,5872,7858]},{"id":"relief","label":"Government relief funding (one-time)","kind":"line","values":[3863,195,0,0]},{"id":"total_op_rev","label":"Total operating revenue","kind":"total","values":[25653,25067,26593,31640]},{"id":"sec_exp","label":"Expenses","kind":"section"},{"id":"salaries","label":"Salaries and wages","kind":"line","values":[17290,19054,20482,18366]},{"id":"benefits","label":"Employee benefits","kind":"line","values":[4459,5100,5683,3972]},{"id":"supplies","label":"Supplies, services and other","kind":"line","values":[10329,11676,14827,15230]},{"id":"depreciation","label":"Depreciation","kind":"line","values":[2473,2163,2144,2081]},{"id":"interest","label":"Interest","kind":"line","values":[672,726,778,742]},{"id":"total_expenses","label":"Total expenses","kind":"total","values":[35223,38719,43914,40391]},{"id":"deficit_before_inv","label":"Deficit before investment results","kind":"total","values":[-9570,-13652,-17321,-8751]},{"id":"inv_gains","label":"Investment gains (losses) and other","kind":"line","values":[-6470,658,3117,2635]},{"id":"surplus","label":"Surplus (deficit) for the year","kind":"total","values":[-16040,-12994,-14204,-6116]},{"id":"customers","label":"Not in dollars: average number of customers served","kind":"memo","values":[450,490,700,767]}]},{"n":2,"title":"Exhibit 2: Balance Sheet at June 30","rows":[{"id":"sec_assets","label":"Assets","kind":"section"},{"id":"cash","label":"Cash","kind":"line","values":[4105,4266,3364,5110]},{"id":"escrow","label":"Cash held in escrow","kind":"line","values":[0,0,0,1178]},{"id":"receivables","label":"Receivables from customers and others","kind":"line","values":[936,249,266,412]},{"id":"relief_receivable","label":"Government relief credit receivable","kind":"line","values":[5530,3628,0,0]},{"id":"donations_promised","label":"Donations promised, not yet received","kind":"line","values":[5261,5699,2943,2792]},{"id":"investments","label":"Investments","kind":"line","values":[39890,29434,24457,22194]},{"id":"property","label":"Property and equipment, net of depreciation","kind":"line","values":[43483,42444,40577,38733]},{"id":"other_assets","label":"Other assets","kind":"line","values":[81,626,451,482]},{"id":"total_assets","label":"Total assets","kind":"total","values":[99286,86346,72058,70901]},{"id":"sec_liab","label":"Liabilities","kind":"section"},{"id":"payables","label":"Accounts payable and accrued expenses","kind":"line","values":[764,812,963,1374]},{"id":"deferred_revenue","label":"Deposits and deferred revenue (paid in advance by customers)","kind":"line","values":[875,1265,2018,2889]},{"id":"debt_current","label":"Debt due within one year","kind":"line","values":[0,22184,21318,20418]},{"id":"debt_longterm","label":"Long-term debt","kind":"line","values":[23099,0,0,4500]},{"id":"other_obligations","label":"Other long-term obligations","kind":"line","values":[3284,3815,3693,3770]},{"id":"total_liabilities","label":"Total liabilities","kind":"total","values":[28022,28076,27992,32951]},{"id":"sec_na","label":"Net assets (equity)","kind":"section"},{"id":"na_free","label":"Free to use","kind":"line","values":[36865,22807,9801,4713]},{"id":"na_restricted","label":"Restricted by donors","kind":"line","values":[34399,35463,34265,33237]},{"id":"total_net_assets","label":"Total net assets","kind":"total","values":[71264,58270,44066,37950]},{"id":"total_liab_na","label":"Total liabilities and net assets","kind":"total","values":[99286,86346,72058,70901]}]},{"n":3,"title":"Exhibit 3: Cash Flows, years ended June 30","rows":[{"id":"sec_ops","label":"Operating activities","kind":"section"},{"id":"cf_surplus","label":"Surplus (deficit) for the year","kind":"line","values":[-16040,-12994,-14204,-6116]},{"id":"cf_depreciation","label":"Add back: depreciation","kind":"line","values":[2473,2163,2144,2081]},{"id":"cf_inv_gains","label":"Investment (gains) losses, shown under asset activities","kind":"line","values":[6514,-2444,-2728,-2402]},{"id":"cf_receivables","label":"Decrease (increase) in receivables","kind":"line","values":[-30,3533,6362,-149]},{"id":"cf_deferred","label":"Increase (decrease) in deposits and deferred revenue","kind":"line","values":[-87,391,753,871]},{"id":"cf_other_ops","label":"Other operating items, net","kind":"line","values":[98,-853,172,431]},{"id":"cf_operating","label":"Net cash used by operating activities","kind":"total","values":[-7072,-10204,-7501,-5284]},{"id":"sec_asset","label":"Asset activities","kind":"section"},{"id":"cf_property","label":"Purchases of property and equipment","kind":"line","values":[-475,-1302,-345,-237]},{"id":"cf_inv_sold","label":"Investments sold, net of purchases","kind":"line","values":[9305,10827,7711,4664]},{"id":"cf_other_asset","label":"Other, net","kind":"line","values":[288,869,67,154]},{"id":"cf_asset","label":"Net cash from asset activities","kind":"total","values":[9118,10394,7433,4581]},{"id":"sec_fin","label":"Financing activities","kind":"section"},{"id":"cf_debt_repaid","label":"Debt repaid","kind":"line","values":[-966,-915,-867,-900]},{"id":"cf_borrowing","label":"New borrowing","kind":"line","values":[0,0,0,4500]},{"id":"cf_restricted_gifts","label":"Donations restricted for long-term investment","kind":"line","values":[60,886,33,27]},{"id":"cf_financing","label":"Net cash from (used by) financing activities","kind":"total","values":[-906,-29,-834,3627]},{"id":"cf_net_change","label":"Net change in cash","kind":"total","values":[1140,161,-902,2924]},{"id":"cf_cash_start","label":"Cash at start of year","kind":"line","values":[2965,4105,4266,3364]},{"id":"cf_cash_end","label":"Cash at end of year, including escrow","kind":"total","values":[4105,4266,3364,6288]}]}]},{"id":"Z","name":"Organization Z","units":"$ millions, one decimal","unit_short":"$ millions","decimals":1,"years":["Year 1","Year 2","Year 3","Year 4"],"exhibits":[{"n":1,"title":"Exhibit 1: Revenue and Expenses, Years 1 to 4","rows":[{"id":"sec_rev","label":"Revenue from customers and sponsors","kind":"section"},{"id":"list_price","label":"Main service fees at list price","kind":"line","values":[1007.2,1086.3,1516,1558.5]},{"id":"discounts","label":"Less: discounts given to customers","kind":"line","values":[-329.7,-368.3,-589.6,-580.4]},{"id":"net_fees","label":"Main service fees, net","kind":"total","values":[677.5,718,926.4,978.1]},{"id":"housing_rev","label":"Housing, food and related services","kind":"line","values":[207.2,219.8,236.9,248.7]},{"id":"other_sales","label":"Other sales and fees","kind":"line","values":[63.2,68.6,92.3,92.9]},{"id":"rev_customers","label":"Revenue from customers","kind":"total","values":[947.9,1006.4,1255.6,1319.7]},{"id":"research_contracts","label":"Research and project contracts","kind":"line","values":[555,618.8,673.1,633.9]},{"id":"total_rev_cust_sponsors","label":"Total revenue from customers and sponsors","kind":"total","values":[1502.9,1625.2,1928.7,1953.6]},{"id":"sec_exp","label":"Expenses","kind":"section"},{"id":"exp_main","label":"Delivering the main service","kind":"line","values":[577.3,641.8,719.9,732.8]},{"id":"exp_research","label":"Research","kind":"line","values":[509.4,588.7,644.9,631.1]},{"id":"exp_community","label":"Community programs","kind":"line","values":[95.7,115.8,133.2,139.2]},{"id":"exp_support","label":"Customer and program support","kind":"line","values":[347.5,389.9,570.8,568.4]},{"id":"exp_admin","label":"Administration","kind":"line","values":[205.6,214.8,269.3,289.6]},{"id":"exp_facilities","label":"Facilities upkeep","kind":"line","values":[101.3,111.3,121.4,122.6]},{"id":"exp_assistance","label":"Price assistance paid to customers in cash","kind":"line","values":[102.1,69.2,81.9,81.7]},{"id":"exp_housing","label":"Housing, food and related services","kind":"line","values":[162.9,205.1,209.6,208.4]},{"id":"depreciation","label":"Depreciation","kind":"line","values":[168.3,190.8,223.2,225.5]},{"id":"total_expenses","label":"Total expenses","kind":"total","values":[2270.1,2527.4,2974.2,2999.3]},{"id":"operating_deficit","label":"Operating surplus (deficit)","kind":"total","values":[-767.2,-902.2,-1045.5,-1045.7]},{"id":"sec_support","label":"Support from government, donors and investments","kind":"section"},{"id":"state_support","label":"State government support","kind":"line","values":[356.4,387.6,421.1,404]},{"id":"grants","label":"Grants, government and private","kind":"line","values":[375.1,353.9,403.2,504.1]},{"id":"donations","label":"Donations","kind":"line","values":[109.2,108.6,135,142.2]},{"id":"investment_income","label":"Investment income (loss)","kind":"line","values":[-47.2,42.6,68.9,67]},{"id":"interest","label":"Interest on debt","kind":"line","values":[-58.7,-56.4,-56.6,-48.3]},{"id":"other_support","label":"Other, net","kind":"line","values":[18,20.1,11.5,8.4]},{"id":"net_support","label":"Net support","kind":"total","values":[752.8,856.4,983.1,1077.4]},{"id":"surplus_before_capital","label":"Surplus (deficit) before building and endowment items","kind":"total","values":[-14.4,-45.8,-62.4,31.7]},{"id":"capital_money","label":"Money for buildings and endowment, government and donors","kind":"line","values":[68.4,57.2,57.7,147.1]},{"id":"one_time","label":"One-time: operations taken over from an affiliate","kind":"line","values":[0,67.9,0,0]},{"id":"surplus","label":"Surplus (deficit) for the year","kind":"total","values":[54,79.3,-4.7,178.8]},{"id":"sec_na","label":"Net assets","kind":"section"},{"id":"na_start","label":"Net assets at start of year","kind":"line","values":[1048,1102,1181.3,1176.6]},{"id":"na_plus_surplus","label":"Plus: surplus (deficit) for the year","kind":"line","values":[54,79.3,-4.7,178.8]},{"id":"na_rule_change","label":"Plus: accounting rule change, one-time","kind":"line","values":[0,0,0,27.2]},{"id":"na_end","label":"Net assets at end of year (Exhibit 2)","kind":"total","values":[1102,1181.3,1176.6,1382.6]},{"id":"customers","label":"Customers served, headcount each fall","kind":"memo","values":[49471,51134,85791,84548]}]},{"n":2,"title":"Exhibit 2: Balance sheet at the end of each year","rows":[{"id":"sec_assets","label":"Assets","kind":"section"},{"id":"cash_free","label":"Cash, free to use","kind":"line","values":[47.5,53.8,52.8,16.9]},{"id":"st_investments","label":"Short-term investments","kind":"line","values":[191.3,165,294.6,367.3]},{"id":"owed_to_org","label":"Amounts owed to the organization","kind":"line","values":[176,204.8,202.9,233.2]},{"id":"supplies_prepaid","label":"Supplies and prepaid costs","kind":"line","values":[17.4,26.3,24.6,29.1]},{"id":"current_assets","label":"Current assets","kind":"total","values":[432.2,449.9,574.9,646.5]},{"id":"cash_set_aside","label":"Cash set aside for specific purposes","kind":"line","values":[48,29.6,32.5,35.6]},{"id":"lt_investments_free","label":"Long-term investments, free to use","kind":"line","values":[530.8,409.1,212.9,110.5]},{"id":"investments_trustees","label":"Investments held by trustees or set aside","kind":"line","values":[387.7,335.9,283.2,421.7]},{"id":"endowment","label":"Endowment investments","kind":"line","values":[298.5,312,327.8,354.6]},{"id":"property","label":"Property and equipment, net of depreciation","kind":"line","values":[2630.3,2845.3,2854.2,2843.6]},{"id":"other_lt_assets","label":"Other long-term assets","kind":"line","values":[129.1,122.1,126.3,124.7]},{"id":"lt_assets","label":"Long-term assets","kind":"total","values":[4024.4,4054,3836.9,3890.7]},{"id":"total_assets","label":"Total assets","kind":"total","values":[4456.6,4503.9,4411.8,4537.2]},{"id":"sec_liab","label":"Liabilities","kind":"section"},{"id":"owed_suppliers_staff","label":"Owed to suppliers and staff","kind":"line","values":[158.7,128.3,152.6,151.3]},{"id":"paid_in_advance","label":"Paid in advance by customers","kind":"line","values":[113.9,154.9,157.6,148.4]},{"id":"debt_current","label":"Debt and leases due within one year","kind":"line","values":[96.9,126.9,123.2,115.4]},{"id":"building_commit_current","label":"Building commitments due within one year","kind":"line","values":[0,5,2,5]},{"id":"current_liabilities","label":"Current liabilities","kind":"total","values":[369.5,415.1,435.4,420.1]},{"id":"staff_leave","label":"Staff leave owed, long-term","kind":"line","values":[83.3,88.8,97.2,79.3]},{"id":"debt_longterm","label":"Debt and leases, long-term","kind":"line","values":[1756.7,1687.7,1584,1522.9]},{"id":"building_commit_lt","label":"Building commitments, long-term","kind":"line","values":[0,35,33,28]},{"id":"pension","label":"Pension and retiree health obligations, net","kind":"line","values":[858.7,826,818.2,812.7]},{"id":"deferrals","label":"Amounts received for future years and other deferrals, net","kind":"line","values":[286.4,270,267.4,291.6]},{"id":"lt_liabilities","label":"Long-term liabilities","kind":"total","values":[2985.1,2907.5,2799.8,2734.5]},{"id":"total_liabilities","label":"Total liabilities","kind":"total","values":[3354.6,3322.6,3235.2,3154.6]},{"id":"na_property","label":"Net assets invested in property, net of related debt","kind":"line","values":[959.5,1044.6,1115.1,1218.6]},{"id":"na_restricted","label":"Net assets restricted by donors and others","kind":"line","values":[449.7,482.7,461.4,509.6]},{"id":"na_unrestricted","label":"Net assets unrestricted (deficit)","kind":"line","values":[-307.2,-346,-399.9,-345.6]},{"id":"total_net_assets","label":"Total net assets (equity)","kind":"total","values":[1102,1181.3,1176.6,1382.6]},{"id":"total_liab_na","label":"Total liabilities and net assets","kind":"total","values":[4456.6,4503.9,4411.8,4537.2]}]},{"n":3,"title":"Exhibit 3: Cash flows by activity","rows":[{"id":"sec_ops","label":"Operating activities","kind":"section"},{"id":"cf_fees","label":"Received for main service fees","kind":"line","values":[669.6,712.8,928.9,969.8]},{"id":"cf_sponsors","label":"Received from research and project sponsors","kind":"line","values":[547.4,627.6,670.3,608.2]},{"id":"cf_housing","label":"Received for housing, food, sales and other","kind":"line","values":[307.6,322.9,351.6,371.9]},{"id":"cf_one_time","label":"Received with operations taken over, one-time","kind":"line","values":[0,44.3,0,0]},{"id":"cf_staff","label":"Paid to staff","kind":"line","values":[-1440.4,-1638.2,-1852.4,-1850.2]},{"id":"cf_suppliers","label":"Paid to suppliers","kind":"line","values":[-598.6,-691.4,-797.4,-845.8]},{"id":"cf_assistance","label":"Price assistance paid to customers","kind":"line","values":[-105.9,-73.3,-81.9,-81.7]},{"id":"cf_other_ops","label":"Other, net","kind":"line","values":[0.2,-3.9,-8.8,-1.1]},{"id":"cf_ops_before_support","label":"Cash used by day-to-day operations, before support","kind":"total","values":[-620.1,-699.2,-789.7,-828.9]},{"id":"cf_state","label":"State government support received","kind":"line","values":[354,384.1,424.2,404]},{"id":"cf_grants","label":"Grants and donations received for operations","kind":"line","values":[488,469.3,537.8,652.2]},{"id":"cf_loans","label":"Customer loans passed through, net","kind":"line","values":[-0.6,-3.2,-1,1.4]},{"id":"cf_support","label":"Support received","kind":"total","values":[841.4,850.2,961,1057.6]},{"id":"cf_operating","label":"Net cash from operating activities, after support","kind":"total","values":[221.3,151,171.3,228.7]},{"id":"sec_asset","label":"Asset activities","kind":"section"},{"id":"cf_property","label":"Bought property and equipment","kind":"line","values":[-210.7,-267.3,-210.7,-209.9]},{"id":"cf_property_sold","label":"Sold property and equipment","kind":"line","values":[0,0,1.1,1]},{"id":"cf_inv_net","label":"Investments sold, net of investments bought","kind":"line","values":[4.6,186.4,137.3,-107.2]},{"id":"cf_inv_income","label":"Investment income received","kind":"line","values":[24.6,37.5,42.1,41.5]},{"id":"cf_asset","label":"Net cash from asset activities","kind":"total","values":[-181.5,-43.4,-30.2,-274.6]},{"id":"sec_fin","label":"Financing activities","kind":"section"},{"id":"cf_borrowing","label":"New borrowing","kind":"line","values":[0.3,0,0,303.9]},{"id":"cf_debt_repaid","label":"Debt repaid","kind":"line","values":[-85.9,-95.6,-124.9,-357.8]},{"id":"cf_interest","label":"Interest paid","kind":"line","values":[-80.1,-77.7,-67.2,-65.9]},{"id":"cf_capital_money","label":"Money received for buildings, government and donors","kind":"line","values":[52.9,53.6,52.9,132.9]},{"id":"cf_financing","label":"Net cash from financing activities","kind":"total","values":[-112.8,-119.7,-139.2,13.1]},{"id":"cf_net_change","label":"Net change in cash","kind":"total","values":[-73,-12.1,1.9,-32.8]},{"id":"cf_cash_start","label":"Cash at start of year","kind":"line","values":[168.5,95.5,83.4,85.3]},{"id":"cf_cash_end","label":"Cash at end of year (Exhibit 2: free to use plus set aside)","kind":"total","values":[95.5,83.4,85.3,52.5]}]}]}],"notes":{"sign":"Negative values print in parentheses. Values are as printed on the student exhibits; 28 Y figures and 26 Z figures were moved by one unit of the last digit so columns foot.","source":"Audited statements of the two organizations, fiscal years ended June 30, 2022 to 2025, relabelled in plain language for the course."}}</script>
-<script type="application/json" id="data-questions">{"questions":[{"n":1,"part":"Part 1. Read the statements","title":"The discount, both organizations","prompt":"How many cents of each list-price dollar does each organization keep, Year 1 and Year 4? Which way is the discount moving?","reference":"Hettinger 4.1 to 4.4, revenue and net revenue; Ch 14, percentage change","orgs":["Y","Z"],"steps":[{"label":"Cents kept per list-price dollar = Net revenue from customers / Charges at list price","equation":[],"result":null,"note":"Y figures are in $ thousands; Z figures in $ millions. The ratio has no unit."},{"label":"Organization Y, Year 1","equation":[{"type":"var","text":"Net revenue from customers, Year 1","ref":{"org":"Y","exhibit":1,"row":"net_revenue","year":1},"value":11015},{"type":"op","text":"/"},{"type":"var","text":"Charges to customers at list price (service, housing and meals), Year 1","ref":{"org":"Y","exhibit":1,"row":"list_price","year":1},"value":28466}],"result":"38.7 cents"},{"label":"Organization Y, Year 4","equation":[{"type":"var","text":"Net revenue from customers, Year 4","ref":{"org":"Y","exhibit":1,"row":"net_revenue","year":4},"value":20515},{"type":"op","text":"/"},{"type":"var","text":"Charges to customers at list price (service, housing and meals), Year 4","ref":{"org":"Y","exhibit":1,"row":"list_price","year":4},"value":56711}],"result":"36.2 cents"},{"label":"Organization Z, Year 1","equation":[{"type":"var","text":"Main service fees, net, Year 1","ref":{"org":"Z","exhibit":1,"row":"net_fees","year":1},"value":677.5},{"type":"op","text":"/"},{"type":"var","text":"Main service fees at list price, Year 1","ref":{"org":"Z","exhibit":1,"row":"list_price","year":1},"value":1007.2}],"result":"67.3 cents"},{"label":"Organization Z, Year 4","equation":[{"type":"var","text":"Main service fees, net, Year 4","ref":{"org":"Z","exhibit":1,"row":"net_fees","year":4},"value":978.1},{"type":"op","text":"/"},{"type":"var","text":"Main service fees at list price, Year 4","ref":{"org":"Z","exhibit":1,"row":"list_price","year":4},"value":1558.5}],"result":"62.8 cents"},{"label":"Direction","equation":[],"result":"Both keep fewer cents in Year 4 than in Year 1. The discount is deepening at both."}],"answer":"Y 38.7 cents to 36.2 cents; Z 67.3 cents to 62.8 cents; both deeper.","lesson":"List price is a fiction in this industry. Net revenue is the real top line."},{"n":2,"part":"Part 1. Read the statements","title":"Who covers the cost, Year 4","prompt":"For each organization, how much of each $1.00 of expenses do customers cover? For Z, what is the result after support?","reference":"Hettinger 4.3 to 4.4, the P&L staircase; Ch 1, the third fit","orgs":["Y","Z"],"steps":[{"label":"Organization Y: (Net revenue from customers + Other sales and income) / Total expenses","equation":[{"type":"op","text":"("},{"type":"var","text":"Net revenue from customers, Year 4","ref":{"org":"Y","exhibit":1,"row":"net_revenue","year":4},"value":20515},{"type":"op","text":"+"},{"type":"var","text":"Other sales and income, Year 4","ref":{"org":"Y","exhibit":1,"row":"other_sales","year":4},"value":3267},{"type":"op","text":")"},{"type":"op","text":"/"},{"type":"var","text":"Total expenses, Year 4","ref":{"org":"Y","exhibit":1,"row":"total_expenses","year":4},"value":40391}],"result":"58.9 cents of each $1.00"},{"label":"Organization Z: Total revenue from customers and sponsors / Total expenses","equation":[{"type":"var","text":"Total revenue from customers and sponsors, Year 4","ref":{"org":"Z","exhibit":1,"row":"total_rev_cust_sponsors","year":4},"value":1953.6},{"type":"op","text":"/"},{"type":"var","text":"Total expenses, Year 4","ref":{"org":"Z","exhibit":1,"row":"total_expenses","year":4},"value":2999.3}],"result":"65.1 cents of each $1.00"},{"label":"Organization Z after support: Operating surplus (deficit) + Net support","equation":[{"type":"var","text":"Operating surplus (deficit), Year 4","ref":{"org":"Z","exhibit":1,"row":"operating_deficit","year":4},"value":-1045.7},{"type":"op","text":"+"},{"type":"var","text":"Net support, Year 4","ref":{"org":"Z","exhibit":1,"row":"net_support","year":4},"value":1077.4}],"result":"31.7 surplus before building and endowment items","note":"This is the line printed as Surplus (deficit) before building and endowment items."}],"answer":"Y 58.9 cents; Z 65.1 cents, and +31.7 after support.","lesson":"Neither covers its cost from customers alone. Someone else fills the gap, every year."},{"n":3,"part":"Part 1. Read the statements","title":"One customer, Year 4 (Y)","prompt":"What does the average customer pay, what does one cost, and what is the gap?","reference":"Hettinger 4.3 to 4.4; Ch 1, the third fit","orgs":["Y"],"steps":[{"label":"Paid per customer = Net revenue from customers / Average number of customers","equation":[{"type":"var","text":"Net revenue from customers, Year 4","ref":{"org":"Y","exhibit":1,"row":"net_revenue","year":4},"value":20515},{"type":"op","text":"/"},{"type":"var","text":"Not in dollars: average number of customers served, Year 4","ref":{"org":"Y","exhibit":1,"row":"customers","year":4},"value":767}],"result":"26.7 thousand, about $26,700"},{"label":"Cost per customer = Total expenses / Average number of customers","equation":[{"type":"var","text":"Total expenses, Year 4","ref":{"org":"Y","exhibit":1,"row":"total_expenses","year":4},"value":40391},{"type":"op","text":"/"},{"type":"var","text":"Not in dollars: average number of customers served, Year 4","ref":{"org":"Y","exhibit":1,"row":"customers","year":4},"value":767}],"result":"52.7 thousand, about $52,700"},{"label":"Gap = Cost per customer less Paid per customer","equation":[{"type":"op","text":"52.7"},{"type":"op","text":"-"},{"type":"op","text":"26.7"}],"result":"about $25,900 per customer"}],"answer":"Pays about $26,700; costs about $52,700; gap about $25,900.","lesson":"Growth is not a fix when the unit loses money. Unit economics has a name from Wednesday on."},{"n":4,"part":"Part 2. Profit is not cash","title":"A deficit is not cash (Y, Year 3)","prompt":"The deficit is bigger than the cash used by operations. Find the gap. Which line on Exhibit 3 explains most of it, and which two lines on Exhibit 2 show the same thing?","reference":"Hettinger Ch 5, cash is not profit; Ch 8, how the statements tie","orgs":["Y"],"steps":[{"label":"Gap = Deficit for the year less Net cash used by operating activities","equation":[{"type":"var","text":"Surplus (deficit) for the year, Year 3","ref":{"org":"Y","exhibit":1,"row":"surplus","year":3},"value":-14204},{"type":"op","text":"vs"},{"type":"var","text":"Net cash used by operating activities, Year 3","ref":{"org":"Y","exhibit":3,"row":"cf_operating","year":3},"value":-7501}],"result":"6,703 less cash left than the deficit says"},{"label":"The Exhibit 3 line that explains most of it","equation":[{"type":"var","text":"Decrease (increase) in receivables, Year 3","ref":{"org":"Y","exhibit":3,"row":"cf_receivables","year":3},"value":6362}],"result":"6,362: receivables fell, so cash came in for revenue recorded earlier"},{"label":"The same thing on Exhibit 2: Government relief credit receivable","equation":[{"type":"var","text":"Government relief credit receivable, Year 2","ref":{"org":"Y","exhibit":2,"row":"relief_receivable","year":2},"value":3628},{"type":"op","text":"to"},{"type":"var","text":"Government relief credit receivable, Year 3","ref":{"org":"Y","exhibit":2,"row":"relief_receivable","year":3},"value":0}],"result":"fell 3,628"},{"label":"The same thing on Exhibit 2: Donations promised, not yet received","equation":[{"type":"var","text":"Donations promised, not yet received, Year 2","ref":{"org":"Y","exhibit":2,"row":"donations_promised","year":2},"value":5699},{"type":"op","text":"to"},{"type":"var","text":"Donations promised, not yet received, Year 3","ref":{"org":"Y","exhibit":2,"row":"donations_promised","year":3},"value":2943}],"result":"fell 2,756","note":"Together the two receivable lines fall 6,384, within the 6,362 receivables line once the small customer receivable (266 vs 249) is netted in."}],"answer":"Gap 6,703; receivables fell 6,362 (relief credit 3,628 to 0; donations promised 5,699 to 2,943).","lesson":"You can lose on paper and bleed less cash for a while. Collecting old promises is not a strategy."},{"n":5,"part":"Part 2. Profit is not cash","title":"A surplus is not cash (Z, Year 2)","prompt":"Strip out the one-time item to get the underlying surplus. Then show what happened to free cash and investments from Year 1 to Year 2, and name the largest cash outflow that explains it.","reference":"Hettinger Ch 5; Ch 3.4, cash flows by activity","orgs":["Z"],"steps":[{"label":"Underlying surplus = Surplus for the year less the one-time item","equation":[{"type":"var","text":"Surplus (deficit) for the year, Year 2","ref":{"org":"Z","exhibit":1,"row":"surplus","year":2},"value":79.3},{"type":"op","text":"-"},{"type":"var","text":"One-time: operations taken over from an affiliate, Year 2","ref":{"org":"Z","exhibit":1,"row":"one_time","year":2},"value":67.9}],"result":"11.4"},{"label":"Free cash and investments, Year 1 = Cash free to use + Short-term investments + Long-term investments free to use","equation":[{"type":"var","text":"Cash, free to use, Year 1","ref":{"org":"Z","exhibit":2,"row":"cash_free","year":1},"value":47.5},{"type":"op","text":"+"},{"type":"var","text":"Short-term investments, Year 1","ref":{"org":"Z","exhibit":2,"row":"st_investments","year":1},"value":191.3},{"type":"op","text":"+"},{"type":"var","text":"Long-term investments, free to use, Year 1","ref":{"org":"Z","exhibit":2,"row":"lt_investments_free","year":1},"value":530.8}],"result":"769.6"},{"label":"Free cash and investments, Year 2","equation":[{"type":"var","text":"Cash, free to use, Year 2","ref":{"org":"Z","exhibit":2,"row":"cash_free","year":2},"value":53.8},{"type":"op","text":"+"},{"type":"var","text":"Short-term investments, Year 2","ref":{"org":"Z","exhibit":2,"row":"st_investments","year":2},"value":165},{"type":"op","text":"+"},{"type":"var","text":"Long-term investments, free to use, Year 2","ref":{"org":"Z","exhibit":2,"row":"lt_investments_free","year":2},"value":409.1}],"result":"627.9"},{"label":"Change","equation":[{"type":"op","text":"627.9"},{"type":"op","text":"-"},{"type":"op","text":"769.6"}],"result":"fell 141.7"},{"label":"Largest cash outflow in the asset and financing sections","equation":[{"type":"var","text":"Bought property and equipment, Year 2","ref":{"org":"Z","exhibit":3,"row":"cf_property","year":2},"value":-267.3}],"result":"Bought property and equipment, 267.3"}],"answer":"79.3 less 67.9 = 11.4; free cash and investments fell 141.7 (769.6 to 627.9); bought property and equipment 267.3.","lesson":"A surplus on the statement; cash walking out the door. Always read both."},{"n":6,"part":"Part 2. Profit is not cash","title":"Prove it with depreciation (Z, Year 4)","prompt":"Property and equipment fell even though Z bought more of it. Show the change, the purchases, and the line that explains the difference.","reference":"Hettinger 4.3 and 6.2, depreciation; Ch 8","orgs":["Z"],"steps":[{"label":"Change in Property and equipment, net","equation":[{"type":"var","text":"Property and equipment, net of depreciation, Year 4","ref":{"org":"Z","exhibit":2,"row":"property","year":4},"value":2843.6},{"type":"op","text":"-"},{"type":"var","text":"Property and equipment, net of depreciation, Year 3","ref":{"org":"Z","exhibit":2,"row":"property","year":3},"value":2854.2}],"result":"down 10.6"},{"label":"What Z bought (Exhibit 3)","equation":[{"type":"var","text":"Bought property and equipment, Year 4","ref":{"org":"Z","exhibit":3,"row":"cf_property","year":4},"value":-209.9}],"result":"209.9 of purchases"},{"label":"What explains the fall (Exhibit 1)","equation":[{"type":"var","text":"Depreciation, Year 4","ref":{"org":"Z","exhibit":1,"row":"depreciation","year":4},"value":225.5}],"result":"Depreciation 225.5 outran the buying: 209.9 - 225.5 = (15.6)","note":"The remaining +5.0 is non-cash additions (leased space, software subscriptions, unpaid invoices) less retirements. Not required."}],"answer":"Down 10.6; bought 209.9; depreciation 225.5 explains it.","lesson":"Depreciation moves the balance sheet and the P&L without a dollar moving. That is the point of it."},{"n":7,"part":"Part 2. Profit is not cash","title":"Who paid for it (Y, all four years)","prompt":"Operations used cash every year. Add up the four years. Which section of Exhibit 3 supplied the cash, and how much over the same four years?","reference":"Hettinger 3.4, cash flows by activity","orgs":["Y"],"steps":[{"label":"Cash used by operations, four years","equation":[{"type":"var","text":"Net cash used by operating activities, Years 1 to 4","ref":{"org":"Y","exhibit":3,"row":"cf_operating","years":[1,2,3,4]},"value":[-7072,-10204,-7501,-5284]}],"result":"30,061 used"},{"label":"Cash supplied by asset activities, four years","equation":[{"type":"var","text":"Net cash from asset activities, Years 1 to 4","ref":{"org":"Y","exhibit":3,"row":"cf_asset","years":[1,2,3,4]},"value":[9118,10394,7433,4581]}],"result":"31,526 supplied"},{"label":"Mostly from one line","equation":[{"type":"var","text":"Investments sold, net of purchases, Years 1 to 4","ref":{"org":"Y","exhibit":3,"row":"cf_inv_sold","years":[1,2,3,4]},"value":[9305,10827,7711,4664]}],"result":"32,507 from selling investments","note":"Either total, 31,526 or 32,507, earns the point on the sheet."}],"answer":"Operations used 30,061; asset activities supplied 31,526, almost all of it investments sold (32,507).","lesson":"The college ran its operations by selling its savings. Selling savings has an end date; Question 11 computes it."},{"n":8,"part":"Part 3. The ratio room","title":"Margin check (Y)","prompt":"Compute the operating margin (deficit before investment results divided by total operating revenue) for Year 1 and Year 4. Is it improving? Does it describe a viable organization?","reference":"Hettinger Ch 10, margins; Ch 15.1 and 15.3, margins and strategy","orgs":["Y"],"steps":[{"label":"Operating margin, Year 1","equation":[{"type":"var","text":"Deficit before investment results, Year 1","ref":{"org":"Y","exhibit":1,"row":"deficit_before_inv","year":1},"value":-9570},{"type":"op","text":"/"},{"type":"var","text":"Total operating revenue, Year 1","ref":{"org":"Y","exhibit":1,"row":"total_op_rev","year":1},"value":25653}],"result":"-37.3%"},{"label":"Operating margin, Year 4","equation":[{"type":"var","text":"Deficit before investment results, Year 4","ref":{"org":"Y","exhibit":1,"row":"deficit_before_inv","year":4},"value":-8751},{"type":"op","text":"/"},{"type":"var","text":"Total operating revenue, Year 4","ref":{"org":"Y","exhibit":1,"row":"total_op_rev","year":4},"value":31640}],"result":"-27.7%"},{"label":"Dollars out per dollar in, Year 4 = Total expenses / Total operating revenue","equation":[{"type":"var","text":"Total expenses, Year 4","ref":{"org":"Y","exhibit":1,"row":"total_expenses","year":4},"value":40391},{"type":"op","text":"/"},{"type":"var","text":"Total operating revenue, Year 4","ref":{"org":"Y","exhibit":1,"row":"total_op_rev","year":4},"value":31640}],"result":"$1.28 out for every $1.00 in"},{"label":"Reading","equation":[],"result":"Improving, and still deeply negative. A margin can improve and still describe a business that does not work."}],"answer":"-37.3% to -27.7%; improving; $1.28 out per $1.00 in at Year 4; not viable as run.","lesson":"A margin can improve and still describe a business that does not work."},{"n":9,"part":"Part 3. The ratio room","title":"Liquidity check (Y, Year 4)","prompt":"Divide cash plus escrow plus investments by debt due within one year. The ratio is above 1.0. Is Y liquid? Look at what is in the numerator and at the net assets section of Exhibit 2 before you answer.","reference":"Hettinger Ch 12, liquidity ratios","orgs":["Y"],"steps":[{"label":"Numerator = Cash + Cash held in escrow + Investments","equation":[{"type":"var","text":"Cash, Year 4","ref":{"org":"Y","exhibit":2,"row":"cash","year":4},"value":5110},{"type":"op","text":"+"},{"type":"var","text":"Cash held in escrow, Year 4","ref":{"org":"Y","exhibit":2,"row":"escrow","year":4},"value":1178},{"type":"op","text":"+"},{"type":"var","text":"Investments, Year 4","ref":{"org":"Y","exhibit":2,"row":"investments","year":4},"value":22194}],"result":"28,482"},{"label":"Ratio = Numerator / Debt due within one year","equation":[{"type":"op","text":"28,482"},{"type":"op","text":"/"},{"type":"var","text":"Debt due within one year, Year 4","ref":{"org":"Y","exhibit":2,"row":"debt_current","year":4},"value":20418}],"result":"1.4"},{"label":"Read the numerator against the net assets section","equation":[{"type":"var","text":"Restricted by donors, Year 4","ref":{"org":"Y","exhibit":2,"row":"na_restricted","year":4},"value":33237},{"type":"op","text":"vs"},{"type":"var","text":"Free to use, Year 4","ref":{"org":"Y","exhibit":2,"row":"na_free","year":4},"value":4713}],"result":"Restricted 33,237 against free 4,713: most of the investments are not Y's to spend"},{"label":"Reading","equation":[],"result":"Above 1.0, but not liquid in the way the ratio suggests. A ratio is only as liquid as what is inside it."}],"answer":"28,482 / 20,418 = 1.4; restricted net assets 33,237 vs free 4,713; not liquid as the ratio suggests.","lesson":"Above 1.0 is not a guarantee. A ratio is only as liquid as what is inside it."},{"n":10,"part":"Part 3. The ratio room","title":"Leverage check (Y)","prompt":"Compute total liabilities divided by total net assets for Year 1 and Year 4. Both are under 2.0. What does this ratio miss about Y's position?","reference":"Hettinger Ch 13, leverage ratios; 6.2, current versus long-term","orgs":["Y"],"steps":[{"label":"Year 1","equation":[{"type":"var","text":"Total liabilities, Year 1","ref":{"org":"Y","exhibit":2,"row":"total_liabilities","year":1},"value":28022},{"type":"op","text":"/"},{"type":"var","text":"Total net assets, Year 1","ref":{"org":"Y","exhibit":2,"row":"total_net_assets","year":1},"value":71264}],"result":"0.39"},{"label":"Year 4","equation":[{"type":"var","text":"Total liabilities, Year 4","ref":{"org":"Y","exhibit":2,"row":"total_liabilities","year":4},"value":32951},{"type":"op","text":"/"},{"type":"var","text":"Total net assets, Year 4","ref":{"org":"Y","exhibit":2,"row":"total_net_assets","year":4},"value":37950}],"result":"0.87"},{"label":"What the ratio misses: when the debt is due","equation":[{"type":"var","text":"Debt due within one year, Year 4","ref":{"org":"Y","exhibit":2,"row":"debt_current","year":4},"value":20418}],"result":"20,418 is due within one year; the lender can call"},{"label":"What the ratio misses: what the net assets are made of","equation":[{"type":"var","text":"Restricted by donors, Year 4","ref":{"org":"Y","exhibit":2,"row":"na_restricted","year":4},"value":33237},{"type":"op","text":"and"},{"type":"var","text":"Property and equipment, net of depreciation, Year 4","ref":{"org":"Y","exhibit":2,"row":"property","year":4},"value":38733}],"result":"Restricted funds and property Y cannot spend sit inside the denominator"}],"answer":"0.39 to 0.87; under 2.0, but 20,418 is due within a year and the net assets include restricted funds and property.","lesson":"Leverage reads differently when the lender can call tomorrow. Benchmarks are a starting point, not a verdict."},{"n":11,"part":"Part 4. Judgment","title":"Runway","prompt":"Y: monthly burn from Year 4 operating cash, and months of runway on cash. Z: days of cash for Year 1 and Year 4, using free cash and investments divided by daily cash spending. Which way are both heading?","reference":"Course supplement, burn rate and runway (Week 4); Hettinger 6.2","orgs":["Y","Z"],"steps":[{"label":"Y monthly burn = Net cash used by operating activities / 12","equation":[{"type":"var","text":"Net cash used by operating activities, Year 4","ref":{"org":"Y","exhibit":3,"row":"cf_operating","year":4},"value":-5284},{"type":"op","text":"/"},{"type":"op","text":"12"}],"result":"about 440 per month"},{"label":"Y runway = Cash / monthly burn","equation":[{"type":"var","text":"Cash, Year 4","ref":{"org":"Y","exhibit":2,"row":"cash","year":4},"value":5110},{"type":"op","text":"/"},{"type":"op","text":"440.3"}],"result":"11.6 months on cash","note":"With escrow included: 14.3 months. Either is accepted if stated. And 20,418 of debt is due within the year."},{"label":"Z daily cash spending, Year 1 = (Paid to staff + Paid to suppliers + Price assistance) / 365","equation":[{"type":"var","text":"Paid to staff, Year 1","ref":{"org":"Z","exhibit":3,"row":"cf_staff","year":1},"value":-1440.4},{"type":"op","text":"+"},{"type":"var","text":"Paid to suppliers, Year 1","ref":{"org":"Z","exhibit":3,"row":"cf_suppliers","year":1},"value":-598.6},{"type":"op","text":"+"},{"type":"var","text":"Price assistance paid to customers, Year 1","ref":{"org":"Z","exhibit":3,"row":"cf_assistance","year":1},"value":-105.9},{"type":"op","text":") / 365"}],"result":"5.88 per day"},{"label":"Z free cash and investments, Year 1","equation":[{"type":"var","text":"Cash, free to use, Year 1","ref":{"org":"Z","exhibit":2,"row":"cash_free","year":1},"value":47.5},{"type":"op","text":"+"},{"type":"var","text":"Short-term investments, Year 1","ref":{"org":"Z","exhibit":2,"row":"st_investments","year":1},"value":191.3},{"type":"op","text":"+"},{"type":"var","text":"Long-term investments, free to use, Year 1","ref":{"org":"Z","exhibit":2,"row":"lt_investments_free","year":1},"value":530.8}],"result":"769.6"},{"label":"Z days of cash, Year 1","equation":[{"type":"op","text":"769.6"},{"type":"op","text":"/"},{"type":"op","text":"5.88"}],"result":"131 days"},{"label":"Z daily cash spending, Year 4","equation":[{"type":"var","text":"Paid to staff, Year 4","ref":{"org":"Z","exhibit":3,"row":"cf_staff","year":4},"value":-1850.2},{"type":"op","text":"+"},{"type":"var","text":"Paid to suppliers, Year 4","ref":{"org":"Z","exhibit":3,"row":"cf_suppliers","year":4},"value":-845.8},{"type":"op","text":"+"},{"type":"var","text":"Price assistance paid to customers, Year 4","ref":{"org":"Z","exhibit":3,"row":"cf_assistance","year":4},"value":-81.7},{"type":"op","text":") / 365"}],"result":"7.61 per day"},{"label":"Z free cash and investments, Year 4","equation":[{"type":"var","text":"Cash, free to use, Year 4","ref":{"org":"Z","exhibit":2,"row":"cash_free","year":4},"value":16.9},{"type":"op","text":"+"},{"type":"var","text":"Short-term investments, Year 4","ref":{"org":"Z","exhibit":2,"row":"st_investments","year":4},"value":367.3},{"type":"op","text":"+"},{"type":"var","text":"Long-term investments, free to use, Year 4","ref":{"org":"Z","exhibit":2,"row":"lt_investments_free","year":4},"value":110.5}],"result":"494.7"},{"label":"Z days of cash, Year 4","equation":[{"type":"op","text":"494.7"},{"type":"op","text":"/"},{"type":"op","text":"7.61"}],"result":"65 days","note":"This is a page-only measure. The university's own reported days-cash figure for Year 4 is higher, about 78."},{"label":"Direction","equation":[],"result":"Both heading down. Different sizes, same direction."}],"answer":"Y: burn about 440 per month, 11.6 months on cash; Z: 131 days to 65 days; both down.","lesson":"Runway is the one number that turns a statement into a deadline."},{"n":12,"part":"Part 4. Judgment","title":"What are they, and would you lend to either one?","prompt":"Name the kind of organization each one is, with two pieces of evidence from the exhibits. Then give a lending verdict for each. A verdict needs at least one number from the exhibits.","reference":"Hettinger Ch 1 and Ch 2, business types and the third fit; Ch 13","orgs":["Y","Z"],"steps":[{"label":"Organization Y, evidence: donors and restricted equity (no owners)","equation":[{"type":"var","text":"Donations and grants, Year 4","ref":{"org":"Y","exhibit":1,"row":"donations","year":4},"value":7858},{"type":"op","text":"and"},{"type":"var","text":"Restricted by donors, Year 4","ref":{"org":"Y","exhibit":2,"row":"na_restricted","year":4},"value":33237}],"result":"A nonprofit with donor-restricted net assets"},{"label":"Organization Y, evidence: a list price with a deep discount, housing and meals, customers counted per year","equation":[{"type":"var","text":"Charges to customers at list price (service, housing and meals), Year 4","ref":{"org":"Y","exhibit":1,"row":"list_price","year":4},"value":56711},{"type":"op","text":"/"},{"type":"var","text":"Not in dollars: average number of customers served, Year 4","ref":{"org":"Y","exhibit":1,"row":"customers","year":4},"value":767}],"result":"about $73,900 list price per customer, 64% discounted: a private residential college"},{"label":"Organization Y, verdict with numbers","equation":[{"type":"op","text":"58.9 cents per expense dollar from customers (Q2)"},{"type":"op","text":"; 11.6 months of runway (Q11)"},{"type":"op","text":";"},{"type":"var","text":"Debt due within one year, Year 4","ref":{"org":"Y","exhibit":2,"row":"debt_current","year":4},"value":20418}],"result":"Not viable as run; would not lend without a new source of cover"},{"label":"Organization Z, evidence: state government support and research","equation":[{"type":"var","text":"State government support, Year 4","ref":{"org":"Z","exhibit":1,"row":"state_support","year":4},"value":404},{"type":"op","text":"and"},{"type":"var","text":"Research and project contracts, Year 4","ref":{"org":"Z","exhibit":1,"row":"research_contracts","year":4},"value":633.9}],"result":"A government-supported public institution with a large research enterprise"},{"label":"Organization Z, evidence: scale and an endowment","equation":[{"type":"var","text":"Customers served, headcount each fall, Year 4","ref":{"org":"Z","exhibit":1,"row":"customers","year":4},"value":84548},{"type":"op","text":"and"},{"type":"var","text":"Endowment investments, Year 4","ref":{"org":"Z","exhibit":2,"row":"endowment","year":4},"value":354.6}],"result":"About 85,000 customers and a 354.6 endowment: a large public research university"},{"label":"Organization Z, verdict with numbers","equation":[{"type":"op","text":"65.1 cents per expense dollar from customers and sponsors (Q2)"},{"type":"op","text":"; 65 days of cash (Q11)"},{"type":"op","text":";"},{"type":"var","text":"State government support, Year 4","ref":{"org":"Z","exhibit":1,"row":"state_support","year":4},"value":404}],"result":"Viable only with support, and short of cash; lend only against the public backstop"}],"answer":"Y: a private nonprofit residential college, not viable as run. Z: a public research university, viable only with support and short of cash. Either verdict earns the point with a number behind it.","lesson":"Same test, different backstop. One closes; one restructures and continues. Lenders read statements before stories."}],"bonus":{"n":"B","part":"Bonus","title":"Name both organizations","prompt":"One line on the group sheet.","answer":[{"org":"Y","name":"Hampshire College","place":"Amherst, Massachusetts","outcome":"On April 14, 2026 the college announced it will close after the fall 2026 semester. The statements said it first: customers covered 59 cents of each expense dollar, operations ran on sold savings, and 11.6 months of runway faced 20,418 of debt due within the year."},{"org":"Z","name":"University of Arizona","place":"Tucson, Arizona","outcome":"A real cash crisis: days of cash fell from 131 to 65 on our page-only measure, and the university reported job losses while it restructured. Still open. The backstop is the public purse, and it came with conditions."}],"tone":"Keep both factual and restrained. Real people lost jobs and a real college is closing. No humor about the outcome."}}</script>
+<script type="application/json" id="tour-exhibits">{"organizations":[{"id":"Y","name":"Organization Y","units":"Dollars in thousands","unit_short":"$ thousands","decimals":0,"years":["Year 1","Year 2","Year 3","Year 4"],"exhibits":[{"n":1,"title":"Exhibit 1: Revenue and Expenses, years ended June 30","rows":[{"id":"sec_rev","label":"Revenue","kind":"section"},{"id":"list_price","label":"Charges to customers at list price (service, housing and meals)","kind":"line","values":[28466,32258,47849,56711]},{"id":"discounts","label":"Less: discounts granted to customers","kind":"line","values":[-17451,-20213,-30834,-36196]},{"id":"net_revenue","label":"Net revenue from customers","kind":"total","values":[11015,12045,17015,20515]},{"id":"other_sales","label":"Other sales and income","kind":"line","values":[3403,3465,3706,3267]},{"id":"donations","label":"Donations and grants","kind":"line","values":[7372,9362,5872,7858]},{"id":"relief","label":"Government relief funding (one-time)","kind":"line","values":[3863,195,0,0]},{"id":"total_op_rev","label":"Total operating revenue","kind":"total","values":[25653,25067,26593,31640]},{"id":"sec_exp","label":"Expenses","kind":"section"},{"id":"salaries","label":"Salaries and wages","kind":"line","values":[17290,19054,20482,18366]},{"id":"benefits","label":"Employee benefits","kind":"line","values":[4459,5100,5683,3972]},{"id":"supplies","label":"Supplies, services and other","kind":"line","values":[10329,11676,14827,15230]},{"id":"depreciation","label":"Depreciation","kind":"line","values":[2473,2163,2144,2081]},{"id":"interest","label":"Interest","kind":"line","values":[672,726,778,742]},{"id":"total_expenses","label":"Total expenses","kind":"total","values":[35223,38719,43914,40391]},{"id":"deficit_before_inv","label":"Deficit before investment results","kind":"total","values":[-9570,-13652,-17321,-8751]},{"id":"inv_gains","label":"Investment gains (losses) and other","kind":"line","values":[-6470,658,3117,2635]},{"id":"surplus","label":"Surplus (deficit) for the year","kind":"total","values":[-16040,-12994,-14204,-6116]},{"id":"customers","label":"Not in dollars: average number of customers served","kind":"memo","values":[450,490,700,767]}]},{"n":2,"title":"Exhibit 2: Balance Sheet at June 30","rows":[{"id":"sec_assets","label":"Assets","kind":"section"},{"id":"cash","label":"Cash","kind":"line","values":[4105,4266,3364,5110]},{"id":"escrow","label":"Cash held in escrow","kind":"line","values":[0,0,0,1178]},{"id":"receivables","label":"Receivables from customers and others","kind":"line","values":[936,249,266,412]},{"id":"relief_receivable","label":"Government relief credit receivable","kind":"line","values":[5530,3628,0,0]},{"id":"donations_promised","label":"Donations promised, not yet received","kind":"line","values":[5261,5699,2943,2792]},{"id":"investments","label":"Investments","kind":"line","values":[39890,29434,24457,22194]},{"id":"property","label":"Property and equipment, net of depreciation","kind":"line","values":[43483,42444,40577,38733]},{"id":"other_assets","label":"Other assets","kind":"line","values":[81,626,451,482]},{"id":"total_assets","label":"Total assets","kind":"total","values":[99286,86346,72058,70901]},{"id":"sec_liab","label":"Liabilities","kind":"section"},{"id":"payables","label":"Accounts payable and accrued expenses","kind":"line","values":[764,812,963,1374]},{"id":"deferred_revenue","label":"Deposits and deferred revenue (paid in advance by customers)","kind":"line","values":[875,1265,2018,2889]},{"id":"debt_current","label":"Debt due within one year","kind":"line","values":[0,22184,21318,20418]},{"id":"debt_longterm","label":"Long-term debt","kind":"line","values":[23099,0,0,4500]},{"id":"other_obligations","label":"Other long-term obligations","kind":"line","values":[3284,3815,3693,3770]},{"id":"total_liabilities","label":"Total liabilities","kind":"total","values":[28022,28076,27992,32951]},{"id":"sec_na","label":"Net assets (equity)","kind":"section"},{"id":"na_free","label":"Free to use","kind":"line","values":[36865,22807,9801,4713]},{"id":"na_restricted","label":"Restricted by donors","kind":"line","values":[34399,35463,34265,33237]},{"id":"total_net_assets","label":"Total net assets","kind":"total","values":[71264,58270,44066,37950]},{"id":"total_liab_na","label":"Total liabilities and net assets","kind":"total","values":[99286,86346,72058,70901]}]},{"n":3,"title":"Exhibit 3: Cash Flows, years ended June 30","rows":[{"id":"sec_ops","label":"Operating activities","kind":"section"},{"id":"cf_surplus","label":"Surplus (deficit) for the year","kind":"line","values":[-16040,-12994,-14204,-6116]},{"id":"cf_depreciation","label":"Add back: depreciation","kind":"line","values":[2473,2163,2144,2081]},{"id":"cf_inv_gains","label":"Investment (gains) losses, shown under asset activities","kind":"line","values":[6514,-2444,-2728,-2402]},{"id":"cf_receivables","label":"Decrease (increase) in receivables","kind":"line","values":[-30,3533,6362,-149]},{"id":"cf_deferred","label":"Increase (decrease) in deposits and deferred revenue","kind":"line","values":[-87,391,753,871]},{"id":"cf_other_ops","label":"Other operating items, net","kind":"line","values":[98,-853,172,431]},{"id":"cf_operating","label":"Net cash used by operating activities","kind":"total","values":[-7072,-10204,-7501,-5284]},{"id":"sec_asset","label":"Asset activities","kind":"section"},{"id":"cf_property","label":"Purchases of property and equipment","kind":"line","values":[-475,-1302,-345,-237]},{"id":"cf_inv_sold","label":"Investments sold, net of purchases","kind":"line","values":[9305,10827,7711,4664]},{"id":"cf_other_asset","label":"Other, net","kind":"line","values":[288,869,67,154]},{"id":"cf_asset","label":"Net cash from asset activities","kind":"total","values":[9118,10394,7433,4581]},{"id":"sec_fin","label":"Financing activities","kind":"section"},{"id":"cf_debt_repaid","label":"Debt repaid","kind":"line","values":[-966,-915,-867,-900]},{"id":"cf_borrowing","label":"New borrowing","kind":"line","values":[0,0,0,4500]},{"id":"cf_restricted_gifts","label":"Donations restricted for long-term investment","kind":"line","values":[60,886,33,27]},{"id":"cf_financing","label":"Net cash from (used by) financing activities","kind":"total","values":[-906,-29,-834,3627]},{"id":"cf_net_change","label":"Net change in cash","kind":"total","values":[1140,161,-902,2924]},{"id":"cf_cash_start","label":"Cash at start of year","kind":"line","values":[2965,4105,4266,3364]},{"id":"cf_cash_end","label":"Cash at end of year, including escrow","kind":"total","values":[4105,4266,3364,6288]}]}]},{"id":"Z","name":"Organization Z","units":"$ millions, one decimal","unit_short":"$ millions","decimals":1,"years":["Year 1","Year 2","Year 3","Year 4"],"exhibits":[{"n":1,"title":"Exhibit 1: Revenue and Expenses, Years 1 to 4","rows":[{"id":"sec_rev","label":"Revenue from customers and sponsors","kind":"section"},{"id":"list_price","label":"Main service fees at list price","kind":"line","values":[1007.2,1086.3,1516,1558.5]},{"id":"discounts","label":"Less: discounts given to customers","kind":"line","values":[-329.7,-368.3,-589.6,-580.4]},{"id":"net_fees","label":"Main service fees, net","kind":"total","values":[677.5,718,926.4,978.1]},{"id":"housing_rev","label":"Housing, food and related services","kind":"line","values":[207.2,219.8,236.9,248.7]},{"id":"other_sales","label":"Other sales and fees","kind":"line","values":[63.2,68.6,92.3,92.9]},{"id":"rev_customers","label":"Revenue from customers","kind":"total","values":[947.9,1006.4,1255.6,1319.7]},{"id":"research_contracts","label":"Research and project contracts","kind":"line","values":[555,618.8,673.1,633.9]},{"id":"total_rev_cust_sponsors","label":"Total revenue from customers and sponsors","kind":"total","values":[1502.9,1625.2,1928.7,1953.6]},{"id":"sec_exp","label":"Expenses","kind":"section"},{"id":"exp_main","label":"Delivering the main service","kind":"line","values":[577.3,641.8,719.9,732.8]},{"id":"exp_research","label":"Research","kind":"line","values":[509.4,588.7,644.9,631.1]},{"id":"exp_community","label":"Community programs","kind":"line","values":[95.7,115.8,133.2,139.2]},{"id":"exp_support","label":"Customer and program support","kind":"line","values":[347.5,389.9,570.8,568.4]},{"id":"exp_admin","label":"Administration","kind":"line","values":[205.6,214.8,269.3,289.6]},{"id":"exp_facilities","label":"Facilities upkeep","kind":"line","values":[101.3,111.3,121.4,122.6]},{"id":"exp_assistance","label":"Price assistance paid to customers in cash","kind":"line","values":[102.1,69.2,81.9,81.7]},{"id":"exp_housing","label":"Housing, food and related services","kind":"line","values":[162.9,205.1,209.6,208.4]},{"id":"depreciation","label":"Depreciation","kind":"line","values":[168.3,190.8,223.2,225.5]},{"id":"total_expenses","label":"Total expenses","kind":"total","values":[2270.1,2527.4,2974.2,2999.3]},{"id":"operating_deficit","label":"Operating surplus (deficit)","kind":"total","values":[-767.2,-902.2,-1045.5,-1045.7]},{"id":"sec_support","label":"Support from government, donors and investments","kind":"section"},{"id":"state_support","label":"State government support","kind":"line","values":[356.4,387.6,421.1,404]},{"id":"grants","label":"Grants, government and private","kind":"line","values":[375.1,353.9,403.2,504.1]},{"id":"donations","label":"Donations","kind":"line","values":[109.2,108.6,135,142.2]},{"id":"investment_income","label":"Investment income (loss)","kind":"line","values":[-47.2,42.6,68.9,67]},{"id":"interest","label":"Interest on debt","kind":"line","values":[-58.7,-56.4,-56.6,-48.3]},{"id":"other_support","label":"Other, net","kind":"line","values":[18,20.1,11.5,8.4]},{"id":"net_support","label":"Net support","kind":"total","values":[752.8,856.4,983.1,1077.4]},{"id":"surplus_before_capital","label":"Surplus (deficit) before building and endowment items","kind":"total","values":[-14.4,-45.8,-62.4,31.7]},{"id":"capital_money","label":"Money for buildings and endowment, government and donors","kind":"line","values":[68.4,57.2,57.7,147.1]},{"id":"one_time","label":"One-time: operations taken over from an affiliate","kind":"line","values":[0,67.9,0,0]},{"id":"surplus","label":"Surplus (deficit) for the year","kind":"total","values":[54,79.3,-4.7,178.8]},{"id":"sec_na","label":"Net assets","kind":"section"},{"id":"na_start","label":"Net assets at start of year","kind":"line","values":[1048,1102,1181.3,1176.6]},{"id":"na_plus_surplus","label":"Plus: surplus (deficit) for the year","kind":"line","values":[54,79.3,-4.7,178.8]},{"id":"na_rule_change","label":"Plus: accounting rule change, one-time","kind":"line","values":[0,0,0,27.2]},{"id":"na_end","label":"Net assets at end of year (Exhibit 2)","kind":"total","values":[1102,1181.3,1176.6,1382.6]},{"id":"customers","label":"Customers served, headcount each fall","kind":"memo","values":[49471,51134,85791,84548]}]},{"n":2,"title":"Exhibit 2: Balance sheet at the end of each year","rows":[{"id":"sec_assets","label":"Assets","kind":"section"},{"id":"cash_free","label":"Cash, free to use","kind":"line","values":[47.5,53.8,52.8,16.9]},{"id":"st_investments","label":"Short-term investments","kind":"line","values":[191.3,165,294.6,367.3]},{"id":"owed_to_org","label":"Amounts owed to the organization","kind":"line","values":[176,204.8,202.9,233.2]},{"id":"supplies_prepaid","label":"Supplies and prepaid costs","kind":"line","values":[17.4,26.3,24.6,29.1]},{"id":"current_assets","label":"Current assets","kind":"total","values":[432.2,449.9,574.9,646.5]},{"id":"cash_set_aside","label":"Cash set aside for specific purposes","kind":"line","values":[48,29.6,32.5,35.6]},{"id":"lt_investments_free","label":"Long-term investments, free to use","kind":"line","values":[530.8,409.1,212.9,110.5]},{"id":"investments_trustees","label":"Investments held by trustees or set aside","kind":"line","values":[387.7,335.9,283.2,421.7]},{"id":"endowment","label":"Endowment investments","kind":"line","values":[298.5,312,327.8,354.6]},{"id":"property","label":"Property and equipment, net of depreciation","kind":"line","values":[2630.3,2845.3,2854.2,2843.6]},{"id":"other_lt_assets","label":"Other long-term assets","kind":"line","values":[129.1,122.1,126.3,124.7]},{"id":"lt_assets","label":"Long-term assets","kind":"total","values":[4024.4,4054,3836.9,3890.7]},{"id":"total_assets","label":"Total assets","kind":"total","values":[4456.6,4503.9,4411.8,4537.2]},{"id":"sec_liab","label":"Liabilities","kind":"section"},{"id":"owed_suppliers_staff","label":"Owed to suppliers and staff","kind":"line","values":[158.7,128.3,152.6,151.3]},{"id":"paid_in_advance","label":"Paid in advance by customers","kind":"line","values":[113.9,154.9,157.6,148.4]},{"id":"debt_current","label":"Debt and leases due within one year","kind":"line","values":[96.9,126.9,123.2,115.4]},{"id":"building_commit_current","label":"Building commitments due within one year","kind":"line","values":[0,5,2,5]},{"id":"current_liabilities","label":"Current liabilities","kind":"total","values":[369.5,415.1,435.4,420.1]},{"id":"staff_leave","label":"Staff leave owed, long-term","kind":"line","values":[83.3,88.8,97.2,79.3]},{"id":"debt_longterm","label":"Debt and leases, long-term","kind":"line","values":[1756.7,1687.7,1584,1522.9]},{"id":"building_commit_lt","label":"Building commitments, long-term","kind":"line","values":[0,35,33,28]},{"id":"pension","label":"Pension and retiree health obligations, net","kind":"line","values":[858.7,826,818.2,812.7]},{"id":"deferrals","label":"Amounts received for future years and other deferrals, net","kind":"line","values":[286.4,270,267.4,291.6]},{"id":"lt_liabilities","label":"Long-term liabilities","kind":"total","values":[2985.1,2907.5,2799.8,2734.5]},{"id":"total_liabilities","label":"Total liabilities","kind":"total","values":[3354.6,3322.6,3235.2,3154.6]},{"id":"na_property","label":"Net assets invested in property, net of related debt","kind":"line","values":[959.5,1044.6,1115.1,1218.6]},{"id":"na_restricted","label":"Net assets restricted by donors and others","kind":"line","values":[449.7,482.7,461.4,509.6]},{"id":"na_unrestricted","label":"Net assets unrestricted (deficit)","kind":"line","values":[-307.2,-346,-399.9,-345.6]},{"id":"total_net_assets","label":"Total net assets (equity)","kind":"total","values":[1102,1181.3,1176.6,1382.6]},{"id":"total_liab_na","label":"Total liabilities and net assets","kind":"total","values":[4456.6,4503.9,4411.8,4537.2]}]},{"n":3,"title":"Exhibit 3: Cash flows by activity","rows":[{"id":"sec_ops","label":"Operating activities","kind":"section"},{"id":"cf_fees","label":"Received for main service fees","kind":"line","values":[669.6,712.8,928.9,969.8]},{"id":"cf_sponsors","label":"Received from research and project sponsors","kind":"line","values":[547.4,627.6,670.3,608.2]},{"id":"cf_housing","label":"Received for housing, food, sales and other","kind":"line","values":[307.6,322.9,351.6,371.9]},{"id":"cf_one_time","label":"Received with operations taken over, one-time","kind":"line","values":[0,44.3,0,0]},{"id":"cf_staff","label":"Paid to staff","kind":"line","values":[-1440.4,-1638.2,-1852.4,-1850.2]},{"id":"cf_suppliers","label":"Paid to suppliers","kind":"line","values":[-598.6,-691.4,-797.4,-845.8]},{"id":"cf_assistance","label":"Price assistance paid to customers","kind":"line","values":[-105.9,-73.3,-81.9,-81.7]},{"id":"cf_other_ops","label":"Other, net","kind":"line","values":[0.2,-3.9,-8.8,-1.1]},{"id":"cf_ops_before_support","label":"Cash used by day-to-day operations, before support","kind":"total","values":[-620.1,-699.2,-789.7,-828.9]},{"id":"cf_state","label":"State government support received","kind":"line","values":[354,384.1,424.2,404]},{"id":"cf_grants","label":"Grants and donations received for operations","kind":"line","values":[488,469.3,537.8,652.2]},{"id":"cf_loans","label":"Customer loans passed through, net","kind":"line","values":[-0.6,-3.2,-1,1.4]},{"id":"cf_support","label":"Support received","kind":"total","values":[841.4,850.2,961,1057.6]},{"id":"cf_operating","label":"Net cash from operating activities, after support","kind":"total","values":[221.3,151,171.3,228.7]},{"id":"sec_asset","label":"Asset activities","kind":"section"},{"id":"cf_property","label":"Bought property and equipment","kind":"line","values":[-210.7,-267.3,-210.7,-209.9]},{"id":"cf_property_sold","label":"Sold property and equipment","kind":"line","values":[0,0,1.1,1]},{"id":"cf_inv_net","label":"Investments sold, net of investments bought","kind":"line","values":[4.6,186.4,137.3,-107.2]},{"id":"cf_inv_income","label":"Investment income received","kind":"line","values":[24.6,37.5,42.1,41.5]},{"id":"cf_asset","label":"Net cash from asset activities","kind":"total","values":[-181.5,-43.4,-30.2,-274.6]},{"id":"sec_fin","label":"Financing activities","kind":"section"},{"id":"cf_borrowing","label":"New borrowing","kind":"line","values":[0.3,0,0,303.9]},{"id":"cf_debt_repaid","label":"Debt repaid","kind":"line","values":[-85.9,-95.6,-124.9,-357.8]},{"id":"cf_interest","label":"Interest paid","kind":"line","values":[-80.1,-77.7,-67.2,-65.9]},{"id":"cf_capital_money","label":"Money received for buildings, government and donors","kind":"line","values":[52.9,53.6,52.9,132.9]},{"id":"cf_financing","label":"Net cash from financing activities","kind":"total","values":[-112.8,-119.7,-139.2,13.1]},{"id":"cf_net_change","label":"Net change in cash","kind":"total","values":[-73,-12.1,1.9,-32.8]},{"id":"cf_cash_start","label":"Cash at start of year","kind":"line","values":[168.5,95.5,83.4,85.3]},{"id":"cf_cash_end","label":"Cash at end of year (Exhibit 2: free to use plus set aside)","kind":"total","values":[95.5,83.4,85.3,52.5]}]}]}]}</script>
+<script type="application/json" id="tour-questions">{"questions":[{"n":1,"part":"Part 1. Read the statements","title":"The discount, both organizations","prompt":"How many cents of each list-price dollar does each organization keep, Year 1 and Year 4? Which way is the discount moving?","reference":"Hettinger 4.1 to 4.4, revenue and net revenue; Ch 14, percentage change","orgs":["Y","Z"],"steps":[{"label":"Cents kept per list-price dollar = Net revenue from customers / Charges at list price","equation":[],"result":null,"note":"Y figures are in $ thousands; Z figures in $ millions. The ratio has no unit."},{"label":"Organization Y, Year 1","equation":[{"type":"var","text":"Net revenue from customers, Year 1","ref":{"org":"Y","exhibit":1,"row":"net_revenue","year":1},"value":11015},{"type":"op","text":"/"},{"type":"var","text":"Charges to customers at list price (service, housing and meals), Year 1","ref":{"org":"Y","exhibit":1,"row":"list_price","year":1},"value":28466}],"result":"38.7 cents"},{"label":"Organization Y, Year 4","equation":[{"type":"var","text":"Net revenue from customers, Year 4","ref":{"org":"Y","exhibit":1,"row":"net_revenue","year":4},"value":20515},{"type":"op","text":"/"},{"type":"var","text":"Charges to customers at list price (service, housing and meals), Year 4","ref":{"org":"Y","exhibit":1,"row":"list_price","year":4},"value":56711}],"result":"36.2 cents"},{"label":"Organization Z, Year 1","equation":[{"type":"var","text":"Main service fees, net, Year 1","ref":{"org":"Z","exhibit":1,"row":"net_fees","year":1},"value":677.5},{"type":"op","text":"/"},{"type":"var","text":"Main service fees at list price, Year 1","ref":{"org":"Z","exhibit":1,"row":"list_price","year":1},"value":1007.2}],"result":"67.3 cents"},{"label":"Organization Z, Year 4","equation":[{"type":"var","text":"Main service fees, net, Year 4","ref":{"org":"Z","exhibit":1,"row":"net_fees","year":4},"value":978.1},{"type":"op","text":"/"},{"type":"var","text":"Main service fees at list price, Year 4","ref":{"org":"Z","exhibit":1,"row":"list_price","year":4},"value":1558.5}],"result":"62.8 cents"},{"label":"Direction","equation":[],"result":"Both keep fewer cents in Year 4 than in Year 1. The discount is deepening at both."}],"answer":"Y 38.7 cents to 36.2 cents; Z 67.3 cents to 62.8 cents; both deeper.","lesson":"List price is a fiction in this industry. Net revenue is the real top line."},{"n":2,"part":"Part 1. Read the statements","title":"Who covers the cost, Year 4","prompt":"For each organization, how much of each $1.00 of expenses do customers cover? For Z, what is the result after support?","reference":"Hettinger 4.3 to 4.4, the P&L staircase; Ch 1, the third fit","orgs":["Y","Z"],"steps":[{"label":"Organization Y: (Net revenue from customers + Other sales and income) / Total expenses","equation":[{"type":"op","text":"("},{"type":"var","text":"Net revenue from customers, Year 4","ref":{"org":"Y","exhibit":1,"row":"net_revenue","year":4},"value":20515},{"type":"op","text":"+"},{"type":"var","text":"Other sales and income, Year 4","ref":{"org":"Y","exhibit":1,"row":"other_sales","year":4},"value":3267},{"type":"op","text":")"},{"type":"op","text":"/"},{"type":"var","text":"Total expenses, Year 4","ref":{"org":"Y","exhibit":1,"row":"total_expenses","year":4},"value":40391}],"result":"58.9 cents of each $1.00"},{"label":"Organization Z: Total revenue from customers and sponsors / Total expenses","equation":[{"type":"var","text":"Total revenue from customers and sponsors, Year 4","ref":{"org":"Z","exhibit":1,"row":"total_rev_cust_sponsors","year":4},"value":1953.6},{"type":"op","text":"/"},{"type":"var","text":"Total expenses, Year 4","ref":{"org":"Z","exhibit":1,"row":"total_expenses","year":4},"value":2999.3}],"result":"65.1 cents of each $1.00"},{"label":"Organization Z after support: Operating surplus (deficit) + Net support","equation":[{"type":"var","text":"Operating surplus (deficit), Year 4","ref":{"org":"Z","exhibit":1,"row":"operating_deficit","year":4},"value":-1045.7},{"type":"op","text":"+"},{"type":"var","text":"Net support, Year 4","ref":{"org":"Z","exhibit":1,"row":"net_support","year":4},"value":1077.4}],"result":"31.7 surplus before building and endowment items","note":"This is the line printed as Surplus (deficit) before building and endowment items."}],"answer":"Y 58.9 cents; Z 65.1 cents, and +31.7 after support.","lesson":"Neither covers its cost from customers alone. Someone else fills the gap, every year."},{"n":3,"part":"Part 1. Read the statements","title":"One customer, Year 4 (Y)","prompt":"What does the average customer pay, what does one cost, and what is the gap?","reference":"Hettinger 4.3 to 4.4; Ch 1, the third fit","orgs":["Y"],"steps":[{"label":"Paid per customer = Net revenue from customers / Average number of customers","equation":[{"type":"var","text":"Net revenue from customers, Year 4","ref":{"org":"Y","exhibit":1,"row":"net_revenue","year":4},"value":20515},{"type":"op","text":"/"},{"type":"var","text":"Not in dollars: average number of customers served, Year 4","ref":{"org":"Y","exhibit":1,"row":"customers","year":4},"value":767}],"result":"26.7 thousand, about $26,700"},{"label":"Cost per customer = Total expenses / Average number of customers","equation":[{"type":"var","text":"Total expenses, Year 4","ref":{"org":"Y","exhibit":1,"row":"total_expenses","year":4},"value":40391},{"type":"op","text":"/"},{"type":"var","text":"Not in dollars: average number of customers served, Year 4","ref":{"org":"Y","exhibit":1,"row":"customers","year":4},"value":767}],"result":"52.7 thousand, about $52,700"},{"label":"Gap = Cost per customer less Paid per customer","equation":[{"type":"op","text":"52.7"},{"type":"op","text":"-"},{"type":"op","text":"26.7"}],"result":"about $25,900 per customer"}],"answer":"Pays about $26,700; costs about $52,700; gap about $25,900.","lesson":"Growth is not a fix when the unit loses money. Unit economics has a name from Wednesday on."},{"n":4,"part":"Part 2. Profit is not cash","title":"A deficit is not cash (Y, Year 3)","prompt":"The deficit is bigger than the cash used by operations. Find the gap. Which line on Exhibit 3 explains most of it, and which two lines on Exhibit 2 show the same thing?","reference":"Hettinger Ch 5, cash is not profit; Ch 8, how the statements tie","orgs":["Y"],"steps":[{"label":"Gap = Deficit for the year less Net cash used by operating activities","equation":[{"type":"var","text":"Surplus (deficit) for the year, Year 3","ref":{"org":"Y","exhibit":1,"row":"surplus","year":3},"value":-14204},{"type":"op","text":"vs"},{"type":"var","text":"Net cash used by operating activities, Year 3","ref":{"org":"Y","exhibit":3,"row":"cf_operating","year":3},"value":-7501}],"result":"6,703 less cash left than the deficit says"},{"label":"The Exhibit 3 line that explains most of it","equation":[{"type":"var","text":"Decrease (increase) in receivables, Year 3","ref":{"org":"Y","exhibit":3,"row":"cf_receivables","year":3},"value":6362}],"result":"6,362: receivables fell, so cash came in for revenue recorded earlier"},{"label":"The same thing on Exhibit 2: Government relief credit receivable","equation":[{"type":"var","text":"Government relief credit receivable, Year 2","ref":{"org":"Y","exhibit":2,"row":"relief_receivable","year":2},"value":3628},{"type":"op","text":"to"},{"type":"var","text":"Government relief credit receivable, Year 3","ref":{"org":"Y","exhibit":2,"row":"relief_receivable","year":3},"value":0}],"result":"fell 3,628"},{"label":"The same thing on Exhibit 2: Donations promised, not yet received","equation":[{"type":"var","text":"Donations promised, not yet received, Year 2","ref":{"org":"Y","exhibit":2,"row":"donations_promised","year":2},"value":5699},{"type":"op","text":"to"},{"type":"var","text":"Donations promised, not yet received, Year 3","ref":{"org":"Y","exhibit":2,"row":"donations_promised","year":3},"value":2943}],"result":"fell 2,756","note":"Together the two receivable lines fall 6,384, within the 6,362 receivables line once the small customer receivable (266 vs 249) is netted in."}],"answer":"Gap 6,703; receivables fell 6,362 (relief credit 3,628 to 0; donations promised 5,699 to 2,943).","lesson":"You can lose on paper and bleed less cash for a while. Collecting old promises is not a strategy."},{"n":5,"part":"Part 2. Profit is not cash","title":"A surplus is not cash (Z, Year 2)","prompt":"Strip out the one-time item to get the underlying surplus. Then show what happened to free cash and investments from Year 1 to Year 2, and name the largest cash outflow that explains it.","reference":"Hettinger Ch 5; Ch 3.4, cash flows by activity","orgs":["Z"],"steps":[{"label":"Underlying surplus = Surplus for the year less the one-time item","equation":[{"type":"var","text":"Surplus (deficit) for the year, Year 2","ref":{"org":"Z","exhibit":1,"row":"surplus","year":2},"value":79.3},{"type":"op","text":"-"},{"type":"var","text":"One-time: operations taken over from an affiliate, Year 2","ref":{"org":"Z","exhibit":1,"row":"one_time","year":2},"value":67.9}],"result":"11.4"},{"label":"Free cash and investments, Year 1 = Cash free to use + Short-term investments + Long-term investments free to use","equation":[{"type":"var","text":"Cash, free to use, Year 1","ref":{"org":"Z","exhibit":2,"row":"cash_free","year":1},"value":47.5},{"type":"op","text":"+"},{"type":"var","text":"Short-term investments, Year 1","ref":{"org":"Z","exhibit":2,"row":"st_investments","year":1},"value":191.3},{"type":"op","text":"+"},{"type":"var","text":"Long-term investments, free to use, Year 1","ref":{"org":"Z","exhibit":2,"row":"lt_investments_free","year":1},"value":530.8}],"result":"769.6"},{"label":"Free cash and investments, Year 2","equation":[{"type":"var","text":"Cash, free to use, Year 2","ref":{"org":"Z","exhibit":2,"row":"cash_free","year":2},"value":53.8},{"type":"op","text":"+"},{"type":"var","text":"Short-term investments, Year 2","ref":{"org":"Z","exhibit":2,"row":"st_investments","year":2},"value":165},{"type":"op","text":"+"},{"type":"var","text":"Long-term investments, free to use, Year 2","ref":{"org":"Z","exhibit":2,"row":"lt_investments_free","year":2},"value":409.1}],"result":"627.9"},{"label":"Change","equation":[{"type":"op","text":"627.9"},{"type":"op","text":"-"},{"type":"op","text":"769.6"}],"result":"fell 141.7"},{"label":"Largest cash outflow in the asset and financing sections","equation":[{"type":"var","text":"Bought property and equipment, Year 2","ref":{"org":"Z","exhibit":3,"row":"cf_property","year":2},"value":-267.3}],"result":"Bought property and equipment, 267.3"}],"answer":"79.3 less 67.9 = 11.4; free cash and investments fell 141.7 (769.6 to 627.9); bought property and equipment 267.3.","lesson":"A surplus on the statement; cash walking out the door. Always read both."},{"n":6,"part":"Part 2. Profit is not cash","title":"Prove it with depreciation (Z, Year 4)","prompt":"Property and equipment fell even though Z bought more of it. Show the change, the purchases, and the line that explains the difference.","reference":"Hettinger 4.3 and 6.2, depreciation; Ch 8","orgs":["Z"],"steps":[{"label":"Change in Property and equipment, net","equation":[{"type":"var","text":"Property and equipment, net of depreciation, Year 4","ref":{"org":"Z","exhibit":2,"row":"property","year":4},"value":2843.6},{"type":"op","text":"-"},{"type":"var","text":"Property and equipment, net of depreciation, Year 3","ref":{"org":"Z","exhibit":2,"row":"property","year":3},"value":2854.2}],"result":"down 10.6"},{"label":"What Z bought (Exhibit 3)","equation":[{"type":"var","text":"Bought property and equipment, Year 4","ref":{"org":"Z","exhibit":3,"row":"cf_property","year":4},"value":-209.9}],"result":"209.9 of purchases"},{"label":"What explains the fall (Exhibit 1)","equation":[{"type":"var","text":"Depreciation, Year 4","ref":{"org":"Z","exhibit":1,"row":"depreciation","year":4},"value":225.5}],"result":"Depreciation 225.5 outran the buying: 209.9 - 225.5 = (15.6)","note":"The remaining +5.0 is non-cash additions (leased space, software subscriptions, unpaid invoices) less retirements. Not required."}],"answer":"Down 10.6; bought 209.9; depreciation 225.5 explains it.","lesson":"Depreciation moves the balance sheet and the P&L without a dollar moving. That is the point of it."},{"n":7,"part":"Part 2. Profit is not cash","title":"Who paid for it (Y, all four years)","prompt":"Operations used cash every year. Add up the four years. Which section of Exhibit 3 supplied the cash, and how much over the same four years?","reference":"Hettinger 3.4, cash flows by activity","orgs":["Y"],"steps":[{"label":"Cash used by operations, four years","equation":[{"type":"var","text":"Net cash used by operating activities, Years 1 to 4","ref":{"org":"Y","exhibit":3,"row":"cf_operating","years":[1,2,3,4]},"value":[-7072,-10204,-7501,-5284]}],"result":"30,061 used"},{"label":"Cash supplied by asset activities, four years","equation":[{"type":"var","text":"Net cash from asset activities, Years 1 to 4","ref":{"org":"Y","exhibit":3,"row":"cf_asset","years":[1,2,3,4]},"value":[9118,10394,7433,4581]}],"result":"31,526 supplied"},{"label":"Mostly from one line","equation":[{"type":"var","text":"Investments sold, net of purchases, Years 1 to 4","ref":{"org":"Y","exhibit":3,"row":"cf_inv_sold","years":[1,2,3,4]},"value":[9305,10827,7711,4664]}],"result":"32,507 from selling investments","note":"Either total, 31,526 or 32,507, earns the point on the sheet."}],"answer":"Operations used 30,061; asset activities supplied 31,526, almost all of it investments sold (32,507).","lesson":"The college ran its operations by selling its savings. Selling savings has an end date; Question 11 computes it."},{"n":8,"part":"Part 3. The ratio room","title":"Margin check (Y)","prompt":"Compute the operating margin (deficit before investment results divided by total operating revenue) for Year 1 and Year 4. Is it improving? Does it describe a viable organization?","reference":"Hettinger Ch 10, margins; Ch 15.1 and 15.3, margins and strategy","orgs":["Y"],"steps":[{"label":"Operating margin, Year 1","equation":[{"type":"var","text":"Deficit before investment results, Year 1","ref":{"org":"Y","exhibit":1,"row":"deficit_before_inv","year":1},"value":-9570},{"type":"op","text":"/"},{"type":"var","text":"Total operating revenue, Year 1","ref":{"org":"Y","exhibit":1,"row":"total_op_rev","year":1},"value":25653}],"result":"-37.3%"},{"label":"Operating margin, Year 4","equation":[{"type":"var","text":"Deficit before investment results, Year 4","ref":{"org":"Y","exhibit":1,"row":"deficit_before_inv","year":4},"value":-8751},{"type":"op","text":"/"},{"type":"var","text":"Total operating revenue, Year 4","ref":{"org":"Y","exhibit":1,"row":"total_op_rev","year":4},"value":31640}],"result":"-27.7%"},{"label":"Dollars out per dollar in, Year 4 = Total expenses / Total operating revenue","equation":[{"type":"var","text":"Total expenses, Year 4","ref":{"org":"Y","exhibit":1,"row":"total_expenses","year":4},"value":40391},{"type":"op","text":"/"},{"type":"var","text":"Total operating revenue, Year 4","ref":{"org":"Y","exhibit":1,"row":"total_op_rev","year":4},"value":31640}],"result":"$1.28 out for every $1.00 in"},{"label":"Reading","equation":[],"result":"Improving, and still deeply negative. A margin can improve and still describe a business that does not work."}],"answer":"-37.3% to -27.7%; improving; $1.28 out per $1.00 in at Year 4; not viable as run.","lesson":"A margin can improve and still describe a business that does not work."},{"n":9,"part":"Part 3. The ratio room","title":"Liquidity check (Y, Year 4)","prompt":"Divide cash plus escrow plus investments by debt due within one year. The ratio is above 1.0. Is Y liquid? Look at what is in the numerator and at the net assets section of Exhibit 2 before you answer.","reference":"Hettinger Ch 12, liquidity ratios","orgs":["Y"],"steps":[{"label":"Numerator = Cash + Cash held in escrow + Investments","equation":[{"type":"var","text":"Cash, Year 4","ref":{"org":"Y","exhibit":2,"row":"cash","year":4},"value":5110},{"type":"op","text":"+"},{"type":"var","text":"Cash held in escrow, Year 4","ref":{"org":"Y","exhibit":2,"row":"escrow","year":4},"value":1178},{"type":"op","text":"+"},{"type":"var","text":"Investments, Year 4","ref":{"org":"Y","exhibit":2,"row":"investments","year":4},"value":22194}],"result":"28,482"},{"label":"Ratio = Numerator / Debt due within one year","equation":[{"type":"op","text":"28,482"},{"type":"op","text":"/"},{"type":"var","text":"Debt due within one year, Year 4","ref":{"org":"Y","exhibit":2,"row":"debt_current","year":4},"value":20418}],"result":"1.4"},{"label":"Read the numerator against the net assets section","equation":[{"type":"var","text":"Restricted by donors, Year 4","ref":{"org":"Y","exhibit":2,"row":"na_restricted","year":4},"value":33237},{"type":"op","text":"vs"},{"type":"var","text":"Free to use, Year 4","ref":{"org":"Y","exhibit":2,"row":"na_free","year":4},"value":4713}],"result":"Restricted 33,237 against free 4,713: most of the investments are not Y's to spend"},{"label":"Reading","equation":[],"result":"Above 1.0, but not liquid in the way the ratio suggests. A ratio is only as liquid as what is inside it."}],"answer":"28,482 / 20,418 = 1.4; restricted net assets 33,237 vs free 4,713; not liquid as the ratio suggests.","lesson":"Above 1.0 is not a guarantee. A ratio is only as liquid as what is inside it."},{"n":10,"part":"Part 3. The ratio room","title":"Leverage check (Y)","prompt":"Compute total liabilities divided by total net assets for Year 1 and Year 4. Both are under 2.0. What does this ratio miss about Y's position?","reference":"Hettinger Ch 13, leverage ratios; 6.2, current versus long-term","orgs":["Y"],"steps":[{"label":"Year 1","equation":[{"type":"var","text":"Total liabilities, Year 1","ref":{"org":"Y","exhibit":2,"row":"total_liabilities","year":1},"value":28022},{"type":"op","text":"/"},{"type":"var","text":"Total net assets, Year 1","ref":{"org":"Y","exhibit":2,"row":"total_net_assets","year":1},"value":71264}],"result":"0.39"},{"label":"Year 4","equation":[{"type":"var","text":"Total liabilities, Year 4","ref":{"org":"Y","exhibit":2,"row":"total_liabilities","year":4},"value":32951},{"type":"op","text":"/"},{"type":"var","text":"Total net assets, Year 4","ref":{"org":"Y","exhibit":2,"row":"total_net_assets","year":4},"value":37950}],"result":"0.87"},{"label":"What the ratio misses: when the debt is due","equation":[{"type":"var","text":"Debt due within one year, Year 4","ref":{"org":"Y","exhibit":2,"row":"debt_current","year":4},"value":20418}],"result":"20,418 is due within one year; the lender can call"},{"label":"What the ratio misses: what the net assets are made of","equation":[{"type":"var","text":"Restricted by donors, Year 4","ref":{"org":"Y","exhibit":2,"row":"na_restricted","year":4},"value":33237},{"type":"op","text":"and"},{"type":"var","text":"Property and equipment, net of depreciation, Year 4","ref":{"org":"Y","exhibit":2,"row":"property","year":4},"value":38733}],"result":"Restricted funds and property Y cannot spend sit inside the denominator"}],"answer":"0.39 to 0.87; under 2.0, but 20,418 is due within a year and the net assets include restricted funds and property.","lesson":"Leverage reads differently when the lender can call tomorrow. Benchmarks are a starting point, not a verdict."},{"n":11,"part":"Part 4. Judgment","title":"Runway","prompt":"Y: monthly burn from Year 4 operating cash, and months of runway on cash. Z: days of cash for Year 1 and Year 4, using free cash and investments divided by daily cash spending. Which way are both heading?","reference":"Course supplement, burn rate and runway (Week 4); Hettinger 6.2","orgs":["Y","Z"],"steps":[{"label":"Y monthly burn = Net cash used by operating activities / 12","equation":[{"type":"var","text":"Net cash used by operating activities, Year 4","ref":{"org":"Y","exhibit":3,"row":"cf_operating","year":4},"value":-5284},{"type":"op","text":"/"},{"type":"op","text":"12"}],"result":"about 440 per month"},{"label":"Y runway = Cash / monthly burn","equation":[{"type":"var","text":"Cash, Year 4","ref":{"org":"Y","exhibit":2,"row":"cash","year":4},"value":5110},{"type":"op","text":"/"},{"type":"op","text":"440.3"}],"result":"11.6 months on cash","note":"With escrow included: 14.3 months. Either is accepted if stated. And 20,418 of debt is due within the year."},{"label":"Z daily cash spending, Year 1 = (Paid to staff + Paid to suppliers + Price assistance) / 365","equation":[{"type":"var","text":"Paid to staff, Year 1","ref":{"org":"Z","exhibit":3,"row":"cf_staff","year":1},"value":-1440.4},{"type":"op","text":"+"},{"type":"var","text":"Paid to suppliers, Year 1","ref":{"org":"Z","exhibit":3,"row":"cf_suppliers","year":1},"value":-598.6},{"type":"op","text":"+"},{"type":"var","text":"Price assistance paid to customers, Year 1","ref":{"org":"Z","exhibit":3,"row":"cf_assistance","year":1},"value":-105.9},{"type":"op","text":") / 365"}],"result":"5.88 per day"},{"label":"Z free cash and investments, Year 1","equation":[{"type":"var","text":"Cash, free to use, Year 1","ref":{"org":"Z","exhibit":2,"row":"cash_free","year":1},"value":47.5},{"type":"op","text":"+"},{"type":"var","text":"Short-term investments, Year 1","ref":{"org":"Z","exhibit":2,"row":"st_investments","year":1},"value":191.3},{"type":"op","text":"+"},{"type":"var","text":"Long-term investments, free to use, Year 1","ref":{"org":"Z","exhibit":2,"row":"lt_investments_free","year":1},"value":530.8}],"result":"769.6"},{"label":"Z days of cash, Year 1","equation":[{"type":"op","text":"769.6"},{"type":"op","text":"/"},{"type":"op","text":"5.88"}],"result":"131 days"},{"label":"Z daily cash spending, Year 4","equation":[{"type":"var","text":"Paid to staff, Year 4","ref":{"org":"Z","exhibit":3,"row":"cf_staff","year":4},"value":-1850.2},{"type":"op","text":"+"},{"type":"var","text":"Paid to suppliers, Year 4","ref":{"org":"Z","exhibit":3,"row":"cf_suppliers","year":4},"value":-845.8},{"type":"op","text":"+"},{"type":"var","text":"Price assistance paid to customers, Year 4","ref":{"org":"Z","exhibit":3,"row":"cf_assistance","year":4},"value":-81.7},{"type":"op","text":") / 365"}],"result":"7.61 per day"},{"label":"Z free cash and investments, Year 4","equation":[{"type":"var","text":"Cash, free to use, Year 4","ref":{"org":"Z","exhibit":2,"row":"cash_free","year":4},"value":16.9},{"type":"op","text":"+"},{"type":"var","text":"Short-term investments, Year 4","ref":{"org":"Z","exhibit":2,"row":"st_investments","year":4},"value":367.3},{"type":"op","text":"+"},{"type":"var","text":"Long-term investments, free to use, Year 4","ref":{"org":"Z","exhibit":2,"row":"lt_investments_free","year":4},"value":110.5}],"result":"494.7"},{"label":"Z days of cash, Year 4","equation":[{"type":"op","text":"494.7"},{"type":"op","text":"/"},{"type":"op","text":"7.61"}],"result":"65 days","note":"This is a page-only measure. The university's own reported days-cash figure for Year 4 is higher, about 78."},{"label":"Direction","equation":[],"result":"Both heading down. Different sizes, same direction."}],"answer":"Y: burn about 440 per month, 11.6 months on cash; Z: 131 days to 65 days; both down.","lesson":"Runway is the one number that turns a statement into a deadline."},{"n":12,"part":"Part 4. Judgment","title":"What are they, and would you lend to either one?","prompt":"Name the kind of organization each one is, with two pieces of evidence from the exhibits. Then give a lending verdict for each. A verdict needs at least one number from the exhibits.","reference":"Hettinger Ch 1 and Ch 2, business types and the third fit; Ch 13","orgs":["Y","Z"],"steps":[{"label":"Organization Y, evidence: donors and restricted equity (no owners)","equation":[{"type":"var","text":"Donations and grants, Year 4","ref":{"org":"Y","exhibit":1,"row":"donations","year":4},"value":7858},{"type":"op","text":"and"},{"type":"var","text":"Restricted by donors, Year 4","ref":{"org":"Y","exhibit":2,"row":"na_restricted","year":4},"value":33237}],"result":"A nonprofit with donor-restricted net assets"},{"label":"Organization Y, evidence: a list price with a deep discount, housing and meals, customers counted per year","equation":[{"type":"var","text":"Charges to customers at list price (service, housing and meals), Year 4","ref":{"org":"Y","exhibit":1,"row":"list_price","year":4},"value":56711},{"type":"op","text":"/"},{"type":"var","text":"Not in dollars: average number of customers served, Year 4","ref":{"org":"Y","exhibit":1,"row":"customers","year":4},"value":767}],"result":"about $73,900 list price per customer, 64% discounted: a private residential college"},{"label":"Organization Y, verdict with numbers","equation":[{"type":"op","text":"58.9 cents per expense dollar from customers (Q2)"},{"type":"op","text":"; 11.6 months of runway (Q11)"},{"type":"op","text":";"},{"type":"var","text":"Debt due within one year, Year 4","ref":{"org":"Y","exhibit":2,"row":"debt_current","year":4},"value":20418}],"result":"Not viable as run; would not lend without a new source of cover"},{"label":"Organization Z, evidence: state government support and research","equation":[{"type":"var","text":"State government support, Year 4","ref":{"org":"Z","exhibit":1,"row":"state_support","year":4},"value":404},{"type":"op","text":"and"},{"type":"var","text":"Research and project contracts, Year 4","ref":{"org":"Z","exhibit":1,"row":"research_contracts","year":4},"value":633.9}],"result":"A government-supported public institution with a large research enterprise"},{"label":"Organization Z, evidence: scale and an endowment","equation":[{"type":"var","text":"Customers served, headcount each fall, Year 4","ref":{"org":"Z","exhibit":1,"row":"customers","year":4},"value":84548},{"type":"op","text":"and"},{"type":"var","text":"Endowment investments, Year 4","ref":{"org":"Z","exhibit":2,"row":"endowment","year":4},"value":354.6}],"result":"About 85,000 customers and a 354.6 endowment: a large public research university"},{"label":"Organization Z, verdict with numbers","equation":[{"type":"op","text":"65.1 cents per expense dollar from customers and sponsors (Q2)"},{"type":"op","text":"; 65 days of cash (Q11)"},{"type":"op","text":";"},{"type":"var","text":"State government support, Year 4","ref":{"org":"Z","exhibit":1,"row":"state_support","year":4},"value":404}],"result":"Viable only with support, and short of cash; lend only against the public backstop"}],"answer":"Y: a private nonprofit residential college, not viable as run. Z: a public research university, viable only with support and short of cash. Either verdict earns the point with a number behind it.","lesson":"Same test, different backstop. One closes; one restructures and continues. Lenders read statements before stories."}],"bonus":{"part":"Bonus","title":"Name both organizations"}}</script>
 <script>
 (function () {
   'use strict';
 
-  var EX = JSON.parse(document.getElementById('data-exhibits').textContent);
-  var QD = JSON.parse(document.getElementById('data-questions').textContent);
+  var EX = JSON.parse(document.getElementById('tour-exhibits').textContent);
+  var QD = JSON.parse(document.getElementById('tour-questions').textContent);
   var QS = QD.questions;
-  var BONUS = QD.bonus;
+  var LIVE = 'walkthrough/';
 
-  // Index organizations, exhibits and rows by their stable keys.
   var ORG = {};
   EX.organizations.forEach(function (o) {
     ORG[o.id] = o;
@@ -304,51 +290,74 @@ noscript p{margin:0;padding:16px var(--gut)}
     });
   });
 
-  /*fmt:start*/
-  // Numbers print as on the student exhibits: thousands separators, fixed
-  // decimals per organization, negatives in parentheses.
   function fmt(v, d) {
     var s = Math.abs(v).toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
     return v < 0 ? '(' + s + ')' : s;
   }
-  // Memo rows are counts, not dollars, so they never take decimals.
   function decimals(org, row) { return row.kind === 'memo' ? 0 : org.decimals; }
-  /*fmt:end*/
-
   function esc(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
   function $(id) { return document.getElementById(id); }
-
   function resolve(ref) {
     var o = ref && ORG[ref.org], x = o && o.byN[ref.exhibit], r = x && x.byId[ref.row];
     if (!r || !r.values) return null;
     var years = ref.years || [ref.year];
     var d = decimals(o, r);
-    for (var i = 0; i < years.length; i++) { if (typeof r.values[years[i] - 1] !== 'number') return null; }
     return { org: o, ex: x, row: r, years: years, printed: years.map(function (y) { return fmt(r.values[y - 1], d); }) };
   }
 
+  var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
   var el = {
-    rail: $('rail'), solution: $('solution'), controls: $('controls'), qbody: $('qbody'),
-    next: $('btnNext'), all: $('btnAll'), reset: $('btnReset'), count: $('stepCount'),
-    prevQ: $('btnPrevQ'), nextQ: $('btnNextQ'),
-    statement: $('statement'), orgSwitch: $('orgSwitch'), exSwitch: $('exSwitch'), back: $('btnBack'),
-    exOrg: $('exOrg'), exTitle: $('exTitle'), exUnits: $('exUnits'), readout: $('readout'), wrap: $('wrap')
+    stage: $('stage'), mini: $('mini'), path: $('mPath'), strip: $('mStrip'), ctl: $('mCtl'),
+    next: $('mNext'), all: $('mAll'), reset: $('mReset'), count: $('mCount'), sol: $('mSol'), q: $('mQ'),
+    orgSw: $('mOrg'), exSw: $('mEx'), title: $('mTitle'), units: $('mUnits'), readout: $('mReadout'), wrap: $('mWrap'),
+    cursor: $('cursor'), keys: $('keys'), bar: $('bar'),
+    capKick: $('capKick'), capTitle: $('capTitle'), capText: $('capText'),
+    play: $('btnPlay'), prev: $('btnPrev'), nextScene: $('btnNextScene'), speed: $('btnSpeed'), scenes: $('scenes')
   };
 
-  // view: 'q' or 'bonus'; qi: index into QS; revealed: steps shown; sel: active chip.
-  var S = { view: null, qi: -1, revealed: 0, sel: null, shownOrg: null, shownEx: null };
+  // Tour state. token changes whenever playback is stopped or restarted.
+  var T = { i: 0, playing: false, started: false, done: false, token: 0, speed: 1 };
 
-  /* ---------- Question strip ---------- */
+  /* ---------- Scrolling inside the miniature (never the page) ---------- */
 
-  function partNameHTML(name) {
-    var cut = name.indexOf('. ');
-    if (cut < 0) return esc(name);
-    return esc(name.slice(0, cut)) + '<span class="pn-rest">' + esc(name.slice(cut)) + '</span>';
+  function glide(node, top, left) {
+    var id = (node._g = (node._g || 0) + 1);
+    if (reduce || !T.playing) { node.scrollTop = top; node.scrollLeft = left; return; }
+    var t0 = null, st = node.scrollTop, sl = node.scrollLeft, ms = 380 / T.speed;
+    function frame(now) {
+      if (node._g !== id) return;
+      if (t0 === null) t0 = now;
+      var k = Math.min(1, (now - t0) / ms);
+      var e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      node.scrollTop = st + (top - st) * e;
+      node.scrollLeft = sl + (left - sl) * e;
+      if (k < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
   }
 
-  function buildRail() {
+  // Bring node into view inside its own scroller. Returns true when it had to scroll.
+  function revealIn(sc, node) {
+    var s = sc.getBoundingClientRect(), r = node.getBoundingClientRect();
+    var th = sc.querySelector('thead th');
+    var head = th ? th.getBoundingClientRect().height : 0;
+    var pad = 8, top = sc.scrollTop;
+    if (r.top < s.top + head + pad) top -= (s.top + head + pad) - r.top;
+    else if (r.bottom > s.bottom - pad) top += Math.min(r.bottom - (s.bottom - pad), r.top - (s.top + head + pad));
+    top = Math.max(0, Math.min(top, sc.scrollHeight - sc.clientHeight));
+    if (Math.abs(top - sc.scrollTop) < 1) return false;
+    glide(sc, top, sc.scrollLeft);
+    return true;
+  }
+
+  /* ---------- The miniature ---------- */
+
+  var M = { view: 'q', qi: 0, revealed: 1, sel: null, org: null, ex: null };
+
+  function buildStrip() {
     var parts = [], byPart = {};
     QS.forEach(function (q) {
       if (!byPart[q.part]) { byPart[q.part] = []; parts.push(q.part); }
@@ -356,184 +365,113 @@ noscript p{margin:0;padding:16px var(--gut)}
     });
     var h = '';
     parts.forEach(function (p) {
-      h += '<div class="part"><span class="part-name">' + partNameHTML(p) + '</span><span class="qs">';
+      var cut = p.indexOf('. ');
+      h += '<div class="m-part"><span class="m-pn">' + (cut < 0 ? esc(p) : esc(p.slice(0, cut)) + '<i>' + esc(p.slice(cut)) + '</i>') + '</span><span class="m-qs">';
       byPart[p].forEach(function (q) {
-        h += '<a class="qlink" href="#q' + q.n + 's1" data-q="' + q.n + '" aria-label="Question ' + q.n + ': ' + esc(q.title) + '">' + q.n + '</a>';
+        h += '<button type="button" class="m-q" data-q="' + q.n + '" aria-label="Question ' + q.n + ': ' + esc(q.title) + '">' + q.n + '</button>';
       });
       h += '</span></div>';
     });
-    h += '<div class="part"><span class="part-name blank" aria-hidden="true">' + esc(BONUS.part) + '</span><span class="qs">' +
-      '<a class="qlink" href="#bonus" data-q="bonus" aria-label="' + esc(BONUS.part) + ': ' + esc(BONUS.title) + '">' + esc(BONUS.part) + '</a></span></div>';
-    el.rail.innerHTML = h;
+    h += '<div class="m-part"><span class="m-pn blank" aria-hidden="true">' + esc(QD.bonus.part) + '</span><span class="m-qs">' +
+      '<button type="button" class="m-q" data-q="bonus">' + esc(QD.bonus.part) + '</button></span></div>';
+    el.strip.innerHTML = h;
   }
 
-  function updateRail() {
-    var cur = S.view === 'bonus' ? 'bonus' : String(QS[S.qi].n);
-    var links = el.rail.querySelectorAll('.qlink');
-    for (var i = 0; i < links.length; i++) {
-      if (links[i].getAttribute('data-q') === cur) links[i].setAttribute('aria-current', 'page');
-      else links[i].removeAttribute('aria-current');
-    }
-    var atStart = S.view === 'q' && S.qi === 0, atEnd = S.view === 'bonus';
-    el.prevQ.disabled = atStart;
-    el.nextQ.disabled = atEnd;
-    el.nextQ.textContent = S.view === 'q' && S.qi === QS.length - 1 ? 'Next: ' + BONUS.part : 'Next question';
+  // As on the real page: "Organization Y" and "Exhibit 1", or the short part beside a group label on a phone.
+  function swButton(attr, long, short) {
+    return '<button type="button" ' + attr + ' aria-pressed="false" aria-label="' + esc(long + short) + '">' +
+      (long ? '<span class="m-long">' + esc(long) + '</span>' : '') + esc(short) + '</button>';
   }
 
-  /* ---------- Solution pane ---------- */
+  function buildSwitches() {
+    el.orgSw.innerHTML = '<span class="m-swl" aria-hidden="true">Organization</span>' + EX.organizations.map(function (o) {
+      var tail = ' ' + o.id;
+      var stem = o.name.slice(-tail.length) === tail ? o.name.slice(0, -o.id.length) : '';
+      return swButton('data-org="' + esc(o.id) + '"', stem, stem ? o.id : o.name);
+    }).join('');
+    el.exSw.innerHTML = '<span class="m-swl" aria-hidden="true">Exhibit</span>' + EX.organizations[0].exhibits.map(function (x) {
+      return swButton('data-ex="' + x.n + '"', 'Exhibit ', String(x.n));
+    }).join('');
+  }
 
   function chipHTML(tok, si, ti) {
     var c = resolve(tok.ref);
-    if (!c) return '<span class="op">' + esc(tok.text) + '</span>';
-    var label = tok.text + ', ' + c.org.name + ', ' + c.printed.join(', ');
-    return '<button type="button" class="chip' + (c.printed.length > 1 ? ' multi' : '') + '" data-s="' + si + '" data-t="' + ti +
-      '" aria-pressed="false" aria-label="' + esc(label) + '"><span class="chip-v">' +
+    if (!c) return '<span class="m-op">' + esc(tok.text) + '</span>';
+    return '<button type="button" class="m-chip' + (c.printed.length > 1 ? ' multi' : '') + '" data-s="' + si + '" data-t="' + ti +
+      '" aria-pressed="false" aria-label="' + esc(tok.text + ', ' + c.org.name + ', ' + c.printed.join(', ')) + '"><span class="m-cv">' +
       c.printed.map(function (p) { return '<span>' + p + '</span>'; }).join('') +
-      '</span><span class="chip-l">' + esc(tok.text) + '</span></button>';
+      '</span><span class="m-cl">' + esc(tok.text) + '</span></button>';
   }
 
   function stepHTML(q, st, si) {
     var toks = st.equation || [];
-    // Some equations close a bracket they never open; balance it at the front.
     var open = 0, close = 0;
     toks.forEach(function (t) {
       if (t.type !== 'op') return;
       open += (t.text.match(/\(/g) || []).length;
       close += (t.text.match(/\)/g) || []).length;
     });
-    // Only an equation with an operator earns an equals sign; "A vs B" and single values do not.
     var arith = toks.some(function (t) { return t.type === 'op' && /^[()\s]*[+\-\/][\s\d.,()]*$/.test(t.text); });
-    var h = '<li class="step" id="step' + (si + 1) + '" data-s="' + si + '" hidden>' +
-      '<p class="step-n">Step ' + (si + 1) + ' of ' + q.steps.length + '</p>' +
-      '<h3>' + esc(st.label) + '</h3>';
+    var h = '<li class="m-step" data-s="' + si + '" hidden><p class="m-stepn">Step ' + (si + 1) + ' of ' + q.steps.length + '</p><h3>' + esc(st.label) + '</h3>';
     if (toks.length) {
-      h += '<div class="eq-row">';
-      for (var i = close - open; i > 0; i--) h += '<span class="op">(</span>';
+      h += '<div class="m-eq">';
+      for (var i = close - open; i > 0; i--) h += '<span class="m-op">(</span>';
       toks.forEach(function (t, ti) {
-        h += t.type === 'var' ? chipHTML(t, si, ti) : '<span class="op">' + (t.text === '-' ? '&minus;' : esc(t.text)) + '</span>';
+        h += t.type === 'var' ? chipHTML(t, si, ti) : '<span class="m-op">' + (t.text === '-' ? '&minus;' : esc(t.text)) + '</span>';
       });
       h += '</div>';
     }
     if (st.result) {
       h += toks.length
-        ? '<p class="result">' + (arith ? '<span class="eq-sign">=</span>' : '') + '<span>' + esc(st.result) + '</span></p>'
-        : '<p class="result prose">' + esc(st.result) + '</p>';
+        ? '<p class="m-result">' + (arith ? '<span>=</span>' : '') + '<span>' + esc(st.result) + '</span></p>'
+        : '<p class="m-result prose">' + esc(st.result) + '</p>';
     }
-    if (st.note) h += '<p class="note">' + esc(st.note) + '</p>';
+    if (st.note) h += '<p class="m-note">' + esc(st.note) + '</p>';
     return h + '</li>';
   }
 
   function renderQuestion() {
-    var q = QS[S.qi];
-    var h = '<p class="part-line">' + esc(q.part) + '</p>' +
-      '<h2 class="q-title" id="qtitle" tabindex="-1">Question ' + q.n + ': ' + esc(q.title) + '</h2>' +
-      '<p class="prompt">' + esc(q.prompt) + '</p>' +
-      '<p class="ref"><b>Reference:</b> ' + esc(q.reference) + '</p>' +
-      '<ol class="steps" role="list">';
+    var q = QS[M.qi];
+    var h = '<p class="m-partline">' + esc(q.part) + '</p><p class="m-title">Question ' + q.n + ': ' + esc(q.title) + '</p>' +
+      '<p class="m-prompt">' + esc(q.prompt) + '</p><ol class="m-steps" role="list">';
     q.steps.forEach(function (st, si) { h += stepHTML(q, st, si); });
-    h += '</ol><div class="answer" id="answer" hidden>' +
-      '<p><b>Answer</b>' + esc(q.answer) + '</p>' +
-      '<p><b>Lesson</b>' + esc(q.lesson) + '</p></div>';
-    el.qbody.innerHTML = h;
+    h += '</ol><div class="m-answer" id="mAnswer" hidden><p><b>Answer</b>' + esc(q.answer) + '</p><p><b>Lesson</b>' + esc(q.lesson) + '</p></div>';
+    el.q.innerHTML = h;
+    el.sol._g = (el.sol._g || 0) + 1;
+    el.sol.scrollTop = 0;
   }
 
   function renderBonus() {
-    var h = '<p class="part-line">' + esc(BONUS.part) + '</p>' +
-      '<h2 class="q-title" id="qtitle" tabindex="-1">' + esc(BONUS.title) + '</h2>' +
-      '<p class="prompt">' + esc(BONUS.prompt) + '</p><div class="reveal">';
-    BONUS.answer.forEach(function (a) {
-      h += '<article class="org-card" data-org="' + esc(a.org) + '">' +
-        '<p class="org-tag">' + esc(ORG[a.org] ? ORG[a.org].name : a.org) + '</p>' +
-        '<h3>' + esc(a.name) + '</h3>' +
-        '<p class="place">' + esc(a.place) + '</p>' +
-        '<p class="outcome">' + esc(a.outcome) + '</p></article>';
-    });
-    h += '</div><p class="tone">' + esc(BONUS.tone) + '</p>';
-    el.qbody.innerHTML = h;
+    el.q.innerHTML = '<p class="m-partline">' + esc(QD.bonus.part) + '</p><p class="m-title">' + esc(QD.bonus.title) + '</p>' +
+      '<div class="m-answer"><p>The bonus screen names both organizations. Open the walkthrough to see it.</p>' +
+      '<p><a href="' + LIVE + '#bonus">Open the bonus screen</a></p></div>';
+    el.sol._g = (el.sol._g || 0) + 1;
+    el.sol.scrollTop = 0;
   }
 
   function selToken() {
-    if (S.view !== 'q' || !S.sel) return null;
-    var st = QS[S.qi].steps[S.sel.si];
-    return st && st.equation ? st.equation[S.sel.ti] || null : null;
+    if (M.view !== 'q' || !M.sel) return null;
+    var st = QS[M.qi].steps[M.sel.si];
+    return st ? st.equation[M.sel.ti] || null : null;
   }
 
-  // First clickable value in step si, or in the nearest earlier step that has one.
   function firstVarAtOrBefore(si) {
-    var steps = QS[S.qi].steps;
+    var steps = QS[M.qi].steps;
     for (var s = si; s >= 0; s--) {
-      var eq = steps[s].equation || [];
-      for (var t = 0; t < eq.length; t++) { if (eq[t].type === 'var' && resolve(eq[t].ref)) return { si: s, ti: t }; }
+      for (var t = 0; t < steps[s].equation.length; t++) {
+        if (steps[s].equation[t].type === 'var' && resolve(steps[s].equation[t].ref)) return { si: s, ti: t };
+      }
     }
     return null;
   }
 
   function firstRef(q) {
     for (var s = 0; s < q.steps.length; s++) {
-      var eq = q.steps[s].equation || [];
-      for (var t = 0; t < eq.length; t++) { if (eq[t].type === 'var' && resolve(eq[t].ref)) return eq[t].ref; }
+      for (var t = 0; t < q.steps[s].equation.length; t++) {
+        if (q.steps[s].equation[t].type === 'var') return q.steps[s].equation[t].ref;
+      }
     }
     return null;
-  }
-
-  // mode 'keep' leaves the active chip alone when it is still on screen.
-  function setRevealed(n, mode) {
-    var q = QS[S.qi], N = q.steps.length;
-    n = Math.max(1, Math.min(N, parseInt(n, 10) || 1));
-    S.revealed = n;
-    var items = el.qbody.querySelectorAll('.step');
-    for (var i = 0; i < items.length; i++) {
-      items[i].hidden = i >= n;
-      items[i].classList.toggle('current', i === n - 1);
-    }
-    $('answer').hidden = n < N;
-    var had = document.activeElement;
-    el.next.disabled = n >= N;
-    el.all.disabled = n >= N;
-    el.reset.disabled = n <= 1;
-    if (had && had.disabled) (el.next.disabled ? el.reset : el.next).focus();
-    el.count.textContent = 'Step ' + n + ' of ' + N;
-    if (!(mode === 'keep' && S.sel && S.sel.si < n)) S.sel = firstVarAtOrBefore(n - 1);
-    applySelection(false);
-  }
-
-  function applySelection(user) {
-    var chips = el.qbody.querySelectorAll('.chip');
-    for (var i = 0; i < chips.length; i++) {
-      var on = !!S.sel && S.view === 'q' && +chips[i].getAttribute('data-s') === S.sel.si && +chips[i].getAttribute('data-t') === S.sel.ti;
-      chips[i].classList.toggle('active', on);
-      chips[i].setAttribute('aria-pressed', on ? 'true' : 'false');
-    }
-    var tok = selToken();
-    if (tok) showExhibit(tok.ref.org, tok.ref.exhibit);
-    else if (S.view === 'q') {
-      var fr = firstRef(QS[S.qi]);
-      if (fr) showExhibit(fr.org, fr.exhibit);
-    }
-    if (!S.shownOrg) showExhibit(EX.organizations[0].id, EX.organizations[0].exhibits[0].n);
-    applyHighlight();
-    if (user) ensureStatementVisible();
-  }
-
-  /* ---------- Statement pane ---------- */
-
-  // Buttons read "Organization Y" and "Exhibit 1"; phones show the short part beside a group label.
-  function switchButton(attr, long, short) {
-    return '<button type="button" ' + attr + ' aria-pressed="false" aria-label="' + esc(long + short) + '">' +
-      (long ? '<span class="sw-long">' + esc(long) + '</span>' : '') + esc(short) + '</button>';
-  }
-
-  function buildSwitches() {
-    var first = EX.organizations[0];
-    var tail = ' ' + first.id;
-    var stem = first.name.slice(-tail.length) === tail ? first.name.slice(0, -first.id.length) : '';
-    var shared = stem && EX.organizations.every(function (o) { return o.name === stem + o.id; });
-    el.orgSwitch.innerHTML = (shared ? '<span class="sw-label" aria-hidden="true">' + esc(stem) + '</span>' : '') +
-      EX.organizations.map(function (o) {
-        return switchButton('data-org="' + esc(o.id) + '"', shared ? stem : '', shared ? o.id : o.name);
-      }).join('');
-    el.exSwitch.innerHTML = '<span class="sw-label" aria-hidden="true">Exhibit</span>' +
-      first.exhibits.map(function (x) { return switchButton('data-ex="' + x.n + '"', 'Exhibit ', String(x.n)); }).join('');
   }
 
   function tableHTML(o, x) {
@@ -542,38 +480,36 @@ noscript p{margin:0;padding:16px var(--gut)}
     var openBody = false;
     x.rows.forEach(function (r) {
       if (r.kind === 'section') {
-        h += (openBody ? '</tbody>' : '') + '<tbody><tr class="k-section"><th scope="rowgroup" colspan="' + (o.years.length + 1) + '"><span>' + esc(r.label) + '</span></th></tr>';
+        h += (openBody ? '</tbody>' : '') + '<tbody><tr class="k-section"><th scope="rowgroup" colspan="' + (o.years.length + 1) + '">' + esc(r.label) + '</th></tr>';
         openBody = true;
         return;
       }
       if (!openBody) { h += '<tbody>'; openBody = true; }
       var d = decimals(o, r);
       h += '<tr class="k-' + esc(r.kind) + '" data-row="' + esc(r.id) + '"><th scope="row">' + esc(r.label) + '</th>' +
-        r.values.map(function (v, i) {
-          return '<td class="num' + (v < 0 ? ' neg' : '') + '" data-y="' + (i + 1) + '">' + fmt(v, d) + '</td>';
-        }).join('') + '</tr>';
+        r.values.map(function (v, i) { return '<td class="num' + (v < 0 ? ' neg' : '') + '" data-y="' + (i + 1) + '">' + fmt(v, d) + '</td>'; }).join('') + '</tr>';
     });
     return h + (openBody ? '</tbody>' : '') + '</table>';
   }
 
   function showExhibit(orgId, n) {
     var o = ORG[orgId], x = o && o.byN[n];
-    if (!x || (S.shownOrg === orgId && S.shownEx === n)) return;
-    S.shownOrg = orgId;
-    S.shownEx = n;
-    el.exOrg.textContent = o.name;
-    el.exTitle.textContent = x.title;
-    el.exUnits.textContent = o.units;
+    if (!x || (M.org === orgId && M.ex === n)) return;
+    M.org = orgId;
+    M.ex = n;
+    el.title.textContent = x.title;
+    el.units.textContent = o.name + '. ' + o.units;
+    el.wrap._g = (el.wrap._g || 0) + 1;
     el.wrap.innerHTML = tableHTML(o, x);
     el.wrap.scrollTop = 0;
     el.wrap.scrollLeft = 0;
-    var i, b = el.orgSwitch.querySelectorAll('button');
+    var i, b = el.orgSw.querySelectorAll('button');
     for (i = 0; i < b.length; i++) b[i].setAttribute('aria-pressed', b[i].getAttribute('data-org') === orgId ? 'true' : 'false');
-    b = el.exSwitch.querySelectorAll('button');
+    b = el.exSw.querySelectorAll('button');
     for (i = 0; i < b.length; i++) b[i].setAttribute('aria-pressed', +b[i].getAttribute('data-ex') === n ? 'true' : 'false');
   }
 
-  function applyHighlight() {
+  function highlight() {
     var old = el.wrap.querySelectorAll('.hl, .hl-row, .hl-col');
     for (var i = 0; i < old.length; i++) {
       old[i].classList.remove('hl', 'hl-row', 'hl-col');
@@ -581,12 +517,10 @@ noscript p{margin:0;padding:16px var(--gut)}
     }
     var tok = selToken(), c = tok && resolve(tok.ref);
     if (!c) {
-      el.readout.textContent = S.view === 'bonus'
-        ? 'Use the buttons above to browse the exhibits.'
-        : 'This step has no figures yet. Select Next step to bring in the first value.';
+      el.readout.textContent = M.view === 'bonus' ? 'Use the buttons above to browse the exhibits.' : 'This step has no figures yet. Select Next step to bring in the first value.';
       return;
     }
-    if (c.org.id !== S.shownOrg || c.ex.n !== S.shownEx) {
+    if (c.org.id !== M.org || c.ex.n !== M.ex) {
       el.readout.textContent = 'The selected value is on ' + c.org.name + ', Exhibit ' + c.ex.n + '. Select it again to go back to it.';
       return;
     }
@@ -604,189 +538,477 @@ noscript p{margin:0;padding:16px var(--gut)}
       cells.push(td);
     });
     el.readout.textContent = 'Highlighted: ' + c.printed.join('; ') + '. ' + tok.text + '.';
-    scrollToCells(tr, cells);
-  }
-
-  // Put the row in the middle of the pane, and the cells clear of the label column.
-  function scrollToCells(tr, cells) {
-    var w = el.wrap;
-    var wr = w.getBoundingClientRect(), rr = tr.getBoundingClientRect();
-    var head = w.querySelector('thead');
-    var hh = head ? head.getBoundingClientRect().height : 0;
+    // Row to the middle of the pane, cells clear of the pinned label column.
+    var w = el.wrap, wr = w.getBoundingClientRect(), rr = tr.getBoundingClientRect();
+    var hh = heads[0] ? heads[0].getBoundingClientRect().height : 0;
+    var top = w.scrollTop, left = w.scrollLeft;
     if (w.scrollHeight > w.clientHeight + 1) {
-      var room = w.clientHeight - hh;
-      w.scrollTop = Math.max(0, w.scrollTop + (rr.top - wr.top) - hh - (room - rr.height) / 2);
+      top = w.scrollTop + (rr.top - wr.top) - hh - ((w.clientHeight - hh) - rr.height) / 2;
+      top = Math.max(0, Math.min(top, w.scrollHeight - w.clientHeight));
     }
     if (cells.length && w.scrollWidth > w.clientWidth + 1) {
       var lab = tr.querySelector('th').getBoundingClientRect().width;
       var first = cells[0].getBoundingClientRect(), last = cells[cells.length - 1].getBoundingClientRect();
-      var shift = 0;
-      var edge = wr.left + w.clientWidth;
+      var shift = 0, edge = wr.left + w.clientWidth;
       if (last.right > edge) shift = last.right - edge + 4;
       if (first.left - shift < wr.left + lab) shift = first.left - (wr.left + lab) - 4;
-      w.scrollLeft = Math.max(0, w.scrollLeft + shift);
+      left = Math.max(0, Math.min(w.scrollLeft + shift, w.scrollWidth - w.clientWidth));
     }
+    glide(w, top, left);
   }
 
-  // After a click, make sure the pane itself is on screen (it can sit below the fold).
-  function ensureStatementVisible() {
-    var r = el.wrap.getBoundingClientRect();
-    var vh = window.innerHeight || document.documentElement.clientHeight;
-    var visible = Math.min(r.bottom, vh) - Math.max(r.top, 0);
-    if (visible < Math.min(120, r.height)) el.statement.scrollIntoView({ block: 'start' });
+  function applySelection() {
+    var chips = el.q.querySelectorAll('.m-chip');
+    for (var i = 0; i < chips.length; i++) {
+      var on = !!M.sel && M.view === 'q' && +chips[i].getAttribute('data-s') === M.sel.si && +chips[i].getAttribute('data-t') === M.sel.ti;
+      chips[i].classList.toggle('active', on);
+      chips[i].setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+    var tok = selToken();
+    if (tok) showExhibit(tok.ref.org, tok.ref.exhibit);
+    else if (M.view === 'q') {
+      var fr = firstRef(QS[M.qi]);
+      if (fr) showExhibit(fr.org, fr.exhibit);
+    }
+    if (!M.org) showExhibit(EX.organizations[0].id, EX.organizations[0].exhibits[0].n);
+    highlight();
   }
 
-  /* ---------- Navigation and URL ---------- */
+  function syncMini() {
+    var cur = M.view === 'bonus' ? 'bonus' : String(QS[M.qi].n);
+    var b = el.strip.querySelectorAll('.m-q');
+    for (var i = 0; i < b.length; i++) {
+      if (b[i].getAttribute('data-q') === cur) b[i].setAttribute('aria-current', 'page');
+      else b[i].removeAttribute('aria-current');
+    }
+    el.ctl.hidden = M.view === 'bonus';
+    el.path.textContent = M.view === 'bonus' ? '#bonus' : '#q' + QS[M.qi].n + 's' + M.revealed;
+  }
 
-  function parseHash() {
-    var h = String(location.hash || '').toLowerCase();
-    if (h === '#bonus') return { view: 'bonus' };
-    var m = /^#q(\d+)(?:s(\d+))?$/.exec(h);
-    if (m) {
-      for (var i = 0; i < QS.length; i++) {
-        if (QS[i].n === +m[1]) return { view: 'q', qi: i, step: m[2] ? +m[2] : 1 };
+  function setRevealed(n, keep) {
+    var N = QS[M.qi].steps.length;
+    n = Math.max(1, Math.min(N, n));
+    M.revealed = n;
+    var items = el.q.querySelectorAll('.m-step');
+    for (var i = 0; i < items.length; i++) {
+      items[i].hidden = i >= n;
+      items[i].classList.toggle('current', i === n - 1);
+    }
+    $('mAnswer').hidden = n < N;
+    el.next.disabled = n >= N;
+    el.all.disabled = n >= N;
+    el.reset.disabled = n <= 1;
+    el.count.textContent = 'Step ' + n + ' of ' + N;
+    if (!(keep && M.sel && M.sel.si < n)) M.sel = firstVarAtOrBefore(n - 1);
+    applySelection();
+    syncMini();
+    if (!keep && n > 1) revealIn(el.sol, items[n - 1]);
+    if (n === 1) { el.sol._g = (el.sol._g || 0) + 1; el.sol.scrollTop = 0; }
+  }
+
+  function go(n, step) {
+    for (var i = 0; i < QS.length; i++) {
+      if (QS[i].n === n) {
+        M.view = 'q';
+        M.qi = i;
+        M.sel = null;
+        renderQuestion();
+        setRevealed(step || 1, false);
+        return;
       }
     }
-    return { view: 'q', qi: 0, step: 1 };
   }
-
-  function hashFor() {
-    return S.view === 'bonus' ? '#bonus' : '#q' + QS[S.qi].n + 's' + S.revealed;
-  }
-
-  function writeHash(push) {
-    var h = hashFor();
-    if (location.hash === h) return;
-    try {
-      if (push) history.pushState(null, '', h);
-      else history.replaceState(null, '', h);
-    } catch (e) {
-      location.hash = h;
-    }
-  }
-
-  function currentStepEl() { return el.qbody.querySelector('.step.current'); }
-
-  // o.push: add a history entry. o.focus: move focus and scroll to the top of the question.
-  function go(t, o) {
-    o = o || {};
-    var changed = t.view !== S.view || (t.view === 'q' && t.qi !== S.qi);
-    var title;
-    S.view = t.view;
-    if (t.view === 'bonus') {
-      if (changed) renderBonus();
-      S.sel = null;
-      applySelection(false);
-      title = BONUS.part + ': ' + BONUS.title;
-    } else {
-      S.qi = t.qi;
-      if (changed) { renderQuestion(); S.sel = null; }
-      setRevealed(t.step, 'first');
-      title = 'Question ' + QS[S.qi].n + ': ' + QS[S.qi].title;
-    }
-    el.controls.hidden = t.view === 'bonus';
-    updateRail();
-    writeHash(!!o.push && changed);
-    document.title = title + ' | Organizations Y and Z Solution Walkthrough';
-    if (changed) {
-      var head = $('qtitle');
-      if (o.focus) el.solution.scrollTop = 0;
-      var r = el.solution.getBoundingClientRect();
-      // On a phone the pinned statement pane can sit over the question title; bring the question up.
-      var pinned = getComputedStyle(el.statement).position === 'sticky';
-      var covered = pinned && head && head.getBoundingClientRect().bottom > el.statement.getBoundingClientRect().top;
-      if ((o.focus && r.top < 0) || covered) window.scrollBy(0, r.top);
-      if (o.focus && head) { try { head.focus({ preventScroll: true }); } catch (e) { head.focus(); } }
-    }
-    if (t.view === 'q' && S.revealed > 1) {
-      var cur = currentStepEl();
-      if (cur) cur.scrollIntoView({ block: 'nearest' });
-    }
-  }
-
-  function moveStep(dir) {
-    if (S.view !== 'q') return;
-    var N = QS[S.qi].steps.length;
-    var n = Math.max(1, Math.min(N, S.revealed + dir));
-    if (n === S.revealed) return;
-    setRevealed(n, 'first');
-    writeHash(false);
-    var cur = currentStepEl();
-    if (cur) cur.scrollIntoView({ block: 'nearest' });
-  }
-
-  function moveQuestion(dir) {
-    var pos = S.view === 'bonus' ? QS.length : S.qi;
-    var to = pos + dir;
+  function goBonus() { M.view = 'bonus'; M.sel = null; renderBonus(); applySelection(); syncMini(); }
+  function step(dir) { if (M.view === 'q') setRevealed(M.revealed + dir, false); }
+  function question(dir) {
+    var pos = M.view === 'bonus' ? QS.length : M.qi, to = pos + dir;
     if (to < 0 || to > QS.length) return;
-    go(to === QS.length ? { view: 'bonus' } : { view: 'q', qi: to, step: 1 }, { push: true, focus: true });
+    if (to === QS.length) goBonus(); else go(QS[to].n, 1);
   }
 
-  /* ---------- Events ---------- */
-
-  el.next.addEventListener('click', function () { moveStep(1); });
-  el.all.addEventListener('click', function () {
-    if (S.view !== 'q') return;
-    setRevealed(QS[S.qi].steps.length, 'keep');
-    writeHash(false);
-  });
-  el.reset.addEventListener('click', function () {
-    if (S.view !== 'q') return;
-    setRevealed(1, 'first');
-    writeHash(false);
-    el.solution.scrollTop = 0;
-    var r = el.solution.getBoundingClientRect();
-    if (r.top < 0) window.scrollBy(0, r.top);
-  });
-  el.prevQ.addEventListener('click', function () { moveQuestion(-1); });
-  el.nextQ.addEventListener('click', function () { moveQuestion(1); });
-
-  el.qbody.addEventListener('click', function (e) {
-    var chip = e.target.closest ? e.target.closest('.chip') : null;
-    if (!chip) return;
-    S.sel = { si: +chip.getAttribute('data-s'), ti: +chip.getAttribute('data-t') };
-    applySelection(true);
-  });
-
-  el.orgSwitch.addEventListener('click', function (e) {
-    var b = e.target.closest ? e.target.closest('button[data-org]') : null;
+  el.next.addEventListener('click', function () { step(1); });
+  el.all.addEventListener('click', function () { if (M.view === 'q') setRevealed(QS[M.qi].steps.length, true); });
+  el.reset.addEventListener('click', function () { if (M.view === 'q') setRevealed(1, false); });
+  el.strip.addEventListener('click', function (e) {
+    var b = e.target.closest('.m-q');
     if (!b) return;
-    showExhibit(b.getAttribute('data-org'), S.shownEx);
-    applyHighlight();
+    if (b.getAttribute('data-q') === 'bonus') goBonus(); else go(+b.getAttribute('data-q'), 1);
   });
-  el.exSwitch.addEventListener('click', function (e) {
-    var b = e.target.closest ? e.target.closest('button[data-ex]') : null;
-    if (!b) return;
-    showExhibit(S.shownOrg, +b.getAttribute('data-ex'));
-    applyHighlight();
+  el.q.addEventListener('click', function (e) {
+    var c = e.target.closest('.m-chip');
+    if (!c) return;
+    M.sel = { si: +c.getAttribute('data-s'), ti: +c.getAttribute('data-t') };
+    applySelection();
   });
-  el.back.addEventListener('click', function () {
-    var target = el.qbody.querySelector('.chip.active') || currentStepEl() || $('qtitle');
-    if (!target) return;
-    target.scrollIntoView({ block: 'center' });
-    if (target.focus) { try { target.focus({ preventScroll: true }); } catch (e) { target.focus(); } }
+  el.orgSw.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-org]');
+    if (b) { showExhibit(b.getAttribute('data-org'), M.ex); highlight(); }
   });
-
-  document.addEventListener('keydown', function (e) {
+  el.exSw.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-ex]');
+    if (b) { showExhibit(M.org, +b.getAttribute('data-ex')); highlight(); }
+  });
+  // The same keys as the real page, while focus is inside the miniature.
+  el.mini.addEventListener('keydown', function (e) {
+    if (e.isTrusted && T.playing) stop();
     if (e.altKey || e.ctrlKey || e.metaKey) return;
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-    var t = e.target;
-    if (t && t.closest && t.closest('input, textarea, select, [contenteditable]')) return;
-    if (t && t.closest && t.closest('#wrap') && el.wrap.scrollWidth > el.wrap.clientWidth + 1) return;
+    if (e.target.closest('#mWrap') && el.wrap.scrollWidth > el.wrap.clientWidth + 1) return;
     e.preventDefault();
     var dir = e.key === 'ArrowRight' ? 1 : -1;
-    if (e.shiftKey) moveQuestion(dir);
-    else moveStep(dir);
+    if (e.shiftKey) question(dir); else step(dir);
+  });
+  // Taking over the miniature pauses the tour.
+  el.mini.addEventListener('pointerdown', function (e) { if (e.isTrusted && T.playing) stop(); });
+  el.mini.addEventListener('click', function (e) { if (e.isTrusted && T.playing) stop(); }, true);
+  document.addEventListener('visibilitychange', function () { if (document.hidden && T.playing) stop(); });
+
+  function layout() {
+    var narrow = el.stage.clientWidth < 660;
+    el.stage.classList.toggle('is-narrow', narrow);
+    var phone = el.stage.classList.contains('phone');
+    el.mini.classList.toggle('narrow', narrow || phone);
+    el.mini.classList.toggle('short', phone || el.stage.clientWidth < 520);
+  }
+
+  /* ---------- The tour ---------- */
+
+  function qBtn(n) { return el.strip.querySelector('[data-q="' + n + '"]'); }
+  function chipAt(si, k) { return el.q.querySelectorAll('.m-chip[data-s="' + si + '"]')[k]; }
+  function orgBtn(id) { return el.orgSw.querySelector('[data-org="' + id + '"]'); }
+  function exBtn(n) { return el.exSw.querySelector('[data-ex="' + n + '"]'); }
+  function lit() { return el.wrap.querySelector('td.hl'); }
+
+  var SCENES = [
+    {
+      t: 'Pick a Question',
+      d: 'The strip at the top lists Parts 1 to 4, questions 1 to 12 and the bonus. Select a number to open that question.',
+      setup: function () { go(4, 1); },
+      run: async function (a) {
+        await a.point(qBtn(4));
+        await a.wait(500);
+        await a.click(qBtn(9));
+        a.say('Question 9 opens at step 1, with its first value already lit on the exhibit.');
+        await a.point(lit());
+        await a.wait(1800);
+      }
+    },
+    {
+      t: 'Reveal One Step at a Time',
+      d: 'Next step adds the next step of the working. You set the pace.',
+      setup: function () { go(9, 1); },
+      run: async function (a) {
+        await a.click(el.next);
+        await a.wait(900);
+        await a.click(el.next);
+        a.say('Earlier steps stay above the newest one. The counter shows where you are.');
+        await a.point(el.count);
+        await a.wait(1800);
+      }
+    },
+    {
+      t: 'Select a Value to See Its Source',
+      d: 'Every boxed figure is a button. Select one and the exhibit scrolls to its row and lights the cell.',
+      setup: function () { go(9, 3); },
+      run: async function (a) {
+        await a.click(chipAt(0, 2));
+        a.say('Investments, Year 4. The balance sheet scrolls to the row and lights 22,194.');
+        await a.point(lit());
+        await a.wait(1500);
+        await a.click(chipAt(1, 0));
+        a.say('Debt due within one year, Year 4. The highlight moves to 20,418.');
+        await a.point(lit());
+        await a.wait(1500);
+        await a.click(chipAt(2, 1));
+        a.say('The value you selected keeps a teal outline, so you can see which figure is lit.');
+        await a.wait(1600);
+      }
+    },
+    {
+      t: 'Follow a Value to Another Exhibit',
+      d: 'Some steps draw on more than one exhibit. Select a value and the pane switches to the right one.',
+      setup: function () { go(4, 1); },
+      run: async function (a) {
+        a.say('This step compares a figure on Exhibit 1 with a figure on Exhibit 3.');
+        await a.wait(1400);
+        await a.click(chipAt(0, 1));
+        a.say('Net cash used by operating activities is on Exhibit 3, so the pane switched for you.');
+        await a.point(exBtn(3));
+        await a.wait(1600);
+        await a.click(el.next);
+        await a.wait(700);
+        await a.click(el.next);
+        a.say('Step 3 moves to Exhibit 2, the balance sheet.');
+        await a.point(exBtn(2));
+        await a.wait(1600);
+      }
+    },
+    {
+      t: 'Follow a Value to the Other Organization',
+      d: 'Four questions use both organizations. When the working moves to Organization Z, the pane moves with it.',
+      setup: function () { go(1, 3); },
+      run: async function (a) {
+        a.say('Steps 2 and 3 use Organization Y.');
+        await a.wait(1200);
+        await a.click(el.next);
+        a.say('Step 4 uses Organization Z, so the pane moved there.');
+        await a.point(orgBtn('Z'));
+        await a.wait(1500);
+        await a.click(chipAt(3, 1));
+        a.say('Organization Z prints in $ millions with one decimal. Organization Y prints in $ thousands.');
+        await a.wait(1900);
+      }
+    },
+    {
+      t: 'Four Years in One Value',
+      d: 'A value that covers Years 1 to 4 shows four figures in one box and lights all four cells in its row.',
+      setup: function () { go(7, 1); },
+      run: async function (a) {
+        await a.point(chipAt(0, 0));
+        await a.wait(900);
+        await a.point(lit());
+        await a.wait(1100);
+        await a.click(el.next);
+        a.say('The next step lights four cells in a different row of the same exhibit.');
+        await a.point(lit());
+        await a.wait(1800);
+      }
+    },
+    {
+      t: 'Show All, Then Reset',
+      d: 'Show all opens every step, then the answer and the lesson. Reset takes you back to step 1.',
+      setup: function () { go(7, 1); },
+      run: async function (a) {
+        await a.click(el.all);
+        a.say('The whole working is open. The answer and the lesson sit under the last step.');
+        await a.wait(500);
+        await a.point($('mAnswer'), 0.5, 0.4);
+        await a.wait(2200);
+        await a.click(el.reset);
+        a.say('Reset takes you back to step 1 of the same question.');
+        await a.wait(1500);
+      }
+    },
+    {
+      t: 'Browse the Exhibits Yourself',
+      d: 'Use the Organization and Exhibit buttons to read any statement. Select your value again to jump back to it.',
+      setup: function () { go(9, 2); },
+      run: async function (a) {
+        await a.click(orgBtn('Z'));
+        a.say('You are browsing now. Your value stays marked in the working.');
+        await a.wait(1300);
+        await a.click(exBtn(3));
+        await a.wait(1300);
+        await a.click(chipAt(1, 0));
+        a.say('Select your value again and the pane returns to its exhibit and its cell.');
+        await a.point(lit());
+        await a.wait(1700);
+      }
+    },
+    {
+      t: 'Keyboard and Links',
+      d: 'Left and Right arrows move between steps. Hold Shift to move between questions.',
+      setup: function () { go(9, 1); },
+      run: async function (a) {
+        await a.keys(['Right'], function () { step(1); });
+        await a.keys(['Right'], function () { step(1); });
+        await a.keys(['Left'], function () { step(-1); });
+        a.say('Hold Shift with an arrow to move to the next or previous question.');
+        await a.keys(['Shift', 'Right'], function () { question(1); });
+        await a.wait(600);
+        a.say('The address changes with every step. Copy it to send someone to this exact step.');
+        await a.point(el.path, 0.5, 0.5);
+        await a.wait(2000);
+      }
+    },
+    {
+      t: 'On a Phone',
+      d: 'On a phone the exhibit stays pinned to the bottom of the screen, so the value you tap and its cell stay in view together.',
+      phone: true,
+      setup: function () { go(9, 2); },
+      run: async function (a) {
+        await a.wait(900);
+        await a.click(chipAt(0, 0));
+        a.say('Tap a value in the working. The pinned exhibit scrolls to it.');
+        await a.point(lit());
+        await a.wait(1500);
+        await a.click(chipAt(1, 0));
+        await a.point(lit());
+        await a.wait(1700);
+      }
+    }
+  ];
+
+  var CANCEL = {};
+  var cur = { x: 40, y: 40 };
+
+  function placeCursor(x, y, ms) {
+    cur.x = x;
+    cur.y = y;
+    el.cursor.style.transitionDuration = (reduce ? 0 : ms) + 'ms';
+    el.cursor.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+  }
+
+  function makeActor(tok) {
+    function alive() { if (tok !== T.token) throw CANCEL; }
+    function wait(ms) {
+      return new Promise(function (res) { setTimeout(res, ms / T.speed); }).then(alive);
+    }
+    async function point(node, fx, fy) {
+      alive();
+      if (!node) return;
+      var sc = node.closest('.m-scroll, .m-wrap');
+      if (sc && revealIn(sc, node)) await wait(460);
+      var s = el.stage.getBoundingClientRect(), r = node.getBoundingClientRect();
+      var x = r.left - s.left + r.width * (fx == null ? 0.6 : fx);
+      var y = r.top - s.top + r.height * (fy == null ? 0.6 : fy);
+      var dist = Math.sqrt((x - cur.x) * (x - cur.x) + (y - cur.y) * (y - cur.y));
+      var ms = Math.max(320, Math.min(900, dist * 1.7)) / T.speed;
+      el.cursor.hidden = false;
+      placeCursor(x, y, ms);
+      await new Promise(function (res) { setTimeout(res, reduce ? 200 : ms + 90); }).then(alive);
+    }
+    async function click(node, fx, fy) {
+      if (!node) return;
+      await point(node, fx, fy);
+      el.cursor.classList.add('click');
+      node.classList.add('m-press');
+      await wait(170);
+      node.click();
+      await wait(230);
+      el.cursor.classList.remove('click');
+      node.classList.remove('m-press');
+      await wait(480);
+    }
+    function say(text) { alive(); el.capText.textContent = text; }
+    async function keys(labels, fn) {
+      alive();
+      el.cursor.hidden = true;
+      el.keys.innerHTML = labels.map(function (k) { return '<span class="key">' + esc(k) + '</span>'; }).join('');
+      el.keys.hidden = false;
+      await wait(450);
+      var caps = el.keys.querySelectorAll('.key');
+      for (var i = 0; i < caps.length; i++) caps[i].classList.add('down');
+      fn();
+      await wait(650);
+      for (i = 0; i < caps.length; i++) caps[i].classList.remove('down');
+      await wait(350);
+      el.keys.hidden = true;
+    }
+    return { wait: wait, point: point, click: click, say: say, keys: keys };
+  }
+
+  function buildList() {
+    el.scenes.innerHTML = SCENES.map(function (s, i) {
+      return '<li><button type="button" class="scene" data-i="' + i + '"><span class="badge" aria-hidden="true">' + (i + 1) + '</span>' +
+        '<span class="s-t">' + esc(s.t) + '</span><span class="s-d">' + esc(s.d) + '</span></button></li>';
+    }).join('');
+    el.bar.innerHTML = SCENES.map(function () { return '<li></li>'; }).join('');
+  }
+
+  function syncUI() {
+    el.play.textContent = T.playing ? 'Pause' : (T.done ? 'Replay the tour' : (T.started ? 'Play' : 'Play the tour'));
+    el.prev.disabled = T.i === 0;
+    el.nextScene.disabled = T.i === SCENES.length - 1;
+    var b = el.scenes.querySelectorAll('.scene');
+    for (var i = 0; i < b.length; i++) {
+      if (i === T.i) b[i].setAttribute('aria-current', 'step'); else b[i].removeAttribute('aria-current');
+    }
+    var seg = el.bar.children;
+    for (i = 0; i < seg.length; i++) seg[i].className = i < T.i || T.done ? 'done' : (i === T.i ? 'now' : '');
+  }
+
+  // Put the miniature in a scene's starting state and show its caption.
+  function enter(i) {
+    T.i = i;
+    el.keys.hidden = true;
+    el.stage.classList.toggle('phone', !!SCENES[i].phone);
+    layout();
+    SCENES[i].setup();
+    el.capKick.textContent = 'Scene ' + (i + 1) + ' of ' + SCENES.length;
+    el.capTitle.textContent = SCENES[i].t;
+    el.capText.textContent = SCENES[i].d;
+    syncUI();
+  }
+
+  function stop() {
+    T.token++;
+    T.playing = false;
+    el.cursor.hidden = true;
+    el.cursor.classList.remove('click');
+    el.keys.hidden = true;
+    var p = el.mini.querySelectorAll('.m-press');
+    for (var i = 0; i < p.length; i++) p[i].classList.remove('m-press');
+    syncUI();
+  }
+
+  async function run() {
+    var tok = ++T.token;
+    T.playing = true;
+    T.started = true;
+    T.done = false;
+    var a = makeActor(tok);
+    try {
+      for (;;) {
+        enter(T.i);
+        await a.wait(1100);
+        await SCENES[T.i].run(a);
+        await a.wait(1500);
+        if (T.i === SCENES.length - 1) break;
+        T.i++;
+      }
+    } catch (e) {
+      if (e !== CANCEL) { stop(); throw e; }
+      return;
+    }
+    T.playing = false;
+    T.done = true;
+    el.cursor.hidden = true;
+    el.capKick.textContent = 'End of the tour';
+    el.capTitle.textContent = 'Now Try It Yourself';
+    el.capText.textContent = 'Open the walkthrough and start with Question 1. The miniature below is live too, so you can select anything in it.';
+    syncUI();
+  }
+
+  function jump(i, play) {
+    var resume = T.playing || play;
+    stop();
+    T.done = false;
+    enter(Math.max(0, Math.min(SCENES.length - 1, i)));
+    if (resume) run();
+  }
+
+  function frameStage() {
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    if (el.stage.getBoundingClientRect().bottom > vh) el.capKick.parentNode.scrollIntoView({ block: 'start' });
+  }
+  el.play.addEventListener('click', function () {
+    if (T.playing) { stop(); return; }
+    if (T.done) T.i = 0;
+    run();
+    frameStage();
+  });
+  el.prev.addEventListener('click', function () { jump(T.i - 1, false); });
+  el.nextScene.addEventListener('click', function () { jump(T.i + 1, false); });
+  el.scenes.addEventListener('click', function (e) {
+    var b = e.target.closest('.scene');
+    if (b) { jump(+b.getAttribute('data-i'), true); frameStage(); }
+  });
+  var SPEEDS = [[1, '1x'], [1.5, '1.5x'], [2, '2x']];
+  el.speed.addEventListener('click', function () {
+    var k = 0;
+    for (var i = 0; i < SPEEDS.length; i++) if (SPEEDS[i][0] === T.speed) k = i;
+    k = (k + 1) % SPEEDS.length;
+    T.speed = SPEEDS[k][0];
+    el.speed.textContent = 'Speed ' + SPEEDS[k][1];
   });
 
-  window.addEventListener('hashchange', function () {
-    if (location.hash === hashFor()) return;
-    go(parseHash(), { focus: true });
-  });
-
-  buildRail();
+  buildStrip();
   buildSwitches();
-  go(parseHash(), {});
+  buildList();
+  placeCursor(cur.x, cur.y, 0);
+  enter(0);
+  if (window.ResizeObserver) new ResizeObserver(layout).observe(el.stage);
 })();
 </script>
 </body>

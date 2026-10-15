@@ -1,0 +1,1002 @@
+<title>Y and Z Walkthrough Tour</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&amp;family=Raleway:wght@700&amp;display=swap">
+<style>
+/* Layout: a player. A live miniature of the walkthrough is the stage; a caption and
+   transport sit under it; the ten scenes are listed beside it (below it when narrow).
+   ELI course material design system, deck variant: one light look by choice, flat
+   fields, zero radius apart from true-circle badges, no shadows, no gradients. */
+:root{
+  --orange:#EB5600;
+  --orange-hover:#E87722;
+  --burnt:#BF5700;
+  --teal:#1A9988;
+  --teal-tint:#D1EBE7;
+  --ink:#1A1A1A;
+  --body:#2D2D2D;
+  --muted:#555555;
+  --hairline:#D9D9D9;
+  --band:#E9EDEE;
+  --white:#FFFFFF;
+  --cream:#FFF8F0;
+  --callout:#FFF3E0;
+  --display:"Raleway","Helvetica Neue",Arial,sans-serif;
+  --text:"Lato","Helvetica Neue",Arial,sans-serif;
+  --gut:20px;
+}
+*,*::before,*::after{box-sizing:border-box;border-radius:0}
+[hidden]{display:none!important}
+body{margin:0;background:var(--white);color:var(--body);font-family:var(--text);font-size:16px;line-height:1.45}
+button{margin:0;font:inherit;color:inherit;cursor:pointer}
+button:disabled{cursor:default}
+a{color:var(--ink)}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--burnt);outline-offset:2px}
+.page{max-width:1240px;margin:0 auto;padding-inline:var(--gut);padding-block:0 28px}
+
+/* Header */
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px 24px;padding-block:12px;border-top:6px solid var(--orange);border-bottom:1px solid var(--hairline)}
+.brand{display:flex;align-items:center;gap:10px;margin:0 0 5px}
+.bars{display:inline-flex;gap:4px;flex:none}
+.bars i{display:block;width:37px;height:0;border-top:5px solid var(--teal)}
+.bars i + i{border-top-color:var(--orange)}
+.course{font:700 14px/1.2 var(--display);color:var(--ink)}
+h1{margin:0;font:700 26px/1.15 var(--display);color:var(--ink);text-wrap:balance}
+.lead{max-width:75ch;margin:10px 0 14px;font-size:16px;color:var(--body)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 14px;border:1px solid var(--ink);background:var(--white);color:var(--ink);font-size:14px;font-weight:700;line-height:1.2;text-decoration:none}
+.btn:hover{border-color:var(--orange);background:var(--cream);transition:background-color 120ms linear,border-color 120ms linear,color 120ms linear}
+.btn:active{background:var(--burnt);border-color:var(--burnt);color:var(--white)}
+.btn.primary{background:var(--orange);border-color:var(--orange)}
+.btn.primary:hover{background:var(--orange-hover);border-color:var(--orange-hover)}
+.btn.primary:active{background:var(--burnt);border-color:var(--burnt);color:var(--white)}
+.btn:disabled{background:var(--white);border-color:var(--hairline);color:#767676}
+
+/* Player */
+.player{display:grid;grid-template-columns:minmax(0,1fr);gap:18px 24px;align-items:start}
+.left{min-width:0;display:grid;gap:10px}
+.stage{position:relative;height:min(580px,max(440px,calc(100vh - 330px)));overflow:hidden;background:var(--band)}
+.stage.is-narrow{height:min(640px,max(520px,calc(100vh - 250px)))}
+.caption{padding:12px 14px 14px;background:var(--callout);border-left:8px solid var(--orange)}
+.kicker{margin:0;font-size:12px;font-weight:700;color:var(--muted)}
+.caption h2{margin:2px 0 0;font:700 21px/1.2 var(--display);color:var(--ink);text-wrap:balance}
+.cap-text{max-width:70ch;min-height:2.9em;margin:6px 0 0;font-size:16px;color:var(--body)}
+.transport{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.transport .grow{flex:1}
+.bar{display:flex;gap:3px;margin:0;padding:0;list-style:none}
+.bar li{flex:1;height:6px;background:var(--hairline)}
+.bar li.done{background:var(--orange)}
+.bar li.now{background:var(--ink)}
+
+/* Scene list */
+.scenes-h{margin:0 0 8px;font:700 13px/1.2 var(--text);color:var(--muted)}
+.scenes{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.scene{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 10px;align-items:start;width:100%;padding:8px 10px 9px 7px;border:0;border-left:7px solid var(--hairline);background:var(--cream);text-align:left}
+.scene:hover{border-left-color:var(--orange-hover);transition:border-color 120ms linear}
+.scene[aria-current="step"]{border-left-color:var(--orange);background:var(--callout)}
+.badge{grid-row:span 2;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--burnt);color:var(--white);font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.s-t{font-size:15px;font-weight:700;line-height:1.25;color:var(--ink)}
+.scene[aria-current="step"] .s-t{text-decoration:underline;text-underline-offset:3px}
+.s-d{font-size:13px;line-height:1.35;color:var(--muted)}
+footer{margin-top:22px;padding-top:10px;border-top:1px solid var(--hairline);font-size:12px;line-height:1.4;color:var(--muted)}
+
+/* ---------- The miniature: a small working copy of the walkthrough ---------- */
+.mini{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--white);border-top:5px solid var(--orange);font-size:12px;line-height:1.35;color:var(--body)}
+.stage.phone .mini{inset:0 auto 0 50%;width:min(360px,100%);transform:translateX(-50%)}
+.mini button{line-height:1.2}
+.m-addr{flex:none;display:flex;gap:0;align-items:center;height:24px;padding:0 10px;background:var(--band);font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden}
+.m-addr b{font-weight:700;color:var(--ink)}
+.m-strip{flex:none;display:flex;flex-wrap:wrap;gap:4px 12px;padding:6px 10px;border-bottom:1px solid var(--hairline)}
+.m-part{display:flex;flex-direction:column;gap:2px}
+.m-pn{font-size:9.5px;font-weight:700;color:var(--muted);white-space:nowrap}
+.m-pn.blank{visibility:hidden}
+.m-qs{display:flex;gap:3px}
+.m-q{min-width:24px;height:24px;padding:0 5px;border:1px solid var(--muted);background:var(--white);color:var(--ink);font-size:11px;font-weight:700}
+.m-q[aria-current="page"]{background:var(--orange);border:2px solid var(--ink)}
+.m-main{flex:1;min-height:0;display:grid;grid-template-columns:45fr 55fr}
+.m-sol{min-width:0;min-height:0;display:flex;flex-direction:column;background:var(--cream)}
+.m-ctl{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:5px;padding:6px 10px;border-bottom:1px solid var(--hairline)}
+.m-btn{min-height:26px;padding:4px 9px;border:1px solid var(--ink);background:var(--white);color:var(--ink);font-size:11.5px;font-weight:700}
+.m-btn.primary{background:var(--orange);border-color:var(--orange)}
+.m-btn:disabled{background:var(--white);border-color:var(--hairline);color:#767676}
+.m-count{margin-left:auto;font-size:11px;font-weight:700;color:var(--body)}
+.m-scroll{flex:1;min-height:0;overflow-y:auto;padding:8px 10px 12px}
+.m-partline{margin:0;font-size:10px;font-weight:700;color:var(--muted)}
+.m-title{margin:2px 0 0;font:700 15px/1.2 var(--display);color:var(--ink)}
+.m-prompt{margin:5px 0 8px;font-size:11.5px;color:var(--body)}
+.m-steps{display:grid;gap:7px;margin:0;padding:0;list-style:none}
+.m-step{min-width:0;padding:7px 9px 8px;background:var(--white);border-left:5px solid var(--hairline)}
+.m-step.current{border-left-color:var(--orange)}
+.m-stepn{margin:0;font-size:9.5px;font-weight:700;color:var(--burnt)}
+.m-step h3{margin:1px 0 0;font:700 11.5px/1.3 var(--text);color:var(--ink)}
+.m-eq{display:flex;flex-wrap:wrap;align-items:flex-start;gap:4px 5px;margin:6px 0 0}
+.m-op{min-width:0;max-width:100%;padding-top:5px;font-size:14px;line-height:20px;color:var(--ink)}
+.m-chip{display:inline-flex;flex-direction:column;align-items:flex-start;max-width:min(100%,170px);padding:4px 7px;border:1px solid var(--muted);background:var(--cream);color:var(--ink);text-align:left}
+.m-chip.multi{max-width:100%}
+.m-cv{display:flex;flex-wrap:wrap;font-size:14px;line-height:20px;font-weight:700;font-variant-numeric:tabular-nums lining-nums}
+.m-cv span + span{margin-left:6px;padding-left:6px;border-left:1px solid var(--muted)}
+.m-cl{margin-top:1px;font-size:9.5px;line-height:1.25;color:var(--muted)}
+.m-chip.active{padding:3px 6px;border:2px solid var(--teal);background:var(--teal-tint)}
+.m-chip.active .m-cl{color:var(--body)}
+.m-result{display:flex;gap:6px;margin:6px 0 0;font-size:13.5px;line-height:1.3;font-weight:700;color:var(--ink)}
+.m-result.prose{display:block;font-size:12px;font-weight:400}
+.m-note{margin:5px 0 0;font-size:10.5px;color:var(--muted)}
+.m-answer{margin:7px 0 0;padding:7px 9px;background:var(--white);border-left:6px solid var(--orange)}
+.m-answer p{margin:0;font-size:11.5px;color:var(--ink)}
+.m-answer p + p{margin-top:6px}
+.m-answer b{display:block;font-size:10px;color:var(--burnt)}
+.m-press{outline:2px solid var(--orange);outline-offset:1px}
+.m-st{min-width:0;min-height:0;display:flex;flex-direction:column;background:var(--white)}
+.m-head{flex:none;padding:6px 10px 5px;border-bottom:1px solid var(--hairline)}
+.m-sws{display:flex;flex-wrap:wrap;gap:4px 8px}
+.m-sw{display:inline-flex}
+.m-swl{display:none;align-self:center;margin-right:5px;font-size:10px;font-weight:700;color:var(--muted)}
+.mini.short .m-long{display:none}
+.mini.short .m-swl{display:inline}
+.mini.short .m-sw button{min-width:26px}
+.m-sw button{min-height:24px;padding:3px 8px;border:1px solid var(--muted);background:var(--white);color:var(--body);font-size:11px}
+.m-sw button + button{margin-left:-1px}
+.m-sw button[aria-pressed="true"]{position:relative;padding-bottom:1px;border-bottom:3px solid var(--orange);background:var(--cream);color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.m-ext{margin:5px 0 0;font:700 12.5px/1.25 var(--text);color:var(--ink)}
+.m-units{margin:0;font-size:10.5px;color:var(--muted)}
+.m-readout{margin:4px 0 0;padding-left:6px;border-left:3px solid var(--teal);font-size:10.5px;color:var(--body)}
+.m-wrap{flex:1;min-height:0;overflow:auto}
+.mini table{width:100%;min-width:380px;border-collapse:separate;border-spacing:0;font-size:11px;line-height:1.3;font-variant-numeric:tabular-nums lining-nums}
+.mini th,.mini td{padding:3px 7px;border-bottom:1px solid var(--hairline);background:var(--white);font-weight:400;text-align:left;vertical-align:bottom}
+.mini thead th{position:sticky;top:0;z-index:2;padding-top:5px;padding-bottom:5px;border-bottom:1px solid var(--muted);font-weight:700;color:var(--ink);white-space:nowrap}
+.mini thead th:first-child{left:0;z-index:3;padding-left:10px;border-right:1px solid var(--hairline);font-weight:400;color:var(--muted)}
+.mini thead th.hl-col{padding-bottom:3px;border-bottom:3px solid var(--teal)}
+.mini .num{text-align:right;white-space:nowrap}
+.mini td.num:not(.neg)::after,.mini thead th.num::after{content:")";visibility:hidden}
+.mini tbody th[scope="row"]{position:sticky;left:0;z-index:1;min-width:120px;padding-left:7px;border-left:3px solid transparent;border-right:1px solid var(--hairline)}
+.mini tr.k-total th,.mini tr.k-total td{border-top:1px solid var(--muted);font-weight:700;color:var(--ink)}
+.mini tr.k-memo th,.mini tr.k-memo td{font-style:italic}
+.mini tr.k-section th{padding-left:10px;border-bottom:1px solid var(--muted);background:var(--cream);font-weight:700;color:var(--ink)}
+.mini td.hl{background:var(--teal-tint);outline:2px solid var(--teal);outline-offset:-2px;font-weight:700;color:var(--ink)}
+.mini tr.hl-row th[scope="row"]{border-left-color:var(--teal);font-weight:700;color:var(--ink)}
+/* Phone layout of the miniature: stacked, exhibit pinned to the bottom */
+.mini.narrow .m-main{display:flex;flex-direction:column}
+.mini.narrow .m-sol{flex:1}
+.mini.narrow .m-st{flex:none;height:46%;border-top:4px solid var(--orange)}
+.mini.narrow .m-pn i{display:none}
+.mini.narrow .m-host{display:none}
+.mini.narrow .m-readout{display:none}
+.mini.narrow .m-sw button{padding-left:7px;padding-right:7px}
+
+/* The scripted pointer and the key overlay */
+.cursor{position:absolute;left:0;top:0;z-index:20;width:0;height:0;pointer-events:none;transition:transform 500ms cubic-bezier(.4,0,.2,1)}
+.cursor::before,.cursor::after{content:"";position:absolute;left:0;top:0;clip-path:polygon(0 0,0 78%,22% 60%,38% 96%,52% 90%,36% 56%,68% 56%)}
+.cursor::before{left:-2px;top:-3px;width:22px;height:27px;background:var(--white)}
+.cursor::after{width:17px;height:21px;background:var(--ink)}
+.ring{position:absolute;left:-14px;top:-14px;width:28px;height:28px;border:3px solid var(--orange);opacity:0;transition:opacity 120ms linear}
+.cursor.click .ring{opacity:1}
+.keys{position:absolute;left:50%;bottom:14px;z-index:19;display:flex;gap:6px;padding:8px 10px;background:var(--ink);transform:translateX(-50%)}
+.key{min-width:48px;padding:6px 10px;border:1px solid var(--white);color:var(--white);font-size:13px;font-weight:700;text-align:center}
+.key.down{background:var(--orange);border-color:var(--orange);color:var(--ink)}
+
+@media (min-width:1080px){
+  .player{grid-template-columns:minmax(0,1fr) 320px}
+}
+@media (max-width:899.98px){
+  :root{--gut:16px}
+  h1{font-size:22px}
+}
+@media (prefers-reduced-motion:reduce){
+  .cursor,.ring{transition:none}
+}
+</style>
+
+<!--BODY-->
+<div class="page">
+  <header class="top">
+    <div>
+      <p class="brand"><span class="bars" aria-hidden="true"><i></i><i></i></span><span class="course">ELI 275 Entrepreneurial Finance</span></p>
+      <h1>Tour of the Y and Z Walkthrough</h1>
+    </div>
+    <a class="btn" href="__WALK_HREF__"__WALK_TARGET__>Open the walkthrough</a>
+  </header>
+
+  <p class="lead">Ten short scenes show you how to use the solution walkthrough. Play the tour or pick a scene. The miniature is live, so you can select anything in it yourself.</p>
+
+  <div class="player">
+    <div class="left">
+      <div class="transport" role="group" aria-label="Tour controls">
+        <button type="button" class="btn primary" id="btnPlay">Play the tour</button>
+        <button type="button" class="btn" id="btnPrev">Previous scene</button>
+        <button type="button" class="btn" id="btnNextScene">Next scene</button>
+        <span class="grow"></span>
+        <button type="button" class="btn" id="btnSpeed">Speed 1x</button>
+      </div>
+      <ol class="bar" id="bar" aria-hidden="true"></ol>
+      <div class="caption">
+        <p class="kicker" id="capKick"></p>
+        <h2 id="capTitle"></h2>
+        <p class="cap-text" id="capText" aria-live="polite"></p>
+      </div>
+      <div class="stage" id="stage" role="region" aria-label="Live miniature of the walkthrough">
+        <div class="mini" id="mini">
+          <div class="m-addr" aria-hidden="true"><span class="m-host">danrasay.github.io</span><span>/eli275/yz-walkthrough/walkthrough/</span><b id="mPath">#q1s1</b></div>
+          <div class="m-strip" id="mStrip"></div>
+          <div class="m-main">
+            <div class="m-sol">
+              <div class="m-ctl" id="mCtl">
+                <button type="button" class="m-btn primary" id="mNext">Next step</button>
+                <button type="button" class="m-btn" id="mAll">Show all</button>
+                <button type="button" class="m-btn" id="mReset">Reset</button>
+                <span class="m-count" id="mCount"></span>
+              </div>
+              <div class="m-scroll" id="mSol"><div id="mQ"></div></div>
+            </div>
+            <div class="m-st">
+              <div class="m-head">
+                <div class="m-sws">
+                  <div class="m-sw" id="mOrg" role="group" aria-label="Organization"></div>
+                  <div class="m-sw" id="mEx" role="group" aria-label="Exhibit"></div>
+                </div>
+                <p class="m-ext" id="mTitle"></p>
+                <p class="m-units" id="mUnits"></p>
+                <p class="m-readout" id="mReadout"></p>
+              </div>
+              <div class="m-wrap" id="mWrap" tabindex="0" role="region" aria-label="Exhibit table"></div>
+            </div>
+          </div>
+        </div>
+        <div class="cursor" id="cursor" aria-hidden="true" hidden><span class="ring"></span></div>
+        <div class="keys" id="keys" aria-hidden="true" hidden></div>
+      </div>
+
+    </div>
+
+    <nav aria-label="Scenes">
+      <p class="scenes-h">Scenes</p>
+      <ol class="scenes" id="scenes" role="list"></ol>
+    </nav>
+  </div>
+
+  <footer>Prepared for ELI 275 Entrepreneurial Finance, Lewis &amp; Clark College, Fall 2026. Figures from the organizations' audited statements, relabelled for the course. Built with help from Claude (Anthropic).</footer>
+</div>
+
+<script type="application/json" id="tour-exhibits">__EXHIBITS_JSON__</script>
+<script type="application/json" id="tour-questions">__QUESTIONS_JSON__</script>
+<script>
+(function () {
+  'use strict';
+
+  var EX = JSON.parse(document.getElementById('tour-exhibits').textContent);
+  var QD = JSON.parse(document.getElementById('tour-questions').textContent);
+  var QS = QD.questions;
+  var LIVE = '__WALK_HREF__';
+
+  var ORG = {};
+  EX.organizations.forEach(function (o) {
+    ORG[o.id] = o;
+    o.byN = {};
+    o.exhibits.forEach(function (x) {
+      o.byN[x.n] = x;
+      x.byId = {};
+      x.rows.forEach(function (r) { x.byId[r.id] = r; });
+    });
+  });
+
+  function fmt(v, d) {
+    var s = Math.abs(v).toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+    return v < 0 ? '(' + s + ')' : s;
+  }
+  function decimals(org, row) { return row.kind === 'memo' ? 0 : org.decimals; }
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function $(id) { return document.getElementById(id); }
+  function resolve(ref) {
+    var o = ref && ORG[ref.org], x = o && o.byN[ref.exhibit], r = x && x.byId[ref.row];
+    if (!r || !r.values) return null;
+    var years = ref.years || [ref.year];
+    var d = decimals(o, r);
+    return { org: o, ex: x, row: r, years: years, printed: years.map(function (y) { return fmt(r.values[y - 1], d); }) };
+  }
+
+  var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  var el = {
+    stage: $('stage'), mini: $('mini'), path: $('mPath'), strip: $('mStrip'), ctl: $('mCtl'),
+    next: $('mNext'), all: $('mAll'), reset: $('mReset'), count: $('mCount'), sol: $('mSol'), q: $('mQ'),
+    orgSw: $('mOrg'), exSw: $('mEx'), title: $('mTitle'), units: $('mUnits'), readout: $('mReadout'), wrap: $('mWrap'),
+    cursor: $('cursor'), keys: $('keys'), bar: $('bar'),
+    capKick: $('capKick'), capTitle: $('capTitle'), capText: $('capText'),
+    play: $('btnPlay'), prev: $('btnPrev'), nextScene: $('btnNextScene'), speed: $('btnSpeed'), scenes: $('scenes')
+  };
+
+  // Tour state. token changes whenever playback is stopped or restarted.
+  var T = { i: 0, playing: false, started: false, done: false, token: 0, speed: 1 };
+
+  /* ---------- Scrolling inside the miniature (never the page) ---------- */
+
+  function glide(node, top, left) {
+    var id = (node._g = (node._g || 0) + 1);
+    if (reduce || !T.playing) { node.scrollTop = top; node.scrollLeft = left; return; }
+    var t0 = null, st = node.scrollTop, sl = node.scrollLeft, ms = 380 / T.speed;
+    function frame(now) {
+      if (node._g !== id) return;
+      if (t0 === null) t0 = now;
+      var k = Math.min(1, (now - t0) / ms);
+      var e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      node.scrollTop = st + (top - st) * e;
+      node.scrollLeft = sl + (left - sl) * e;
+      if (k < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // Bring node into view inside its own scroller. Returns true when it had to scroll.
+  function revealIn(sc, node) {
+    var s = sc.getBoundingClientRect(), r = node.getBoundingClientRect();
+    var th = sc.querySelector('thead th');
+    var head = th ? th.getBoundingClientRect().height : 0;
+    var pad = 8, top = sc.scrollTop;
+    if (r.top < s.top + head + pad) top -= (s.top + head + pad) - r.top;
+    else if (r.bottom > s.bottom - pad) top += Math.min(r.bottom - (s.bottom - pad), r.top - (s.top + head + pad));
+    top = Math.max(0, Math.min(top, sc.scrollHeight - sc.clientHeight));
+    if (Math.abs(top - sc.scrollTop) < 1) return false;
+    glide(sc, top, sc.scrollLeft);
+    return true;
+  }
+
+  /* ---------- The miniature ---------- */
+
+  var M = { view: 'q', qi: 0, revealed: 1, sel: null, org: null, ex: null };
+
+  function buildStrip() {
+    var parts = [], byPart = {};
+    QS.forEach(function (q) {
+      if (!byPart[q.part]) { byPart[q.part] = []; parts.push(q.part); }
+      byPart[q.part].push(q);
+    });
+    var h = '';
+    parts.forEach(function (p) {
+      var cut = p.indexOf('. ');
+      h += '<div class="m-part"><span class="m-pn">' + (cut < 0 ? esc(p) : esc(p.slice(0, cut)) + '<i>' + esc(p.slice(cut)) + '</i>') + '</span><span class="m-qs">';
+      byPart[p].forEach(function (q) {
+        h += '<button type="button" class="m-q" data-q="' + q.n + '" aria-label="Question ' + q.n + ': ' + esc(q.title) + '">' + q.n + '</button>';
+      });
+      h += '</span></div>';
+    });
+    h += '<div class="m-part"><span class="m-pn blank" aria-hidden="true">' + esc(QD.bonus.part) + '</span><span class="m-qs">' +
+      '<button type="button" class="m-q" data-q="bonus">' + esc(QD.bonus.part) + '</button></span></div>';
+    el.strip.innerHTML = h;
+  }
+
+  // As on the real page: "Organization Y" and "Exhibit 1", or the short part beside a group label on a phone.
+  function swButton(attr, long, short) {
+    return '<button type="button" ' + attr + ' aria-pressed="false" aria-label="' + esc(long + short) + '">' +
+      (long ? '<span class="m-long">' + esc(long) + '</span>' : '') + esc(short) + '</button>';
+  }
+
+  function buildSwitches() {
+    el.orgSw.innerHTML = '<span class="m-swl" aria-hidden="true">Organization</span>' + EX.organizations.map(function (o) {
+      var tail = ' ' + o.id;
+      var stem = o.name.slice(-tail.length) === tail ? o.name.slice(0, -o.id.length) : '';
+      return swButton('data-org="' + esc(o.id) + '"', stem, stem ? o.id : o.name);
+    }).join('');
+    el.exSw.innerHTML = '<span class="m-swl" aria-hidden="true">Exhibit</span>' + EX.organizations[0].exhibits.map(function (x) {
+      return swButton('data-ex="' + x.n + '"', 'Exhibit ', String(x.n));
+    }).join('');
+  }
+
+  function chipHTML(tok, si, ti) {
+    var c = resolve(tok.ref);
+    if (!c) return '<span class="m-op">' + esc(tok.text) + '</span>';
+    return '<button type="button" class="m-chip' + (c.printed.length > 1 ? ' multi' : '') + '" data-s="' + si + '" data-t="' + ti +
+      '" aria-pressed="false" aria-label="' + esc(tok.text + ', ' + c.org.name + ', ' + c.printed.join(', ')) + '"><span class="m-cv">' +
+      c.printed.map(function (p) { return '<span>' + p + '</span>'; }).join('') +
+      '</span><span class="m-cl">' + esc(tok.text) + '</span></button>';
+  }
+
+  function stepHTML(q, st, si) {
+    var toks = st.equation || [];
+    var open = 0, close = 0;
+    toks.forEach(function (t) {
+      if (t.type !== 'op') return;
+      open += (t.text.match(/\(/g) || []).length;
+      close += (t.text.match(/\)/g) || []).length;
+    });
+    var arith = toks.some(function (t) { return t.type === 'op' && /^[()\s]*[+\-\/][\s\d.,()]*$/.test(t.text); });
+    var h = '<li class="m-step" data-s="' + si + '" hidden><p class="m-stepn">Step ' + (si + 1) + ' of ' + q.steps.length + '</p><h3>' + esc(st.label) + '</h3>';
+    if (toks.length) {
+      h += '<div class="m-eq">';
+      for (var i = close - open; i > 0; i--) h += '<span class="m-op">(</span>';
+      toks.forEach(function (t, ti) {
+        h += t.type === 'var' ? chipHTML(t, si, ti) : '<span class="m-op">' + (t.text === '-' ? '&minus;' : esc(t.text)) + '</span>';
+      });
+      h += '</div>';
+    }
+    if (st.result) {
+      h += toks.length
+        ? '<p class="m-result">' + (arith ? '<span>=</span>' : '') + '<span>' + esc(st.result) + '</span></p>'
+        : '<p class="m-result prose">' + esc(st.result) + '</p>';
+    }
+    if (st.note) h += '<p class="m-note">' + esc(st.note) + '</p>';
+    return h + '</li>';
+  }
+
+  function renderQuestion() {
+    var q = QS[M.qi];
+    var h = '<p class="m-partline">' + esc(q.part) + '</p><p class="m-title">Question ' + q.n + ': ' + esc(q.title) + '</p>' +
+      '<p class="m-prompt">' + esc(q.prompt) + '</p><ol class="m-steps" role="list">';
+    q.steps.forEach(function (st, si) { h += stepHTML(q, st, si); });
+    h += '</ol><div class="m-answer" id="mAnswer" hidden><p><b>Answer</b>' + esc(q.answer) + '</p><p><b>Lesson</b>' + esc(q.lesson) + '</p></div>';
+    el.q.innerHTML = h;
+    el.sol._g = (el.sol._g || 0) + 1;
+    el.sol.scrollTop = 0;
+  }
+
+  function renderBonus() {
+    el.q.innerHTML = '<p class="m-partline">' + esc(QD.bonus.part) + '</p><p class="m-title">' + esc(QD.bonus.title) + '</p>' +
+      '<div class="m-answer"><p>The bonus screen names both organizations. Open the walkthrough to see it.</p>' +
+      '<p><a href="' + LIVE + '#bonus"__WALK_TARGET__>Open the bonus screen</a></p></div>';
+    el.sol._g = (el.sol._g || 0) + 1;
+    el.sol.scrollTop = 0;
+  }
+
+  function selToken() {
+    if (M.view !== 'q' || !M.sel) return null;
+    var st = QS[M.qi].steps[M.sel.si];
+    return st ? st.equation[M.sel.ti] || null : null;
+  }
+
+  function firstVarAtOrBefore(si) {
+    var steps = QS[M.qi].steps;
+    for (var s = si; s >= 0; s--) {
+      for (var t = 0; t < steps[s].equation.length; t++) {
+        if (steps[s].equation[t].type === 'var' && resolve(steps[s].equation[t].ref)) return { si: s, ti: t };
+      }
+    }
+    return null;
+  }
+
+  function firstRef(q) {
+    for (var s = 0; s < q.steps.length; s++) {
+      for (var t = 0; t < q.steps[s].equation.length; t++) {
+        if (q.steps[s].equation[t].type === 'var') return q.steps[s].equation[t].ref;
+      }
+    }
+    return null;
+  }
+
+  function tableHTML(o, x) {
+    var h = '<table><thead><tr><th scope="col">' + esc(o.unit_short) + '</th>' +
+      o.years.map(function (y) { return '<th scope="col" class="num">' + esc(y) + '</th>'; }).join('') + '</tr></thead>';
+    var openBody = false;
+    x.rows.forEach(function (r) {
+      if (r.kind === 'section') {
+        h += (openBody ? '</tbody>' : '') + '<tbody><tr class="k-section"><th scope="rowgroup" colspan="' + (o.years.length + 1) + '">' + esc(r.label) + '</th></tr>';
+        openBody = true;
+        return;
+      }
+      if (!openBody) { h += '<tbody>'; openBody = true; }
+      var d = decimals(o, r);
+      h += '<tr class="k-' + esc(r.kind) + '" data-row="' + esc(r.id) + '"><th scope="row">' + esc(r.label) + '</th>' +
+        r.values.map(function (v, i) { return '<td class="num' + (v < 0 ? ' neg' : '') + '" data-y="' + (i + 1) + '">' + fmt(v, d) + '</td>'; }).join('') + '</tr>';
+    });
+    return h + (openBody ? '</tbody>' : '') + '</table>';
+  }
+
+  function showExhibit(orgId, n) {
+    var o = ORG[orgId], x = o && o.byN[n];
+    if (!x || (M.org === orgId && M.ex === n)) return;
+    M.org = orgId;
+    M.ex = n;
+    el.title.textContent = x.title;
+    el.units.textContent = o.name + '. ' + o.units;
+    el.wrap._g = (el.wrap._g || 0) + 1;
+    el.wrap.innerHTML = tableHTML(o, x);
+    el.wrap.scrollTop = 0;
+    el.wrap.scrollLeft = 0;
+    var i, b = el.orgSw.querySelectorAll('button');
+    for (i = 0; i < b.length; i++) b[i].setAttribute('aria-pressed', b[i].getAttribute('data-org') === orgId ? 'true' : 'false');
+    b = el.exSw.querySelectorAll('button');
+    for (i = 0; i < b.length; i++) b[i].setAttribute('aria-pressed', +b[i].getAttribute('data-ex') === n ? 'true' : 'false');
+  }
+
+  function highlight() {
+    var old = el.wrap.querySelectorAll('.hl, .hl-row, .hl-col');
+    for (var i = 0; i < old.length; i++) {
+      old[i].classList.remove('hl', 'hl-row', 'hl-col');
+      old[i].removeAttribute('aria-current');
+    }
+    var tok = selToken(), c = tok && resolve(tok.ref);
+    if (!c) {
+      el.readout.textContent = M.view === 'bonus' ? 'Use the buttons above to browse the exhibits.' : 'This step has no figures yet. Select Next step to bring in the first value.';
+      return;
+    }
+    if (c.org.id !== M.org || c.ex.n !== M.ex) {
+      el.readout.textContent = 'The selected value is on ' + c.org.name + ', Exhibit ' + c.ex.n + '. Select it again to go back to it.';
+      return;
+    }
+    var tr = el.wrap.querySelector('tr[data-row="' + c.row.id + '"]');
+    if (!tr) return;
+    tr.classList.add('hl-row');
+    var heads = el.wrap.querySelectorAll('thead th');
+    var cells = [];
+    c.years.forEach(function (y) {
+      var td = tr.querySelector('td[data-y="' + y + '"]');
+      if (!td) return;
+      td.classList.add('hl');
+      td.setAttribute('aria-current', 'true');
+      if (heads[y]) heads[y].classList.add('hl-col');
+      cells.push(td);
+    });
+    el.readout.textContent = 'Highlighted: ' + c.printed.join('; ') + '. ' + tok.text + '.';
+    // Row to the middle of the pane, cells clear of the pinned label column.
+    var w = el.wrap, wr = w.getBoundingClientRect(), rr = tr.getBoundingClientRect();
+    var hh = heads[0] ? heads[0].getBoundingClientRect().height : 0;
+    var top = w.scrollTop, left = w.scrollLeft;
+    if (w.scrollHeight > w.clientHeight + 1) {
+      top = w.scrollTop + (rr.top - wr.top) - hh - ((w.clientHeight - hh) - rr.height) / 2;
+      top = Math.max(0, Math.min(top, w.scrollHeight - w.clientHeight));
+    }
+    if (cells.length && w.scrollWidth > w.clientWidth + 1) {
+      var lab = tr.querySelector('th').getBoundingClientRect().width;
+      var first = cells[0].getBoundingClientRect(), last = cells[cells.length - 1].getBoundingClientRect();
+      var shift = 0, edge = wr.left + w.clientWidth;
+      if (last.right > edge) shift = last.right - edge + 4;
+      if (first.left - shift < wr.left + lab) shift = first.left - (wr.left + lab) - 4;
+      left = Math.max(0, Math.min(w.scrollLeft + shift, w.scrollWidth - w.clientWidth));
+    }
+    glide(w, top, left);
+  }
+
+  function applySelection() {
+    var chips = el.q.querySelectorAll('.m-chip');
+    for (var i = 0; i < chips.length; i++) {
+      var on = !!M.sel && M.view === 'q' && +chips[i].getAttribute('data-s') === M.sel.si && +chips[i].getAttribute('data-t') === M.sel.ti;
+      chips[i].classList.toggle('active', on);
+      chips[i].setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+    var tok = selToken();
+    if (tok) showExhibit(tok.ref.org, tok.ref.exhibit);
+    else if (M.view === 'q') {
+      var fr = firstRef(QS[M.qi]);
+      if (fr) showExhibit(fr.org, fr.exhibit);
+    }
+    if (!M.org) showExhibit(EX.organizations[0].id, EX.organizations[0].exhibits[0].n);
+    highlight();
+  }
+
+  function syncMini() {
+    var cur = M.view === 'bonus' ? 'bonus' : String(QS[M.qi].n);
+    var b = el.strip.querySelectorAll('.m-q');
+    for (var i = 0; i < b.length; i++) {
+      if (b[i].getAttribute('data-q') === cur) b[i].setAttribute('aria-current', 'page');
+      else b[i].removeAttribute('aria-current');
+    }
+    el.ctl.hidden = M.view === 'bonus';
+    el.path.textContent = M.view === 'bonus' ? '#bonus' : '#q' + QS[M.qi].n + 's' + M.revealed;
+  }
+
+  function setRevealed(n, keep) {
+    var N = QS[M.qi].steps.length;
+    n = Math.max(1, Math.min(N, n));
+    M.revealed = n;
+    var items = el.q.querySelectorAll('.m-step');
+    for (var i = 0; i < items.length; i++) {
+      items[i].hidden = i >= n;
+      items[i].classList.toggle('current', i === n - 1);
+    }
+    $('mAnswer').hidden = n < N;
+    el.next.disabled = n >= N;
+    el.all.disabled = n >= N;
+    el.reset.disabled = n <= 1;
+    el.count.textContent = 'Step ' + n + ' of ' + N;
+    if (!(keep && M.sel && M.sel.si < n)) M.sel = firstVarAtOrBefore(n - 1);
+    applySelection();
+    syncMini();
+    if (!keep && n > 1) revealIn(el.sol, items[n - 1]);
+    if (n === 1) { el.sol._g = (el.sol._g || 0) + 1; el.sol.scrollTop = 0; }
+  }
+
+  function go(n, step) {
+    for (var i = 0; i < QS.length; i++) {
+      if (QS[i].n === n) {
+        M.view = 'q';
+        M.qi = i;
+        M.sel = null;
+        renderQuestion();
+        setRevealed(step || 1, false);
+        return;
+      }
+    }
+  }
+  function goBonus() { M.view = 'bonus'; M.sel = null; renderBonus(); applySelection(); syncMini(); }
+  function step(dir) { if (M.view === 'q') setRevealed(M.revealed + dir, false); }
+  function question(dir) {
+    var pos = M.view === 'bonus' ? QS.length : M.qi, to = pos + dir;
+    if (to < 0 || to > QS.length) return;
+    if (to === QS.length) goBonus(); else go(QS[to].n, 1);
+  }
+
+  el.next.addEventListener('click', function () { step(1); });
+  el.all.addEventListener('click', function () { if (M.view === 'q') setRevealed(QS[M.qi].steps.length, true); });
+  el.reset.addEventListener('click', function () { if (M.view === 'q') setRevealed(1, false); });
+  el.strip.addEventListener('click', function (e) {
+    var b = e.target.closest('.m-q');
+    if (!b) return;
+    if (b.getAttribute('data-q') === 'bonus') goBonus(); else go(+b.getAttribute('data-q'), 1);
+  });
+  el.q.addEventListener('click', function (e) {
+    var c = e.target.closest('.m-chip');
+    if (!c) return;
+    M.sel = { si: +c.getAttribute('data-s'), ti: +c.getAttribute('data-t') };
+    applySelection();
+  });
+  el.orgSw.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-org]');
+    if (b) { showExhibit(b.getAttribute('data-org'), M.ex); highlight(); }
+  });
+  el.exSw.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-ex]');
+    if (b) { showExhibit(M.org, +b.getAttribute('data-ex')); highlight(); }
+  });
+  // The same keys as the real page, while focus is inside the miniature.
+  el.mini.addEventListener('keydown', function (e) {
+    if (e.isTrusted && T.playing) stop();
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    if (e.target.closest('#mWrap') && el.wrap.scrollWidth > el.wrap.clientWidth + 1) return;
+    e.preventDefault();
+    var dir = e.key === 'ArrowRight' ? 1 : -1;
+    if (e.shiftKey) question(dir); else step(dir);
+  });
+  // Taking over the miniature pauses the tour.
+  el.mini.addEventListener('pointerdown', function (e) { if (e.isTrusted && T.playing) stop(); });
+  el.mini.addEventListener('click', function (e) { if (e.isTrusted && T.playing) stop(); }, true);
+  document.addEventListener('visibilitychange', function () { if (document.hidden && T.playing) stop(); });
+
+  function layout() {
+    var narrow = el.stage.clientWidth < 660;
+    el.stage.classList.toggle('is-narrow', narrow);
+    var phone = el.stage.classList.contains('phone');
+    el.mini.classList.toggle('narrow', narrow || phone);
+    el.mini.classList.toggle('short', phone || el.stage.clientWidth < 520);
+  }
+
+  /* ---------- The tour ---------- */
+
+  function qBtn(n) { return el.strip.querySelector('[data-q="' + n + '"]'); }
+  function chipAt(si, k) { return el.q.querySelectorAll('.m-chip[data-s="' + si + '"]')[k]; }
+  function orgBtn(id) { return el.orgSw.querySelector('[data-org="' + id + '"]'); }
+  function exBtn(n) { return el.exSw.querySelector('[data-ex="' + n + '"]'); }
+  function lit() { return el.wrap.querySelector('td.hl'); }
+
+  var SCENES = [
+    {
+      t: 'Pick a Question',
+      d: 'The strip at the top lists Parts 1 to 4, questions 1 to 12 and the bonus. Select a number to open that question.',
+      setup: function () { go(4, 1); },
+      run: async function (a) {
+        await a.point(qBtn(4));
+        await a.wait(500);
+        await a.click(qBtn(9));
+        a.say('Question 9 opens at step 1, with its first value already lit on the exhibit.');
+        await a.point(lit());
+        await a.wait(1800);
+      }
+    },
+    {
+      t: 'Reveal One Step at a Time',
+      d: 'Next step adds the next step of the working. You set the pace.',
+      setup: function () { go(9, 1); },
+      run: async function (a) {
+        await a.click(el.next);
+        await a.wait(900);
+        await a.click(el.next);
+        a.say('Earlier steps stay above the newest one. The counter shows where you are.');
+        await a.point(el.count);
+        await a.wait(1800);
+      }
+    },
+    {
+      t: 'Select a Value to See Its Source',
+      d: 'Every boxed figure is a button. Select one and the exhibit scrolls to its row and lights the cell.',
+      setup: function () { go(9, 3); },
+      run: async function (a) {
+        await a.click(chipAt(0, 2));
+        a.say('Investments, Year 4. The balance sheet scrolls to the row and lights 22,194.');
+        await a.point(lit());
+        await a.wait(1500);
+        await a.click(chipAt(1, 0));
+        a.say('Debt due within one year, Year 4. The highlight moves to 20,418.');
+        await a.point(lit());
+        await a.wait(1500);
+        await a.click(chipAt(2, 1));
+        a.say('The value you selected keeps a teal outline, so you can see which figure is lit.');
+        await a.wait(1600);
+      }
+    },
+    {
+      t: 'Follow a Value to Another Exhibit',
+      d: 'Some steps draw on more than one exhibit. Select a value and the pane switches to the right one.',
+      setup: function () { go(4, 1); },
+      run: async function (a) {
+        a.say('This step compares a figure on Exhibit 1 with a figure on Exhibit 3.');
+        await a.wait(1400);
+        await a.click(chipAt(0, 1));
+        a.say('Net cash used by operating activities is on Exhibit 3, so the pane switched for you.');
+        await a.point(exBtn(3));
+        await a.wait(1600);
+        await a.click(el.next);
+        await a.wait(700);
+        await a.click(el.next);
+        a.say('Step 3 moves to Exhibit 2, the balance sheet.');
+        await a.point(exBtn(2));
+        await a.wait(1600);
+      }
+    },
+    {
+      t: 'Follow a Value to the Other Organization',
+      d: 'Four questions use both organizations. When the working moves to Organization Z, the pane moves with it.',
+      setup: function () { go(1, 3); },
+      run: async function (a) {
+        a.say('Steps 2 and 3 use Organization Y.');
+        await a.wait(1200);
+        await a.click(el.next);
+        a.say('Step 4 uses Organization Z, so the pane moved there.');
+        await a.point(orgBtn('Z'));
+        await a.wait(1500);
+        await a.click(chipAt(3, 1));
+        a.say('Organization Z prints in $ millions with one decimal. Organization Y prints in $ thousands.');
+        await a.wait(1900);
+      }
+    },
+    {
+      t: 'Four Years in One Value',
+      d: 'A value that covers Years 1 to 4 shows four figures in one box and lights all four cells in its row.',
+      setup: function () { go(7, 1); },
+      run: async function (a) {
+        await a.point(chipAt(0, 0));
+        await a.wait(900);
+        await a.point(lit());
+        await a.wait(1100);
+        await a.click(el.next);
+        a.say('The next step lights four cells in a different row of the same exhibit.');
+        await a.point(lit());
+        await a.wait(1800);
+      }
+    },
+    {
+      t: 'Show All, Then Reset',
+      d: 'Show all opens every step, then the answer and the lesson. Reset takes you back to step 1.',
+      setup: function () { go(7, 1); },
+      run: async function (a) {
+        await a.click(el.all);
+        a.say('The whole working is open. The answer and the lesson sit under the last step.');
+        await a.wait(500);
+        await a.point($('mAnswer'), 0.5, 0.4);
+        await a.wait(2200);
+        await a.click(el.reset);
+        a.say('Reset takes you back to step 1 of the same question.');
+        await a.wait(1500);
+      }
+    },
+    {
+      t: 'Browse the Exhibits Yourself',
+      d: 'Use the Organization and Exhibit buttons to read any statement. Select your value again to jump back to it.',
+      setup: function () { go(9, 2); },
+      run: async function (a) {
+        await a.click(orgBtn('Z'));
+        a.say('You are browsing now. Your value stays marked in the working.');
+        await a.wait(1300);
+        await a.click(exBtn(3));
+        await a.wait(1300);
+        await a.click(chipAt(1, 0));
+        a.say('Select your value again and the pane returns to its exhibit and its cell.');
+        await a.point(lit());
+        await a.wait(1700);
+      }
+    },
+    {
+      t: 'Keyboard and Links',
+      d: 'Left and Right arrows move between steps. Hold Shift to move between questions.',
+      setup: function () { go(9, 1); },
+      run: async function (a) {
+        await a.keys(['Right'], function () { step(1); });
+        await a.keys(['Right'], function () { step(1); });
+        await a.keys(['Left'], function () { step(-1); });
+        a.say('Hold Shift with an arrow to move to the next or previous question.');
+        await a.keys(['Shift', 'Right'], function () { question(1); });
+        await a.wait(600);
+        a.say('The address changes with every step. Copy it to send someone to this exact step.');
+        await a.point(el.path, 0.5, 0.5);
+        await a.wait(2000);
+      }
+    },
+    {
+      t: 'On a Phone',
+      d: 'On a phone the exhibit stays pinned to the bottom of the screen, so the value you tap and its cell stay in view together.',
+      phone: true,
+      setup: function () { go(9, 2); },
+      run: async function (a) {
+        await a.wait(900);
+        await a.click(chipAt(0, 0));
+        a.say('Tap a value in the working. The pinned exhibit scrolls to it.');
+        await a.point(lit());
+        await a.wait(1500);
+        await a.click(chipAt(1, 0));
+        await a.point(lit());
+        await a.wait(1700);
+      }
+    }
+  ];
+
+  var CANCEL = {};
+  var cur = { x: 40, y: 40 };
+
+  function placeCursor(x, y, ms) {
+    cur.x = x;
+    cur.y = y;
+    el.cursor.style.transitionDuration = (reduce ? 0 : ms) + 'ms';
+    el.cursor.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+  }
+
+  function makeActor(tok) {
+    function alive() { if (tok !== T.token) throw CANCEL; }
+    function wait(ms) {
+      return new Promise(function (res) { setTimeout(res, ms / T.speed); }).then(alive);
+    }
+    async function point(node, fx, fy) {
+      alive();
+      if (!node) return;
+      var sc = node.closest('.m-scroll, .m-wrap');
+      if (sc && revealIn(sc, node)) await wait(460);
+      var s = el.stage.getBoundingClientRect(), r = node.getBoundingClientRect();
+      var x = r.left - s.left + r.width * (fx == null ? 0.6 : fx);
+      var y = r.top - s.top + r.height * (fy == null ? 0.6 : fy);
+      var dist = Math.sqrt((x - cur.x) * (x - cur.x) + (y - cur.y) * (y - cur.y));
+      var ms = Math.max(320, Math.min(900, dist * 1.7)) / T.speed;
+      el.cursor.hidden = false;
+      placeCursor(x, y, ms);
+      await new Promise(function (res) { setTimeout(res, reduce ? 200 : ms + 90); }).then(alive);
+    }
+    async function click(node, fx, fy) {
+      if (!node) return;
+      await point(node, fx, fy);
+      el.cursor.classList.add('click');
+      node.classList.add('m-press');
+      await wait(170);
+      node.click();
+      await wait(230);
+      el.cursor.classList.remove('click');
+      node.classList.remove('m-press');
+      await wait(480);
+    }
+    function say(text) { alive(); el.capText.textContent = text; }
+    async function keys(labels, fn) {
+      alive();
+      el.cursor.hidden = true;
+      el.keys.innerHTML = labels.map(function (k) { return '<span class="key">' + esc(k) + '</span>'; }).join('');
+      el.keys.hidden = false;
+      await wait(450);
+      var caps = el.keys.querySelectorAll('.key');
+      for (var i = 0; i < caps.length; i++) caps[i].classList.add('down');
+      fn();
+      await wait(650);
+      for (i = 0; i < caps.length; i++) caps[i].classList.remove('down');
+      await wait(350);
+      el.keys.hidden = true;
+    }
+    return { wait: wait, point: point, click: click, say: say, keys: keys };
+  }
+
+  function buildList() {
+    el.scenes.innerHTML = SCENES.map(function (s, i) {
+      return '<li><button type="button" class="scene" data-i="' + i + '"><span class="badge" aria-hidden="true">' + (i + 1) + '</span>' +
+        '<span class="s-t">' + esc(s.t) + '</span><span class="s-d">' + esc(s.d) + '</span></button></li>';
+    }).join('');
+    el.bar.innerHTML = SCENES.map(function () { return '<li></li>'; }).join('');
+  }
+
+  function syncUI() {
+    el.play.textContent = T.playing ? 'Pause' : (T.done ? 'Replay the tour' : (T.started ? 'Play' : 'Play the tour'));
+    el.prev.disabled = T.i === 0;
+    el.nextScene.disabled = T.i === SCENES.length - 1;
+    var b = el.scenes.querySelectorAll('.scene');
+    for (var i = 0; i < b.length; i++) {
+      if (i === T.i) b[i].setAttribute('aria-current', 'step'); else b[i].removeAttribute('aria-current');
+    }
+    var seg = el.bar.children;
+    for (i = 0; i < seg.length; i++) seg[i].className = i < T.i || T.done ? 'done' : (i === T.i ? 'now' : '');
+  }
+
+  // Put the miniature in a scene's starting state and show its caption.
+  function enter(i) {
+    T.i = i;
+    el.keys.hidden = true;
+    el.stage.classList.toggle('phone', !!SCENES[i].phone);
+    layout();
+    SCENES[i].setup();
+    el.capKick.textContent = 'Scene ' + (i + 1) + ' of ' + SCENES.length;
+    el.capTitle.textContent = SCENES[i].t;
+    el.capText.textContent = SCENES[i].d;
+    syncUI();
+  }
+
+  function stop() {
+    T.token++;
+    T.playing = false;
+    el.cursor.hidden = true;
+    el.cursor.classList.remove('click');
+    el.keys.hidden = true;
+    var p = el.mini.querySelectorAll('.m-press');
+    for (var i = 0; i < p.length; i++) p[i].classList.remove('m-press');
+    syncUI();
+  }
+
+  async function run() {
+    var tok = ++T.token;
+    T.playing = true;
+    T.started = true;
+    T.done = false;
+    var a = makeActor(tok);
+    try {
+      for (;;) {
+        enter(T.i);
+        await a.wait(1100);
+        await SCENES[T.i].run(a);
+        await a.wait(1500);
+        if (T.i === SCENES.length - 1) break;
+        T.i++;
+      }
+    } catch (e) {
+      if (e !== CANCEL) { stop(); throw e; }
+      return;
+    }
+    T.playing = false;
+    T.done = true;
+    el.cursor.hidden = true;
+    el.capKick.textContent = 'End of the tour';
+    el.capTitle.textContent = 'Now Try It Yourself';
+    el.capText.textContent = 'Open the walkthrough and start with Question 1. The miniature below is live too, so you can select anything in it.';
+    syncUI();
+  }
+
+  function jump(i, play) {
+    var resume = T.playing || play;
+    stop();
+    T.done = false;
+    enter(Math.max(0, Math.min(SCENES.length - 1, i)));
+    if (resume) run();
+  }
+
+  function frameStage() {
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    if (el.stage.getBoundingClientRect().bottom > vh) el.capKick.parentNode.scrollIntoView({ block: 'start' });
+  }
+  el.play.addEventListener('click', function () {
+    if (T.playing) { stop(); return; }
+    if (T.done) T.i = 0;
+    run();
+    frameStage();
+  });
+  el.prev.addEventListener('click', function () { jump(T.i - 1, false); });
+  el.nextScene.addEventListener('click', function () { jump(T.i + 1, false); });
+  el.scenes.addEventListener('click', function (e) {
+    var b = e.target.closest('.scene');
+    if (b) { jump(+b.getAttribute('data-i'), true); frameStage(); }
+  });
+  var SPEEDS = [[1, '1x'], [1.5, '1.5x'], [2, '2x']];
+  el.speed.addEventListener('click', function () {
+    var k = 0;
+    for (var i = 0; i < SPEEDS.length; i++) if (SPEEDS[i][0] === T.speed) k = i;
+    k = (k + 1) % SPEEDS.length;
+    T.speed = SPEEDS[k][0];
+    el.speed.textContent = 'Speed ' + SPEEDS[k][1];
+  });
+
+  buildStrip();
+  buildSwitches();
+  buildList();
+  placeCursor(cur.x, cur.y, 0);
+  enter(0);
+  if (window.ResizeObserver) new ResizeObserver(layout).observe(el.stage);
+})();
+</script>

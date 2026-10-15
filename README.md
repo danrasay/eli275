@@ -6,7 +6,7 @@ Site: https://danrasay.github.io/eli275/
 
 | Folder | Page |
 | --- | --- |
-| `yz-walkthrough/` | [Organizations Y and Z solution walkthrough](https://danrasay.github.io/eli275/yz-walkthrough/). See its README to rebuild and test. |
+| `yz-walkthrough/` | [Organizations Y and Z solution walkthrough](https://danrasay.github.io/eli275/yz-walkthrough/): a tour of the page at the folder's address, and the walkthrough itself at [`walkthrough/`](https://danrasay.github.io/eli275/yz-walkthrough/walkthrough/). See its README to rebuild and test. |
 
 ## Adding a page
 

@@ -1,6 +1,6 @@
 // Browser half of the acceptance checks (HANDOFF.md section 7: checks 2, 3, 5, 6, 7, 8).
 // Serve the folder, open index.html, then in the console run:
-//   const { run } = await import('./test/selftest.js'); console.table((await run()).failures)
+//   const { run } = await import('../test/selftest.js'); console.table((await run()).failures)
 // It drives the real page: sets the hash, clicks every chip, and reads the DOM back.
 
 const tick = () => new Promise((r) => setTimeout(r, 0));

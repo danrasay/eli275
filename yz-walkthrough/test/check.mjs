@@ -9,8 +9,8 @@ const read = (p) => readFileSync(new URL(p, root), 'utf8');
 
 const exhibits = JSON.parse(read('data/exhibits.json'));
 const questions = JSON.parse(read('data/questions.json'));
-const template = read('src/index.template.html');
-const built = read('index.html');
+const template = read('src/walkthrough.template.html');
+const built = read('walkthrough/index.html');
 
 let failed = 0;
 const check = (name, ok, detail = '') => {
@@ -83,7 +83,7 @@ check('4c. Y has no decimals, Z has one', org.Y.decimals === 0 && org.Z.decimals
 
 // Check 7: no em or en dashes anywhere in the built file or its sources.
 const dash = new RegExp('[' + String.fromCharCode(0x2013, 0x2014) + ']');
-check('7. no em or en dashes in index.html', !dash.test(built));
+check('7. no em or en dashes in walkthrough/index.html', !dash.test(built));
 check('7b. no em or en dashes in the template or the data',
   !dash.test(template) && !dash.test(read('data/exhibits.json')) && !dash.test(read('data/questions.json')));
 
@@ -132,6 +132,24 @@ for (const [name, fg, bg, need] of pairs) {
   const r = ratio(fg, bg);
   check(`contrast ${name}`, r >= need, `${r.toFixed(2)} (needs ${need})`);
 }
+
+// The tour, the landing page at index.html.
+const tourSrc = read('src/tour.template.html');
+const tour = read('index.html');
+check('tour: no em or en dashes', !dash.test(tour) && !dash.test(tourSrc));
+check('tour: robots noindex tag', tour.includes('<meta name="robots" content="noindex">'));
+check('tour: no build placeholders left', !/__[A-Z_]+__|<!--BODY-->/.test(tour));
+check('tour: names neither organization', !/Hampshire|Arizona|Amherst|Tucson/.test(tour));
+check('tour: opens the walkthrough beside it', tour.includes('<a class="btn" href="walkthrough/">Open the walkthrough</a>'));
+check('tour: old step links forward to the walkthrough', tour.includes("location.replace('walkthrough/' + h)"));
+const tourJson = (id) => JSON.parse(new RegExp(`<script type="application/json" id="${id}">([\\s\\S]*?)</script>`).exec(tour)[1]);
+check('tour: inlined questions equal the source, without the bonus answers',
+  JSON.stringify(tourJson('tour-questions').questions) === JSON.stringify(questions.questions) && !('answer' in tourJson('tour-questions').bonus));
+check('tour: inlined exhibits equal the source', JSON.stringify(tourJson('tour-exhibits').organizations) === JSON.stringify(exhibits.organizations));
+const scripts = [...tour.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((m) => m[1]);
+let parses = true;
+try { scripts.forEach((code) => new vm.Script(code)); } catch (e) { parses = false; console.log(e.message); }
+check(`tour: its ${scripts.length} scripts parse`, parses && scripts.length === 2);
 
 console.log(failed ? `\n${failed} check(s) failed` : '\nAll static checks passed');
 process.exit(failed ? 1 : 0);
