@@ -1526,12 +1526,63 @@
      "note": "This is a page-only measure. The university's own reported days-cash figure for Year 4 is higher, about 78."
     },
     {
+     "label": "Y monthly burn, Year 1, to see which way Y is heading",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Net cash used by operating activities, Year 1",
+       "ref": {
+        "org": "Y",
+        "exhibit": 3,
+        "row": "cf_operating",
+        "year": 1
+       },
+       "value": -7072
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "op",
+       "text": "12"
+      }
+     ],
+     "result": "about 589 per month"
+    },
+    {
+     "label": "Y runway, Year 1 = Cash / monthly burn",
+     "equation": [
+      {
+       "type": "var",
+       "text": "Cash, Year 1",
+       "ref": {
+        "org": "Y",
+        "exhibit": 2,
+        "row": "cash",
+        "year": 1
+       },
+       "value": 4105
+      },
+      {
+       "type": "op",
+       "text": "/"
+      },
+      {
+       "type": "op",
+       "text": "589.3"
+      }
+     ],
+     "result": "7.0 months on cash"
+    },
+    {
      "label": "Direction",
      "equation": [],
-     "result": "Both heading down. Different sizes, same direction."
+     "result": "Opposite ways. Y's runway on cash lengthened from 7.0 to 11.6 months, because its burn shrank and its cash rose; Z's fell from 131 to 65 days.",
+     "note": "A longer runway is not safety for Y: 20,418 of debt is due within the year, and runway on cash leaves it out."
     }
    ],
-   "answer": "Y: burn about 440 per month, 11.6 months on cash; Z: 131 days to 65 days; both down.",
+   "answer": "Y: burn about 440 per month, 11.6 months on cash, up from 7.0 in Year 1; Z: 131 days to 65 days. Opposite ways: Y's runway lengthened, Z's shortened.",
    "lesson": "Runway is the one number that turns a statement into a deadline."
   },
   {
