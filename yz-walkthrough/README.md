@@ -9,7 +9,7 @@ A review companion for the ELI 275 team challenge, in two pages: an animated tou
 | `index.html` | The built tour, the folder's landing page. Self-contained. |
 | `walkthrough/index.html` | The built walkthrough. Self-contained. |
 | `src/tour.template.html` | The tour source. It plays ten scenes on a live miniature of the walkthrough. |
-| `src/walkthrough.template.html` | The walkthrough source (HTML, CSS and JavaScript). |
+| `src/walkthrough.template.html` | The walkthrough source (HTML, CSS and JavaScript). The Organization W walkthrough is built from this same template, from a private folder. |
 | `data/exhibits.json`, `data/questions.json` | The source of truth for every figure, question and step, in both pages. |
 | `build.mjs` | Inlines the two JSON files into both templates and writes both pages. Edit the templates, never the built pages. |
 | `test/check.mjs` | Static acceptance checks: every reference resolves, number formats, no em or en dashes, inlined data equals the source, contrast, and the tour's links and data. |

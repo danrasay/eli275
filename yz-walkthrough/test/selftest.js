@@ -97,8 +97,10 @@ export async function run() {
   }
 
   // Check 3: Q7 chips light four cells in one row.
-  await goto('#q7s3');
-  for (const chip of $$('.chip')) {
+  const q7 = QD.questions.find((q) => q.n === 7);
+  await goto(`#q7s${q7.steps.length}`);
+  if (!$$('.chip.multi').length) fail('Q7', 'no four-year chip');
+  for (const chip of $$('.chip.multi')) {
     chip.click();
     await tick();
     const lit = $$('td.hl', wrap);
@@ -127,10 +129,15 @@ export async function run() {
   await goto('#bonus');
   if ($('#qtitle').textContent !== QD.bonus.title) fail('#bonus', 'bonus screen not shown');
 
-  // Check 8: the bonus screen matches bonus.answer word for word.
+  // Check 8: the closing screen matches the data word for word (reveal cards, or a comparison table).
+  if (QD.bonus.table) {
+    const want = [...QD.bonus.table.head.flat(), ...QD.bonus.table.rows.flat()].map((c) => c.text);
+    const got = $$('.cmp th, .cmp td').map((c) => c.textContent);
+    if (JSON.stringify(want) !== JSON.stringify(got)) fail('closing table', `${got.length} cells, want ${want.length}`);
+  }
   const cards = $$('.org-card');
-  if (cards.length !== QD.bonus.answer.length) fail('bonus', `${cards.length} cards`);
-  QD.bonus.answer.forEach((a, i) => {
+  if (cards.length !== (QD.bonus.answer || []).length) fail('bonus', `${cards.length} cards`);
+  (QD.bonus.answer || []).forEach((a, i) => {
     const card = cards[i];
     if (!card) return;
     if ($('h3', card).textContent !== a.name) fail('bonus', `name ${i}`);
@@ -138,7 +145,8 @@ export async function run() {
     if ($('.outcome', card).textContent !== a.outcome) fail('bonus', `outcome ${i}`);
     if ($('.org-tag', card).textContent !== org[a.org].name) fail('bonus', `org tag ${i}`);
   });
-  if ($('.tone').textContent !== QD.bonus.tone) fail('bonus', 'tone line');
+  if (QD.bonus.tone && !$$('.tone').some((p) => p.textContent === QD.bonus.tone)) fail('bonus', 'tone line');
+  if (QD.bonus.notes && !$$('.tone').some((p) => p.textContent === QD.bonus.notes)) fail('bonus', 'notes line');
   if ($$('img, svg, picture').length) fail('bonus', 'an image is present');
 
   // Step reveal and keyboard.
@@ -160,7 +168,8 @@ export async function run() {
   $('#btnAll').focus();
   $('#btnAll').click();
   if (document.activeElement && document.activeElement.disabled) fail('Show all', 'focus left on a disabled button');
-  if (location.hash !== '#q1s6' || $('#answer').hidden || !$('#btnNext').disabled) fail('Show all', `hash ${location.hash}`);
+  const n1 = QD.questions[0].steps.length;
+  if (location.hash !== `#q1s${n1}` || $('#answer').hidden || !$('#btnNext').disabled) fail('Show all', `hash ${location.hash}`);
   $('#btnReset').click();
   if (location.hash !== '#q1s1' || $$('.step:not([hidden])').length !== 1 || !$('#btnReset').disabled) fail('Reset', `hash ${location.hash}`);
   key('ArrowRight', true);

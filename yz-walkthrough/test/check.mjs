@@ -67,7 +67,7 @@ for (const o of exhibits.organizations) {
       if (r.kind === 'section') continue;
       if (!Array.isArray(r.values) || r.values.length !== 4) { badCells.push(`${o.id}${x.n}.${r.id} needs four values`); continue; }
       // The expected decimals come from the data, not from the function under test.
-      const want = r.kind === 'memo' ? 0 : o.decimals;
+      const want = typeof r.decimals === 'number' ? r.decimals : (r.kind === 'memo' ? 0 : o.decimals);
       const d = decimals(o, r);
       if (d !== want) badCells.push(`${o.id}${x.n}.${r.id} uses ${d} decimals, wants ${want}`);
       for (const v of r.values) {

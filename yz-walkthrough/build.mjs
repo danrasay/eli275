@@ -23,6 +23,9 @@ const questions = JSON.parse(read('data/questions.json'));
 
 // Function replacers throughout: the data contains "$1.00", which a string replacer would mangle.
 const walkthrough = read('src/walkthrough.template.html')
+  .replaceAll('__TITLE__', () => 'Organizations Y and Z Solution Walkthrough')
+  .replace('__DESCRIPTION__', () => 'Step by step solutions to the Organizations Y and Z team challenge. ELI 275 Entrepreneurial Finance, Lewis &amp; Clark College, Fall 2026.')
+  .replace('__TOUR_LINK__', () => ' New here? <a href="../">Take the tour</a>.')
   .replace('__EXHIBITS_JSON__', () => inline(exhibits))
   .replace('__QUESTIONS_JSON__', () => inline(questions));
 write(new URL('walkthrough/index.html', root), walkthrough);

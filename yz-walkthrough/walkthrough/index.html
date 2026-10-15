@@ -39,7 +39,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;font-family:var(--text);font-size:16px;line-height:1.45;color:var(--body);background:var(--white)}
 button{font:inherit;color:inherit;cursor:pointer;margin:0}
 button:disabled{cursor:default}
-a:focus-visible,button:focus-visible,.wrap:focus-visible,h2:focus-visible{outline:2px solid var(--burnt);outline-offset:2px}
+a:focus-visible,button:focus-visible,.wrap:focus-visible,.cmp:focus-visible,h2:focus-visible{outline:2px solid var(--burnt);outline-offset:2px}
 /* Motion: colour only, 120 ms, and only on hover and focus. State changes are instant. */
 a:hover,a:focus-visible,button:hover,button:focus-visible{transition:background-color var(--t),border-color var(--t),color var(--t)}
 h2:focus:not(:focus-visible){outline:none}
@@ -123,6 +123,15 @@ main{background:var(--cream)}
 .place{margin:2px 0 0;font-size:14px;color:var(--muted)}
 .outcome{margin:10px 0 0;font-size:16px;color:var(--body)}
 .tone{margin:14px 0 0;padding-top:10px;border-top:1px solid var(--hairline);font-size:13px;font-style:italic;color:var(--muted)}
+.ex-note{max-width:70ch;margin:0;padding:10px var(--gut) 14px;font-size:12px;line-height:1.45;font-style:italic;color:var(--muted)}
+.cmp{margin:14px 0 0;overflow-x:auto;background:var(--white)}
+.cmp table{min-width:540px;font-size:12px}
+.cmp th,.cmp td{padding:5px 6px;vertical-align:top}
+.cmp thead th{position:static;white-space:normal;text-align:center}
+.cmp tbody th[scope="row"]{position:static;min-width:170px;font-weight:700;color:var(--ink)}
+.cmp td.num{font-variant-numeric:tabular-nums lining-nums}
+.cmp td.num::after,.cmp td.num:not(.neg)::after{content:none}
+.cmp td.text{text-align:left}
 
 /* Question to question */
 .qnav{display:flex;flex-wrap:wrap;gap:8px;padding:12px var(--gut) 0}
@@ -173,6 +182,7 @@ noscript p{margin:0;padding:16px var(--gut)}
   body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
   @supports (height:1dvh){ body{height:100dvh} }
   main{flex:1;min-height:0;display:grid;grid-template-columns:45fr 55fr}
+  body.cmp-view main{grid-template-columns:65fr 35fr}
   .solution{overflow-y:auto;scroll-padding:72px 0 12px}
   .statement{display:flex;flex-direction:column;min-height:0}
   .wrap{flex:1;min-height:0}
@@ -292,6 +302,7 @@ noscript p{margin:0;padding:16px var(--gut)}
   var QD = JSON.parse(document.getElementById('data-questions').textContent);
   var QS = QD.questions;
   var BONUS = QD.bonus;
+  var PAGE_TITLE = 'Organizations Y and Z Solution Walkthrough';
 
   // Index organizations, exhibits and rows by their stable keys.
   var ORG = {};
@@ -309,11 +320,12 @@ noscript p{margin:0;padding:16px var(--gut)}
   // Numbers print as on the student exhibits: thousands separators, fixed
   // decimals per organization, negatives in parentheses.
   function fmt(v, d) {
+    if (typeof v !== 'number') return 'n/a';
     var s = Math.abs(v).toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
     return v < 0 ? '(' + s + ')' : s;
   }
-  // Memo rows are counts, not dollars, so they never take decimals.
-  function decimals(org, row) { return row.kind === 'memo' ? 0 : org.decimals; }
+  // A row can set its own decimals; otherwise memo rows are counts, so they take none.
+  function decimals(org, row) { return typeof row.decimals === 'number' ? row.decimals : (row.kind === 'memo' ? 0 : org.decimals); }
   /*fmt:end*/
 
   function esc(s) {
@@ -441,16 +453,38 @@ noscript p{margin:0;padding:16px var(--gut)}
   function renderBonus() {
     var h = '<p class="part-line">' + esc(BONUS.part) + '</p>' +
       '<h2 class="q-title" id="qtitle" tabindex="-1">' + esc(BONUS.title) + '</h2>' +
-      '<p class="prompt">' + esc(BONUS.prompt) + '</p><div class="reveal">';
-    BONUS.answer.forEach(function (a) {
+      '<p class="prompt">' + esc(BONUS.prompt) + '</p>';
+    if (BONUS.table) h += comparisonHTML(BONUS.table);
+    if (BONUS.answer) h += '<div class="reveal">';
+    (BONUS.answer || []).forEach(function (a) {
       h += '<article class="org-card" data-org="' + esc(a.org) + '">' +
         '<p class="org-tag">' + esc(ORG[a.org] ? ORG[a.org].name : a.org) + '</p>' +
         '<h3>' + esc(a.name) + '</h3>' +
         '<p class="place">' + esc(a.place) + '</p>' +
         '<p class="outcome">' + esc(a.outcome) + '</p></article>';
     });
-    h += '</div><p class="tone">' + esc(BONUS.tone) + '</p>';
+    if (BONUS.answer) h += '</div>';
+    if (BONUS.notes) h += '<p class="tone">' + esc(BONUS.notes) + '</p>';
+    if (BONUS.tone) h += '<p class="tone">' + esc(BONUS.tone) + '</p>';
     el.qbody.innerHTML = h;
+  }
+
+  // A table given as rows of cells: {text, cols, rows, head}. Short figures align right.
+  function comparisonHTML(t) {
+    function cell(c, tag, scope) {
+      var cls = /^[-(]?[\d.,]+%?\)?( months| days)?$/.test(c.text) ? 'num' : 'text';
+      return '<' + tag + (scope ? ' scope="' + scope + '"' : '') + (c.cols ? ' colspan="' + c.cols + '"' : '') +
+        (c.rows ? ' rowspan="' + c.rows + '"' : '') + (tag === 'td' ? ' class="' + cls + '"' : '') + '>' + esc(c.text) + '</' + tag + '>';
+    }
+    var h = '<div class="cmp" role="region" aria-label="' + esc(t.caption || BONUS.title) + '" tabindex="0"><table><thead>';
+    t.head.forEach(function (row) {
+      h += '<tr>' + row.map(function (c) { return cell(c, 'th', c.cols ? 'colgroup' : 'col'); }).join('') + '</tr>';
+    });
+    h += '</thead><tbody>';
+    t.rows.forEach(function (row) {
+      h += '<tr>' + row.map(function (c, i) { return i === 0 ? cell(c, 'th', 'row') : cell(c, 'td'); }).join('') + '</tr>';
+    });
+    return h + '</tbody></table></div>';
   }
 
   function selToken() {
@@ -533,6 +567,7 @@ noscript p{margin:0;padding:16px var(--gut)}
       EX.organizations.map(function (o) {
         return switchButton('data-org="' + esc(o.id) + '"', shared ? stem : '', shared ? o.id : o.name);
       }).join('');
+    el.orgSwitch.hidden = EX.organizations.length < 2;
     el.exSwitch.innerHTML = '<span class="sw-label" aria-hidden="true">Exhibit</span>' +
       first.exhibits.map(function (x) { return switchButton('data-ex="' + x.n + '"', 'Exhibit ', String(x.n)); }).join('');
   }
@@ -565,7 +600,7 @@ noscript p{margin:0;padding:16px var(--gut)}
     el.exOrg.textContent = o.name;
     el.exTitle.textContent = x.title;
     el.exUnits.textContent = o.units;
-    el.wrap.innerHTML = tableHTML(o, x);
+    el.wrap.innerHTML = tableHTML(o, x) + (x.note ? '<p class="ex-note">' + esc(x.note) + '</p>' : '');
     el.wrap.scrollTop = 0;
     el.wrap.scrollLeft = 0;
     var i, b = el.orgSwitch.querySelectorAll('button');
@@ -686,9 +721,10 @@ noscript p{margin:0;padding:16px var(--gut)}
       title = 'Question ' + QS[S.qi].n + ': ' + QS[S.qi].title;
     }
     el.controls.hidden = t.view === 'bonus';
+    document.body.classList.toggle('cmp-view', t.view === 'bonus' && !!BONUS.table);
     updateRail();
     writeHash(!!o.push && changed);
-    document.title = title + ' | Organizations Y and Z Solution Walkthrough';
+    document.title = title + ' | ' + PAGE_TITLE;
     if (changed) {
       var head = $('qtitle');
       if (o.focus) el.solution.scrollTop = 0;
